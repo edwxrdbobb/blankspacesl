@@ -47,9 +47,9 @@ const designFeatures = [
 ]
 
 const videoShowcase = [
-  { id: "ads", label: "Commercials", thumbnail: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=600&q=80" },
-  { id: "music", label: "Music Videos", thumbnail: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80" },
-  { id: "eco", label: "Documentaries", thumbnail: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&q=80" },
+  { id: "ads", label: "Commercials", thumbnail: "/30ebf51e02c4894bf0d4162e506b333e.jpg" },
+  { id: "music", label: "Music Videos", thumbnail: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg" },
+  { id: "eco", label: "Documentaries", thumbnail: "/9e484b919d09faaa3f7f698b4889713c.jpg" },
 ]
 
 export function ServicesContent() {
@@ -148,7 +148,7 @@ export function ServicesContent() {
 
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1200&q=80"
+                  src="/d21421eb008f0db473c6036b75be58d6.jpg"
                   alt="Recording studio interior"
                   fill
                   className="object-cover"
@@ -296,7 +296,7 @@ export function ServicesContent() {
                 <div className="space-y-4">
                   <div className="relative aspect-[3/4] overflow-hidden bg-muted">
                     <Image
-                      src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80"
+                      src="/videoframe_16889.png"
                       alt="Brand design example"
                       fill
                       className="object-cover"
@@ -304,7 +304,7 @@ export function ServicesContent() {
                   </div>
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     <Image
-                      src="https://images.unsplash.com/photo-1634128221889-82ed6efebfc3?w=600&q=80"
+                      src="/4f64c688bd941de218f6647a1cc0ad04.jpg"
                       alt="Web design example"
                       fill
                       className="object-cover"
@@ -314,7 +314,7 @@ export function ServicesContent() {
                 <div className="space-y-4 mt-8">
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     <Image
-                      src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&q=80"
+                      src="/b3a086476f7cafa9ad54ad9d0e133f3f.jpg"
                       alt="Identity design example"
                       fill
                       className="object-cover"
@@ -322,7 +322,7 @@ export function ServicesContent() {
                   </div>
                   <div className="relative aspect-[3/4] overflow-hidden bg-muted">
                     <Image
-                      src="https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=600&q=80"
+                      src="/e6e36705fc1d199c05bc8dfb896e32b8.jpg"
                       alt="Packaging design example"
                       fill
                       className="object-cover"

@@ -42,9 +42,9 @@ const articles: Record<string, {
       
       <p>"Sierra Leone is my home. No matter how big things get, I'll always come back here. This is where my story started, and Blank Space is a big part of that story."</p>
     `,
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1600&q=80",
+    image: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg",
     author: "Amara Koroma",
-    authorImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80",
+    authorImage: "/0eb14988cda007dd63b35be6d5020dc6.jpg",
     date: "January 15, 2024",
     readTime: "8 min read",
   },
@@ -77,9 +77,9 @@ const articles: Record<string, {
       
       <p>Of course, when you're ready to take your sound to the next level, our doors are always open. Book a session and experience the difference professional equipment and environment can make.</p>
     `,
-    image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1600&q=80",
+    image: "/d21421eb008f0db473c6036b75be58d6.jpg",
     author: "Ibrahim Sesay",
-    authorImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80",
+    authorImage: "/f14281875b7b16d18596fab170cd9b29.jpg",
     date: "January 10, 2024",
     readTime: "5 min read",
   },
@@ -88,7 +88,7 @@ const articles: Record<string, {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const article = articles[slug]
-  
+
   if (!article) {
     return { title: "Article Not Found | Blank Space" }
   }

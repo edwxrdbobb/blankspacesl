@@ -5,6 +5,7 @@ import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { BlurFade } from "@/components/effects/blur-fade"
 import { SpotlightCard } from "@/components/effects/spotlight-card"
+import { DotScreenShader } from "@/components/ui/dot-shader-background";
 
 const services = [
   {
@@ -32,7 +33,8 @@ const services = [
 
 export function ServicesPreview() {
   return (
-    <section className="py-24 md:py-32 bg-background">
+    <section className="flex relative py-24 md:py-32 bg-background">
+       <div className="absolute inset-0"> <DotScreenShader /> </div>
       <div className="container mx-auto px-4">
         {/* Header */}
         <BlurFade>

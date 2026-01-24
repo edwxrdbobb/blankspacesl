@@ -23,7 +23,7 @@ const projects = [
     client: "tar1k",
     year: "2024",
     description: "A cinematic music video exploring themes of love and longing, shot across multiple locations in Freetown.",
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80",
+    image: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg",
     featured: true,
     hasVideo: true,
   },
@@ -35,7 +35,7 @@ const projects = [
     client: "EcoSL Initiative",
     year: "2024",
     description: "An environmental awareness campaign highlighting sustainable practices in Sierra Leone.",
-    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80",
+    image: "/9e484b919d09faaa3f7f698b4889713c.jpg",
     featured: false,
     hasVideo: true,
   },
@@ -47,7 +47,7 @@ const projects = [
     client: "Various Artists",
     year: "2024",
     description: "A collaborative album featuring emerging Afrobeats artists from Sierra Leone.",
-    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80",
+    image: "/b3a086476f7cafa9ad54ad9d0e133f3f.jpg",
     featured: false,
     hasVideo: false,
   },
@@ -59,7 +59,7 @@ const projects = [
     client: "Heritage Bank SL",
     year: "2023",
     description: "Complete brand overhaul including visual identity, digital presence, and marketing collateral.",
-    image: "https://images.unsplash.com/photo-1634128221889-82ed6efebfc3?w=800&q=80",
+    image: "/4f64c688bd941de218f6647a1cc0ad04.jpg",
     featured: false,
     hasVideo: false,
   },
@@ -71,7 +71,7 @@ const projects = [
     client: "DJ Rampage",
     year: "2024",
     description: "High-energy music video capturing the vibrant nightlife of Freetown.",
-    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800&q=80",
+    image: "/1f2b7feac884ebb75004ccf47a96ce52.jpg",
     featured: false,
     hasVideo: true,
   },
@@ -83,7 +83,7 @@ const projects = [
     client: "Africell",
     year: "2023",
     description: "National advertising campaign promoting mobile connectivity across Sierra Leone.",
-    image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
+    image: "/30ebf51e02c4894bf0d4162e506b333e.jpg",
     featured: false,
     hasVideo: true,
   },
@@ -95,7 +95,7 @@ const projects = [
     client: "National Tourist Board",
     year: "2023",
     description: "Tourism brand identity and promotional materials showcasing Sierra Leone's natural beauty.",
-    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
+    image: "/d21421eb008f0db473c6036b75be58d6.jpg",
     featured: false,
     hasVideo: false,
   },
@@ -107,7 +107,7 @@ const projects = [
     client: "Star Academy SL",
     year: "2023",
     description: "Professional recording and mixing for emerging talent competition winners.",
-    image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
+    image: "/f14281875b7b16d18596fab170cd9b29.jpg",
     featured: false,
     hasVideo: false,
   },
@@ -116,8 +116,8 @@ const projects = [
 export function PortfolioGrid() {
   const [activeCategory, setActiveCategory] = useState("all")
 
-  const filteredProjects = activeCategory === "all" 
-    ? projects 
+  const filteredProjects = activeCategory === "all"
+    ? projects
     : projects.filter(p => p.category === activeCategory)
 
   return (
@@ -155,9 +155,8 @@ export function PortfolioGrid() {
             <Link
               key={project.id}
               href={`/portfolio/${project.id}`}
-              className={`group relative overflow-hidden bg-muted ${
-                project.featured && index === 0 ? "md:col-span-2 lg:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
-              }`}
+              className={`group relative overflow-hidden bg-muted ${project.featured && index === 0 ? "md:col-span-2 lg:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
+                }`}
             >
               <Image
                 src={project.image || "/placeholder.svg"}
@@ -166,7 +165,7 @@ export function PortfolioGrid() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-foreground/40 group-hover:bg-foreground/30 transition-colors" />
-              
+
               {/* Content Overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <div className="flex items-center gap-2 mb-2">

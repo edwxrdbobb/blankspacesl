@@ -21,7 +21,7 @@ const articles = [
     title: "Finding Your Voice: A Conversation with tar1k",
     category: "spotlight",
     excerpt: "Sierra Leone's breakout artist shares his journey from bedroom producer to international stages, and the role Blank Space played in his evolution.",
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80",
+    image: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg",
     author: "Amara Koroma",
     date: "January 15, 2024",
     readTime: "8 min read",
@@ -32,7 +32,7 @@ const articles = [
     title: "5 Tips for Better Home Recordings",
     category: "tips",
     excerpt: "Professional recording doesn't always require a studio. Here are essential techniques to improve your home setup.",
-    image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800&q=80",
+    image: "/d21421eb008f0db473c6036b75be58d6.jpg",
     author: "Ibrahim Sesay",
     date: "January 10, 2024",
     readTime: "5 min read",
@@ -43,7 +43,7 @@ const articles = [
     title: "Making 'Before You Wake': Behind the Scenes",
     category: "behind",
     excerpt: "A look at the creative process behind tar1k's latest music video, from concept to final cut.",
-    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&q=80",
+    image: "/videoframe_2764.png",
     author: "Blank Space",
     date: "January 5, 2024",
     readTime: "6 min read",
@@ -54,7 +54,7 @@ const articles = [
     title: "The Rise of Sierra Leonean Afrobeats",
     category: "industry",
     excerpt: "How a new generation of artists is putting Freetown on the global music map.",
-    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80",
+    image: "/b3a086476f7cafa9ad54ad9d0e133f3f.jpg",
     author: "Fatou Bangura",
     date: "December 28, 2023",
     readTime: "10 min read",
@@ -65,7 +65,7 @@ const articles = [
     title: "Building a Brand Identity That Lasts",
     category: "tips",
     excerpt: "The fundamentals of creating a memorable brand identity for artists and businesses.",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+    image: "/videoframe_16889.png",
     author: "Fatou Bangura",
     date: "December 20, 2023",
     readTime: "7 min read",
@@ -76,7 +76,7 @@ const articles = [
     title: "A Day at Blank Space Studio",
     category: "behind",
     excerpt: "Take a virtual tour of our facilities and see where the magic happens.",
-    image: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80",
+    image: "/30ebf51e02c4894bf0d4162e506b333e.jpg",
     author: "Ibrahim Sesay",
     date: "December 15, 2023",
     readTime: "4 min read",
@@ -105,7 +105,7 @@ export function JournalGrid() {
             Stories from the studio.
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-            Artist spotlights, creative tips, behind-the-scenes stories, and insights from 
+            Artist spotlights, creative tips, behind-the-scenes stories, and insights from
             Sierra Leone&apos;s creative community.
           </p>
         </div>
@@ -207,7 +207,7 @@ export function JournalGrid() {
                 Stay in the loop.
               </h2>
               <p className="text-background/70 leading-relaxed">
-                Get the latest artist spotlights, creative tips, and studio updates delivered 
+                Get the latest artist spotlights, creative tips, and studio updates delivered
                 straight to your inbox. No spam, just good content.
               </p>
             </div>

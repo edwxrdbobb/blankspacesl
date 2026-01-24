@@ -11,7 +11,7 @@ const coreTeam = [
     name: "Amara Koroma",
     role: "Founder & Creative Director",
     bio: "Amara founded Blank Space in 2019 with a vision to create a world-class creative hub in Freetown. With over 15 years in the music and advertising industry, she brings a unique blend of artistic vision and business acumen to every project.",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80",
+    image: "/0eb14988cda007dd63b35be6d5020dc6.jpg",
     social: {
       instagram: "https://instagram.com/amarakoroma",
       twitter: "https://twitter.com/amarakoroma",
@@ -22,7 +22,7 @@ const coreTeam = [
     name: "Ibrahim Sesay",
     role: "Studio Manager & Lead Engineer",
     bio: "Ibrahim oversees all studio operations and brings 10 years of audio engineering experience. He's worked with some of Sierra Leone's biggest artists and ensures every session meets international standards.",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
+    image: "/f14281875b7b16d18596fab170cd9b29.jpg",
     social: {
       instagram: "https://instagram.com/ibrahimsesay",
     },
@@ -32,7 +32,7 @@ const coreTeam = [
     name: "tar1k",
     role: "Artist-in-Residence & Creative Lead",
     bio: "tar1k is an award-winning artist and one of Sierra Leone's most recognized voices. As our artist-in-residence, he mentors emerging talent and leads creative direction on flagship projects.",
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&q=80",
+    image: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg",
     social: {
       instagram: "https://instagram.com/tar1k",
       twitter: "https://twitter.com/tar1k",
@@ -44,7 +44,7 @@ const coreTeam = [
     name: "Fatou Bangura",
     role: "Head of Brand & Design",
     bio: "Fatou leads our design team, bringing a fresh perspective to brand identity and visual communications. Her work has been recognized at the African Design Awards.",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80",
+    image: "/b6929bd059977a8238dcbc74008f31f4.jpg",
     social: {
       instagram: "https://instagram.com/fatoubangura",
     },
@@ -55,32 +55,32 @@ const collaborators = [
   {
     name: "Mohamed Camera",
     role: "Cinematographer",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80",
+    image: "/placeholder-user.jpg",
   },
   {
     name: "Mariatu Conteh",
     role: "Motion Designer",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80",
+    image: "/placeholder-user.jpg",
   },
   {
     name: "Abdul Rahman",
     role: "Sound Designer",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
+    image: "/placeholder-user.jpg",
   },
   {
     name: "Isatu Jalloh",
     role: "Makeup Artist",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80",
+    image: "/placeholder-user.jpg",
   },
   {
     name: "David Williams",
     role: "Music Producer",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80",
+    image: "/placeholder-user.jpg",
   },
   {
     name: "Aminata Kamara",
     role: "Stylist",
-    image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80",
+    image: "/placeholder-user.jpg",
   },
 ]
 
@@ -95,7 +95,7 @@ export function TeamGrid() {
             The minds behind the magic.
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-            We&apos;re a collective of artists, producers, designers, and dreamers united by a passion 
+            We&apos;re a collective of artists, producers, designers, and dreamers united by a passion
             for creative excellence and a commitment to putting Sierra Leone on the global creative map.
           </p>
         </div>
@@ -195,7 +195,7 @@ export function TeamGrid() {
                 Want to join the collective?
               </h2>
               <p className="text-background/70 leading-relaxed">
-                We&apos;re always looking for talented creatives to collaborate with. Whether you&apos;re an artist, 
+                We&apos;re always looking for talented creatives to collaborate with. Whether you&apos;re an artist,
                 producer, designer, or have other creative skills, we&apos;d love to hear from you.
               </p>
             </div>
