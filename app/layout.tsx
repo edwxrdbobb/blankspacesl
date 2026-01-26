@@ -4,11 +4,11 @@ import { Space_Grotesk, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
-const spaceGrotesk = Space_Grotesk({ 
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: '--font-heading'
 });
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   variable: '--font-body'
 });
@@ -22,7 +22,11 @@ export const metadata: Metadata = {
     description: 'Endless Possibilities. Uninterrupted Power. Unmatched Quality.',
     type: 'website',
   },
-    generator: 'v0.app'
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-icon.png',
+  },
+  generator: 'v0.app'
 }
 
 export const viewport: Viewport = {

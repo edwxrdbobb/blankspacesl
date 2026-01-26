@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { BlurFade } from "@/components/effects/blur-fade"
@@ -62,6 +63,7 @@ export function Hero() {
               />
             </span>
           </h1> */}
+
 
           <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-background leading-tight mb-6 text-balance">
             <span className="text-white">

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -22,7 +23,13 @@ export function Navigation() {
       <nav className="mx-auto max-w-6xl px-6 h-14 flex items-center justify-between bg-gray-800/20 backdrop-blur-xl border border-border/50 rounded-full shadow-lg shadow-foreground/5">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <span className="font-heading text-xl font-bold tracking-tight">BLANK SPACE</span>
+          <Image
+            src="/logo.png"
+            alt="BLANK SPACE Logo"
+            width={150}
+            height={150}
+            className="h-8 w-auto object-contain"
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -57,7 +64,13 @@ export function Navigation() {
             <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between mb-8">
-                <span className="font-heading text-xl font-bold tracking-tight">BLANK SPACE</span>
+                <Image
+                  src="/navbar-logo.png"
+                  alt="BLANK SPACE Logo"
+                  width={140}
+                  height={40}
+                  className="h-8 w-auto object-contain"
+                />
               </div>
               <nav className="flex flex-col gap-4">
                 {navLinks.map((link) => (

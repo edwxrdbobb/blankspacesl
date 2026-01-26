@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Instagram, Youtube, Twitter, Mail, MapPin, Phone } from "lucide-react"
@@ -32,10 +33,16 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-6">
-              <span className="font-heading text-xl font-bold tracking-tight">BLANK SPACE</span>
+              <Image
+                src="/navbar-logo-light.png"
+                alt="BLANK SPACE Logo"
+                width={160}
+                height={46}
+                className="h-10 w-auto object-contain"
+              />
             </Link>
             <p className="text-background/70 text-sm leading-relaxed mb-6">
-              Freetown&apos;s premier recording studio and creative agency. 
+              Freetown&apos;s premier recording studio and creative agency.
               Where artists and brands come to create.
             </p>
             <div className="flex items-center gap-4">
