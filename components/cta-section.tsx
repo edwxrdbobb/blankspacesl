@@ -33,28 +33,6 @@ export function CTASection() {
               </Link>
             </Button>
           </div>
-
-          {/* Trust Indicators */}
-          <div className="mt-16 pt-12 border-t border-border">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div>
-                <p className="font-heading text-3xl md:text-4xl font-bold">150+</p>
-                <p className="text-muted-foreground text-sm mt-1">Sessions Recorded</p>
-              </div>
-              <div>
-                <p className="font-heading text-3xl md:text-4xl font-bold">50+</p>
-                <p className="text-muted-foreground text-sm mt-1">Artists Hosted</p>
-              </div>
-              <div>
-                <p className="font-heading text-3xl md:text-4xl font-bold">25+</p>
-                <p className="text-muted-foreground text-sm mt-1">Brand Campaigns</p>
-              </div>
-              <div>
-                <p className="font-heading text-3xl md:text-4xl font-bold">24/7</p>
-                <p className="text-muted-foreground text-sm mt-1">Power Supply</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
