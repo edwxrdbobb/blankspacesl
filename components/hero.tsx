@@ -78,8 +78,8 @@ export function Hero() {
 
           <BlurFade delay={0.8}>
             <p className="text-background/80 text-md md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-              Freetown&apos;s premier destination for professional recording, rehearsal,
-              and creative production. Where artists and brands come to create.
+              Freetown&apos;s premier destination for professional sound recording, content
+development and creative productions
             </p>
           </BlurFade>
 

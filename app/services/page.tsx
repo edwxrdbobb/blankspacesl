@@ -6,7 +6,7 @@ import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Services | Blank Space - Recording Studio & Creative Agency",
-  description: "Professional recording studio, rehearsal space, audiovisual production, and brand design services in Freetown, Sierra Leone.",
+  description: "Recording and studio rental, audiovisual productions, web development, and events entertainment services in Freetown, Sierra Leone.",
 }
 
 export default function ServicesPage() {

@@ -8,9 +8,10 @@ import { Instagram, Youtube, Twitter, Mail, MapPin, Phone } from "lucide-react"
 
 const footerLinks = {
   services: [
-    { label: "Rehearsal & Recording", href: "/services#recording" },
-    { label: "Audiovisual Production", href: "/services#audiovisual" },
-    { label: "Brand & Design", href: "/services#design" },
+    { label: "Recording & Studio Rental", href: "/services#recording" },
+    { label: "Audiovisual Productions", href: "/services#audiovisual" },
+    { label: "Web Development", href: "/services#web-development" },
+    { label: "Events & Entertainment", href: "/services#events-entertainment" },
   ],
   company: [
     { label: "Select Works", href: "/portfolio" },
@@ -42,8 +43,8 @@ export function Footer() {
               />
             </Link>
             <p className="text-background/70 text-sm leading-relaxed mb-6">
-              Freetown&apos;s premier recording studio and creative agency.
-              Where artists and brands come to create.
+              Freetown&apos;s premier destination for professional sound recording, content
+              development and creative productions
             </p>
             <div className="flex items-center gap-4">
               {footerLinks.social.map((item) => (

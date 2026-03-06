@@ -9,41 +9,50 @@ import {
   ArrowRight,
   Mic,
   Video,
-  Palette,
   Check,
   Clock,
   Zap,
   Headphones,
   Play,
   Monitor,
-  PenTool
+  Globe,
+  Music
 } from "lucide-react"
 
 const recordingFeatures = [
-  "State-of-the-art recording equipment",
+  "Industry standard recording equipment",
   "Acoustically treated studio rooms",
   "24/7 uninterrupted power supply",
   "Professional mixing & mastering",
-  "Comfortable rehearsal space",
-  "Instrument & gear rental available",
+  "Studio rental for high-level productions",
+  "Comfortable rehearsal and recording environment",
 ]
 
 const avFeatures = [
-  "4K cinema-quality cameras",
-  "Professional lighting setups",
-  "yellow screen capabilities",
-  "Motion graphics & VFX",
-  "Music video production",
-  "Commercial & documentary filming",
+  "Radio and TV commercial production",
+  "Professional video direction and capture",
+  "Sound design for visual projects",
+  "Lighting and set support",
+  "Editing and post-production",
+  "Commercial and branded content delivery",
 ]
 
-const designFeatures = [
-  "Brand strategy & positioning",
-  "Visual identity systems",
-  "Website design & development",
-  "Marketing collateral",
-  "Social media content",
-  "Packaging design",
+const webDevelopmentFeatures = [
+  "Custom business and portfolio websites",
+  "Responsive design for mobile and desktop",
+  "Landing pages for launches and campaigns",
+  "Copy and content structure support",
+  "Performance-focused front-end builds",
+  "Ongoing site updates and maintenance",
+]
+
+const eventsFeatures = [
+  "Live music curation for private events",
+  "Bands, solo acts, and instrumentalists",
+  "Mood-based programming for the occasion",
+  "Entertainment planning support",
+  "Sound coordination for event flow",
+  "Bookings for retreats and special moments",
 ]
 
 const videoShowcase = [
@@ -52,8 +61,34 @@ const videoShowcase = [
   { id: "eco", label: "Documentaries", thumbnail: "/9e484b919d09faaa3f7f698b4889713c.jpg" },
 ]
 
+const usdToSleRate = 22.58
+
+const studioRates = [
+  { label: "Rehearsal", usd: 25, period: "/hr", note: "Basic room access" },
+  { label: "Recording Session", usd: 50, period: "/hr", note: "Full studio access + engineer", featured: true },
+  { label: "Full Day", usd: 350, period: "/day", note: "8 hours, all inclusive" },
+]
+
 export function ServicesContent() {
   const [activeVideo, setActiveVideo] = useState("ads")
+  const [currency, setCurrency] = useState<"SLE" | "USD">("SLE")
+
+  const formatPrice = (usdAmount: number) => {
+    if (currency === "USD") {
+      return {
+        symbol: "$",
+        amount: usdAmount.toLocaleString("en-US"),
+      }
+    }
+
+    return {
+      symbol: "Le ",
+      amount: (usdAmount * usdToSleRate).toLocaleString("en-SL", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }),
+    }
+  }
 
   return (
     <section className="py-16 md:py-24">
@@ -65,7 +100,7 @@ export function ServicesContent() {
             Creative solutions for artists and brands.
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-            From studio sessions to full-scale brand campaigns, we provide end-to-end creative services
+            From studio sessions to digital launches and live experiences, we provide end-to-end creative services
             tailored to your vision.
           </p>
         </div>
@@ -79,7 +114,7 @@ export function ServicesContent() {
               id="recording"
             >
               <Mic className="h-4 w-4 mr-2" />
-              Rehearsal & Recording
+              Recording & Studio Rental
             </TabsTrigger>
             <TabsTrigger
               value="audiovisual"
@@ -87,15 +122,23 @@ export function ServicesContent() {
               id="audiovisual"
             >
               <Video className="h-4 w-4 mr-2" />
-              Audiovisual Production
+              Audiovisual Productions
             </TabsTrigger>
             <TabsTrigger
-              value="design"
+              value="web-development"
               className="data-[state=active]:bg-transparent data-[state=active]:border-b-2 data-[state=active]:border-foreground rounded-none px-6 py-4 font-heading"
-              id="design"
+              id="web-development"
             >
-              <Palette className="h-4 w-4 mr-2" />
-              Brand & Design
+              <Globe className="h-4 w-4 mr-2" />
+              Web Development
+            </TabsTrigger>
+            <TabsTrigger
+              value="events-entertainment"
+              className="data-[state=active]:bg-transparent data-[state=active]:border-b-2 data-[state=active]:border-foreground rounded-none px-6 py-4 font-heading"
+              id="events-entertainment"
+            >
+              <Music className="h-4 w-4 mr-2" />
+              Events & Entertainment
             </TabsTrigger>
           </TabsList>
 
@@ -108,14 +151,14 @@ export function ServicesContent() {
                     <Headphones className="h-6 w-6 text-background" />
                   </div>
                   <div>
-                    <h2 className="font-heading text-2xl md:text-3xl font-bold">Rehearsal & Recording</h2>
+                    <h2 className="font-heading text-2xl md:text-3xl font-bold">Recording & Studio Rental</h2>
                     <p className="text-muted-foreground">Professional studio space in Freetown</p>
                   </div>
                 </div>
 
                 <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                  Whether you&apos;re laying down tracks, perfecting your set, or producing your next hit,
-                  our studio provides the professional environment you need with reliable power and top-tier equipment.
+                  Professional studio space with industry standard equipment for high level productions,
+                  acoustically treated, with uninterrupted power supply.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-3 mb-8">
@@ -130,7 +173,7 @@ export function ServicesContent() {
                 <div className="flex flex-col sm:flex-row gap-4 mb-8">
                   <div className="flex items-center gap-3 text-sm">
                     <Clock className="h-4 w-4 text-muted-foreground" />
-                    <span>Hourly & Daily rates available</span>
+                    <span>Hourly and daily rentals available</span>
                   </div>
                   <div className="flex items-center gap-3 text-sm">
                     <Zap className="h-4 w-4 text-muted-foreground" />
@@ -158,25 +201,57 @@ export function ServicesContent() {
 
             {/* Pricing Preview */}
             <div className="mt-16 p-8 bg-muted">
-              <h3 className="font-heading text-xl font-bold mb-6">Studio Rates</h3>
-              <div className="grid sm:grid-cols-3 gap-6">
-                <div className="bg-background p-6">
-                  <p className="text-muted-foreground text-sm mb-2">Rehearsal</p>
-                  <p className="font-heading text-3xl font-bold">$25<span className="text-lg font-normal text-muted-foreground">/hr</span></p>
-                  <p className="text-muted-foreground text-sm mt-2">Basic room access</p>
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-6">
+                <div>
+                  <h3 className="font-heading text-xl font-bold">Studio Rates</h3>
+                  <p className="text-muted-foreground text-sm">Toggle pricing between Leones and US dollars.</p>
                 </div>
-                <div className="bg-background p-6 border-2 border-foreground">
-                  <p className="text-muted-foreground text-sm mb-2">Recording Session</p>
-                  <p className="font-heading text-3xl font-bold">$50<span className="text-lg font-normal text-muted-foreground">/hr</span></p>
-                  <p className="text-muted-foreground text-sm mt-2">Full studio access + engineer</p>
-                </div>
-                <div className="bg-background p-6">
-                  <p className="text-muted-foreground text-sm mb-2">Full Day</p>
-                  <p className="font-heading text-3xl font-bold">$350<span className="text-lg font-normal text-muted-foreground">/day</span></p>
-                  <p className="text-muted-foreground text-sm mt-2">8 hours, all inclusive</p>
+                <div className="inline-flex w-fit rounded-full border border-border bg-background p-1">
+                  <button
+                    type="button"
+                    onClick={() => setCurrency("SLE")}
+                    className={`rounded-full px-4 py-2 text-sm transition-colors ${
+                      currency === "SLE" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                    aria-pressed={currency === "SLE"}
+                  >
+                    Leones
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setCurrency("USD")}
+                    className={`rounded-full px-4 py-2 text-sm transition-colors ${
+                      currency === "USD" ? "bg-foreground text-background" : "text-muted-foreground hover:text-foreground"
+                    }`}
+                    aria-pressed={currency === "USD"}
+                  >
+                    Dollars
+                  </button>
                 </div>
               </div>
-              <p className="text-muted-foreground text-sm mt-6">* 50% deposit required to confirm booking</p>
+              <div className="grid sm:grid-cols-3 gap-6">
+                {studioRates.map((rate) => {
+                  const price = formatPrice(rate.usd)
+
+                  return (
+                    <div
+                      key={rate.label}
+                      className={`bg-background p-6 ${rate.featured ? "border-2 border-foreground" : ""}`}
+                    >
+                      <p className="text-muted-foreground text-sm mb-2">{rate.label}</p>
+                      <p className="font-heading text-3xl font-bold">
+                        {price.symbol}
+                        {price.amount}
+                        <span className="text-lg font-normal text-muted-foreground">{rate.period}</span>
+                      </p>
+                      <p className="text-muted-foreground text-sm mt-2">{rate.note}</p>
+                    </div>
+                  )
+                })}
+              </div>
+              <p className="text-muted-foreground text-sm mt-6">
+                * 50% deposit required to confirm booking. Leone pricing uses an approximate conversion of 1 USD = Le 22.58.
+              </p>
             </div>
           </TabsContent>
 
@@ -189,14 +264,14 @@ export function ServicesContent() {
                     <Monitor className="h-6 w-6 text-background" />
                   </div>
                   <div>
-                    <h2 className="font-heading text-2xl md:text-3xl font-bold">Audiovisual Production</h2>
+                    <h2 className="font-heading text-2xl md:text-3xl font-bold">Audiovisual Productions</h2>
                     <p className="text-muted-foreground">Cinema-quality video content</p>
                   </div>
                 </div>
 
                 <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                  From music videos to commercials, documentaries to social content, we bring your creative
-                  vision to life with professional-grade production quality.
+                  From radio and TV commercials to visual projects with key sonic elements, we&apos;ll
+                  bring your vision to life.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-3 mb-8">
@@ -255,27 +330,26 @@ export function ServicesContent() {
             </div>
           </TabsContent>
 
-          {/* Design Tab */}
-          <TabsContent value="design" className="mt-12">
+          {/* Web Development Tab */}
+          <TabsContent value="web-development" className="mt-12">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 bg-foreground flex items-center justify-center">
-                    <PenTool className="h-6 w-6 text-background" />
+                    <Globe className="h-6 w-6 text-background" />
                   </div>
                   <div>
-                    <h2 className="font-heading text-2xl md:text-3xl font-bold">Brand & Design</h2>
-                    <p className="text-muted-foreground">Strategic creative solutions</p>
+                    <h2 className="font-heading text-2xl md:text-3xl font-bold">Web Development</h2>
+                    <p className="text-muted-foreground">Professional websites for your digital presence</p>
                   </div>
                 </div>
 
                 <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                  We create distinctive brand identities, websites, and visual communications that
-                  make your brand unforgettable and connect with your audience.
+                  Get your digital footprint started right with a professional website worth of your dream.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-3 mb-8">
-                  {designFeatures.map((feature) => (
+                  {webDevelopmentFeatures.map((feature) => (
                     <div key={feature} className="flex items-center gap-2">
                       <Check className="h-4 w-4 text-accent shrink-0" />
                       <span className="text-sm">{feature}</span>
@@ -284,20 +358,20 @@ export function ServicesContent() {
                 </div>
 
                 <Button asChild size="lg">
-                  <Link href="/contact?service=design">
+                  <Link href="/contact?service=web-development">
                     Get a Quote
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </div>
 
-              {/* Design Portfolio Preview */}
+              {/* Web Portfolio Preview */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-4">
                   <div className="relative aspect-[3/4] overflow-hidden bg-muted">
                     <Image
                       src="/videoframe_16889.png"
-                      alt="Brand design example"
+                      alt="Web project example"
                       fill
                       className="object-cover"
                     />
@@ -305,7 +379,7 @@ export function ServicesContent() {
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     <Image
                       src="/4f64c688bd941de218f6647a1cc0ad04.jpg"
-                      alt="Web design example"
+                      alt="Website interface example"
                       fill
                       className="object-cover"
                     />
@@ -315,7 +389,7 @@ export function ServicesContent() {
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     <Image
                       src="/b3a086476f7cafa9ad54ad9d0e133f3f.jpg"
-                      alt="Identity design example"
+                      alt="Digital product example"
                       fill
                       className="object-cover"
                     />
@@ -323,12 +397,60 @@ export function ServicesContent() {
                   <div className="relative aspect-[3/4] overflow-hidden bg-muted">
                     <Image
                       src="/e6e36705fc1d199c05bc8dfb896e32b8.jpg"
-                      alt="Packaging design example"
+                      alt="Responsive site example"
                       fill
                       className="object-cover"
                     />
                   </div>
                 </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          {/* Events Tab */}
+          <TabsContent value="events-entertainment" className="mt-12">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-foreground flex items-center justify-center">
+                    <Music className="h-6 w-6 text-background" />
+                  </div>
+                  <div>
+                    <h2 className="font-heading text-2xl md:text-3xl font-bold">Events & Entertainment</h2>
+                    <p className="text-muted-foreground">Curated live experiences for every setting</p>
+                  </div>
+                </div>
+
+                <p className="text-muted-foreground text-lg leading-relaxed mb-8">
+                  Musical curations ranging from performing talents to bands or solo instrumentalists.
+                  Get in touch to bring the right ambience and mood to your events, staff retreats,
+                  and special moments.
+                </p>
+
+                <div className="grid sm:grid-cols-2 gap-3 mb-8">
+                  {eventsFeatures.map((feature) => (
+                    <div key={feature} className="flex items-center gap-2">
+                      <Check className="h-4 w-4 text-accent shrink-0" />
+                      <span className="text-sm">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <Button asChild size="lg">
+                  <Link href="/contact?service=events-entertainment">
+                    Plan an Event
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src="/ad79ed2ac71a0fecb65425f4acccc4ae.jpg"
+                  alt="Live event entertainment"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </TabsContent>

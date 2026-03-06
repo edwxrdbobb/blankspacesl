@@ -9,25 +9,32 @@ import { DotScreenShader } from "@/components/ui/dot-shader-background";
 
 const services = [
   {
-    id: "rehearsal-recording",
-    title: "Rehearsal & Recording",
-    description: "Professional studio space with state-of-the-art equipment, acoustically treated rooms, and uninterrupted power supply.",
+    id: "recording-studio-rental",
+    title: "Recording & Studio Rental",
+    description: "Professional studio space with industry standard equipment for high level productions, acoustically treated, with uninterrupted power supply.",
     image: "/2383df5047047988ba513db21e630079.jpg",
     href: "/services#recording",
   },
   {
     id: "audiovisual",
-    title: "Audiovisual Production",
-    description: "From music videos to commercials, we bring your creative vision to life with cinema-quality production.",
+    title: "Audiovisual Productions",
+    description: "From radio and TV commercials to visual projects with key sonic elements, we'll bring your vision to life.",
     image: "/1190c1d6176009d625f7d93b0d973f5b.jpg",
     href: "/services#audiovisual",
   },
   {
-    id: "brand-design",
-    title: "Brand & Design",
-    description: "Strategic brand identity, web design, and visual communications that make your brand unforgettable.",
+    id: "web-development",
+    title: "Web Development",
+    description: "Get your digital footprint started right with a professional website worth of your dream.",
     image: "/videoframe_16889.png",
-    href: "/services#design",
+    href: "/services#web-development",
+  },
+  {
+    id: "events-entertainment",
+    title: "Events & Entertainment",
+    description: "Musical curations ranging from performing talents to bands or solo instrumentalists for events, retreats, and special moments.",
+    image: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg",
+    href: "/services#events-entertainment",
   },
 ]
 
@@ -44,13 +51,13 @@ export function ServicesPreview() {
               Everything you need to create, produce, and grow.
             </h2>
             <p className="text-muted-foreground text-lg">
-              From studio sessions to full-scale brand campaigns, we provide end-to-end creative solutions.
+              From studio sessions to digital launches and live experiences, we provide end-to-end creative solutions.
             </p>
           </div>
         </BlurFade>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <BlurFade key={service.id} delay={0.1 * (index + 1)}>
               <Link href={service.href} className="block h-full">

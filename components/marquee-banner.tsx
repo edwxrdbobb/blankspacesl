@@ -1,14 +1,10 @@
 "use client"
 
 const services = [
-  "Recording Studio",
-  "Rehearsal Space",
-  "Music Production",
-  "Video Production",
-  "Brand Design",
+  "Recording & Studio Rental",
+  "Audiovisual Productions",
   "Web Development",
-  "Creative Strategy",
-  "Artist Development",
+  "Events & Entertainment",
 ]
 
 export function MarqueeBanner() {

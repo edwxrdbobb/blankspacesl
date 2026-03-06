@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { TeamGrid } from "@/components/team-grid"
+import { PartnersSlider } from "@/components/partners-slider"
 import { FloatingBookButton } from "@/components/floating-book-button"
 import type { Metadata } from "next"
 
@@ -15,6 +16,7 @@ export default function CollectivePage() {
       <Navigation />
       <div className="pt-16">
         <TeamGrid />
+        <PartnersSlider title="Brands and organizations we've worked with" compact />
       </div>
       <Footer />
       <FloatingBookButton />
