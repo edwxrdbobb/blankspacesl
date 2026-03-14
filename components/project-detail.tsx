@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowLeft, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 
 interface ProjectDetailProps {
   project: {
@@ -16,10 +17,14 @@ interface ProjectDetailProps {
     gallery: string[]
     credits: { role: string; name: string }[]
     hasVideo: boolean
+    videoSrc?: string
+    audioSamples?: { title: string; src: string }[]
   }
 }
 
 export function ProjectDetail({ project }: ProjectDetailProps) {
+  const audioSamples = project.audioSamples ?? []
+
   return (
     <section className="py-8 md:py-16">
       <div className="container mx-auto px-4">
@@ -40,12 +45,32 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             className="object-cover"
             priority
           />
-          {project.hasVideo && (
-            <div className="absolute inset-0 bg-foreground/20 flex items-center justify-center">
-              <button className="w-20 h-20 rounded-full bg-background flex items-center justify-center hover:scale-110 transition-transform">
-                <Play className="h-8 w-8 text-foreground ml-1" />
-              </button>
-            </div>
+          {project.videoSrc && (
+            <Dialog>
+              <DialogTrigger asChild>
+                <button
+                  type="button"
+                  className="absolute inset-0 bg-foreground/20 flex items-center justify-center"
+                  aria-label="Play project video"
+                >
+                  <span className="w-20 h-20 rounded-full bg-background flex items-center justify-center hover:scale-110 transition-transform">
+                    <Play className="h-8 w-8 text-foreground ml-1" />
+                  </span>
+                </button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-5xl p-0 overflow-hidden bg-black">
+                <div className="relative aspect-video w-full">
+                  <video
+                    src={project.videoSrc}
+                    className="h-full w-full"
+                    controls
+                    autoPlay
+                    playsInline
+                    preload="metadata"
+                  />
+                </div>
+              </DialogContent>
+            </Dialog>
           )}
         </div>
 
@@ -68,6 +93,21 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
             <p className="text-muted-foreground text-lg leading-relaxed mb-12">
               {project.fullDescription}
             </p>
+
+            {/* Audio Samples */}
+            {audioSamples.length > 0 && (
+              <div className="space-y-6 mb-12">
+                <h2 className="font-heading text-xl font-semibold">Audio Samples</h2>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {audioSamples.map((sample) => (
+                    <div key={sample.src} className="border border-border bg-muted p-4">
+                      <p className="font-medium mb-2">{sample.title}</p>
+                      <audio className="w-full" controls preload="none" src={sample.src} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
 
             {/* Gallery */}
             {project.gallery.length > 0 && (

@@ -13,7 +13,7 @@ const services = [
     id: "recording-studio-rental",
     title: "Recording & Studio Rental",
     description: "Professional studio space with industry standard equipment for high level productions, acoustically treated, with uninterrupted power supply.",
-    image: "/2383df5047047988ba513db21e630079.jpg",
+    image: "/stud.png",
     href: "/services#recording",
   },
   {
@@ -21,21 +21,21 @@ const services = [
     title: "Audiovisual Productions",
     description:
       "From brand songs to radio and TV commercials, to visual projects with key sonic elements, we'll bring your vision to life.",
-    image: "/1190c1d6176009d625f7d93b0d973f5b.jpg",
+    image: "/audio.png",
     href: "/services#audiovisual",
   },
   {
     id: "web-development",
     title: "Web Solutions",
     description: "Get your digital footprint started right with a professional website worthy of your dream.",
-    image: "/videoframe_16889.png",
+    image: "/our-work/website/Smove-Vehicles-03-14-2026_05_18_PM.png",
     href: "/services#web-development",
   },
   {
     id: "events-entertainment",
     title: "Events & Entertainment",
     description: "Musical curations ranging from performing talents to bands or solo instrumentalists for events, retreats, and special moments.",
-    image: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg",
+    image: "/events/WhatsApp%20Image%202026-03-14%20at%2010.57.30.jpeg",
     href: "/services#events-entertainment",
   },
 ]

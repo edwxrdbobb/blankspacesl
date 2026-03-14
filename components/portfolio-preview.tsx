@@ -13,14 +13,16 @@ const projects = [
     client: "tar1k",
     image: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg",
     featured: true,
+    hasVideo: true,
   },
   {
-    id: "eco-campaign",
+    id: "eco-initiative",
     title: "Sustainability Forward",
     category: "Brand Campaign",
     client: "EcoSL Initiative",
     image: "/9e484b919d09faaa3f7f698b4889713c.jpg",
     featured: false,
+    hasVideo: true,
   },
   {
     id: "afrobeats-sessions",
@@ -29,14 +31,16 @@ const projects = [
     client: "Various Artists",
     image: "/b3a086476f7cafa9ad54ad9d0e133f3f.jpg",
     featured: false,
+    hasVideo: false,
   },
   {
-    id: "heritage-rebrand",
-    title: "Heritage Bank Rebrand",
-    category: "Brand Identity",
-    client: "Heritage Bank SL",
-    image: "/4f64c688bd941de218f6647a1cc0ad04.jpg",
+    id: "audio-ads",
+    title: "Audio Ads Collection",
+    category: "Audio Ads",
+    client: "Various Brands",
+    image: "/audio1.png",
     featured: false,
+    hasVideo: false,
   },
 ]
 
@@ -90,11 +94,13 @@ export function PortfolioPreview() {
                   {featuredProject.title}
                 </h3>
               </div>
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center">
-                  <Play className="h-6 w-6 text-foreground ml-1" />
+              {featuredProject.hasVideo && (
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="w-16 h-16 rounded-full bg-background flex items-center justify-center">
+                    <Play className="h-6 w-6 text-foreground ml-1" />
+                  </div>
                 </div>
-              </div>
+              )}
             </Link>
           )}
 

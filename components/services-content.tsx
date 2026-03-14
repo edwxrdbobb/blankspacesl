@@ -4,9 +4,11 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   ArrowRight,
+  ArrowUpRight,
   Mic,
   Video,
   Check,
@@ -55,10 +57,55 @@ const eventsFeatures = [
   "Bookings for retreats and special moments",
 ]
 
+const eventsGallery = [
+  "/events/WhatsApp%20Image%202026-03-14%20at%2010.57.30.jpeg",
+  "/events/WhatsApp%20Image%202026-03-14%20at%2010.57.32.jpeg",
+  "/events/WhatsApp%20Image%202026-03-14%20at%2010.58.55.jpeg",
+  "/events/WhatsApp%20Image%202026-03-14%20at%2010.59.08.jpeg",
+]
+
+const audioAds = [
+  { title: "1 Mobile", src: "/our-work/audio-ads/1%20Mobile.mp3" },
+  { title: "AWATS Ad", src: "/our-work/audio-ads/AWATS%20ad.mp3" },
+  { title: "Vult App (English)", src: "/our-work/audio-ads/Vult%20App%20English.mp3" },
+]
+
 const videoShowcase = [
-  { id: "ads", label: "Commercials", thumbnail: "/30ebf51e02c4894bf0d4162e506b333e.jpg" },
-  { id: "music", label: "Music Videos", thumbnail: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg" },
-  { id: "eco", label: "Documentaries", thumbnail: "/9e484b919d09faaa3f7f698b4889713c.jpg" },
+  {
+    id: "showcase-1",
+    label: "Showcase",
+    thumbnail: "/videoframe_2764.png",
+    src: "/our-work/VIDEO-2026-03-02-12-10-51.mp4",
+  },
+  {
+    id: "showcase-2",
+    label: "Spotlight",
+    thumbnail: "/videoframe_3051.png",
+    src: "/our-work/VIDEO-2026-03-02-12-19-48.mp4",
+  },
+]
+
+const webWorks = [
+  {
+    title: "Smove Vehicles",
+    href: "https://smovevehicles.com/",
+    image: "/our-work/website/Smove-Vehicles-03-14-2026_05_18_PM.png",
+  },
+  {
+    title: "Leone Gadgets",
+    href: "https://leonegadgets.com/",
+    image: "/our-work/website/HOME-Leone-Gadgets-03-14-2026_05_20_PM.png",
+  },
+  {
+    title: "Kizuri International",
+    href: "https://kizuri-international.com/",
+    image: "/our-work/website/Kizuri-International-%E2%80%93-HR-Solutions-Across-Borders-03-14-2026_05_22_PM.png",
+  },
+  {
+    title: "Centurion Engineering",
+    href: "https://centurion.sl/",
+    image: "/our-work/website/Centurion-Engineering-%E2%80%93-Building-a-concrete-future-03-14-2026_05_23_PM.png",
+  },
 ]
 
 const usdToSleRate = 22.58
@@ -77,7 +124,7 @@ const studioRates = [
 ]
 
 export function ServicesContent() {
-  const [activeVideo, setActiveVideo] = useState(videoShowcase[0]?.id ?? "ads")
+  const [activeVideo, setActiveVideo] = useState(videoShowcase[0]?.id ?? "showcase-1")
   const [currency, setCurrency] = useState<"SLE" | "USD">("SLE")
 
   const formatPrice = (sleAmount: number) => {
@@ -309,19 +356,43 @@ export function ServicesContent() {
 
               {/* Video Showcase */}
               <div className="space-y-4">
-                <div className="relative aspect-video overflow-hidden bg-muted">
-                  <Image
-                    src={videoShowcase.find((video) => video.id === activeVideo)?.thumbnail || videoShowcase[0].thumbnail}
-                    alt="Audiovisual showcase"
-                    fill
-                    className="object-cover"
-                  />
-                  <div className="absolute inset-0 bg-foreground/30 flex items-center justify-center">
-                    <button className="w-16 h-16 rounded-full bg-background flex items-center justify-center hover:scale-110 transition-transform">
-                      <Play className="h-6 w-6 text-foreground ml-1" />
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button
+                      type="button"
+                      className="relative aspect-video w-full overflow-hidden bg-muted"
+                      aria-label="Play showcase video"
+                    >
+                      <Image
+                        src={
+                          videoShowcase.find((video) => video.id === activeVideo)?.thumbnail ??
+                          videoShowcase[0].thumbnail
+                        }
+                        alt="Audiovisual showcase"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-foreground/30 flex items-center justify-center">
+                        <span className="w-16 h-16 rounded-full bg-background flex items-center justify-center hover:scale-110 transition-transform">
+                          <Play className="h-6 w-6 text-foreground ml-1" />
+                        </span>
+                      </div>
                     </button>
-                  </div>
-                </div>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-4xl p-0 overflow-hidden bg-black">
+                    <div className="relative aspect-video w-full">
+                      <video
+                        key={activeVideo}
+                        src={videoShowcase.find((video) => video.id === activeVideo)?.src ?? videoShowcase[0].src}
+                        className="h-full w-full"
+                        controls
+                        autoPlay
+                        playsInline
+                        preload="metadata"
+                      />
+                    </div>
+                  </DialogContent>
+                </Dialog>
                 <div className="flex gap-3">
                   {videoShowcase.map((video) => (
                     <button
@@ -341,6 +412,20 @@ export function ServicesContent() {
                       </span>
                     </button>
                   ))}
+                </div>
+
+                <div className="pt-4">
+                  <h3 className="font-heading text-sm uppercase tracking-wider text-muted-foreground mb-3">
+                    Audio Samples
+                  </h3>
+                  <div className="space-y-3">
+                    {audioAds.map((sample) => (
+                      <div key={sample.src} className="border border-border bg-background p-3">
+                        <p className="text-sm font-medium mb-2">{sample.title}</p>
+                        <audio className="w-full" controls preload="none" src={sample.src} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -382,43 +467,33 @@ export function ServicesContent() {
               </div>
 
               {/* Web Portfolio Preview */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="relative aspect-[3/4] overflow-hidden bg-muted">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {webWorks.map((work) => (
+                  <a
+                    key={work.href}
+                    href={work.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative block aspect-[16/10] overflow-hidden bg-muted"
+                    aria-label={`Open ${work.title} website`}
+                  >
                     <Image
-                      src="/videoframe_16889.png"
-                      alt="Web project example"
+                      src={work.image}
+                      alt={`${work.title} website`}
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                  </div>
-                  <div className="relative aspect-square overflow-hidden bg-muted">
-                    <Image
-                      src="/4f64c688bd941de218f6647a1cc0ad04.jpg"
-                      alt="Website interface example"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-4 mt-8">
-                  <div className="relative aspect-square overflow-hidden bg-muted">
-                    <Image
-                      src="/b3a086476f7cafa9ad54ad9d0e133f3f.jpg"
-                      alt="Digital product example"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="relative aspect-[3/4] overflow-hidden bg-muted">
-                    <Image
-                      src="/e6e36705fc1d199c05bc8dfb896e32b8.jpg"
-                      alt="Responsive site example"
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
+                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors" />
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="text-xs font-medium text-background bg-foreground/70 px-2 py-1">
+                        {work.title}
+                      </span>
+                      <span className="h-8 w-8 shrink-0 bg-background/90 flex items-center justify-center">
+                        <ArrowUpRight className="h-4 w-4 text-foreground" />
+                      </span>
+                    </div>
+                  </a>
+                ))}
               </div>
             </div>
           </TabsContent>
@@ -460,13 +535,43 @@ export function ServicesContent() {
                 </Button>
               </div>
 
-              <div className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src="/ad79ed2ac71a0fecb65425f4acccc4ae.jpg"
-                  alt="Live event entertainment"
-                  fill
-                  className="object-cover"
-                />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-4">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-muted">
+                    <Image
+                      src={eventsGallery[0]}
+                      alt="Live event entertainment"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="relative aspect-square overflow-hidden bg-muted">
+                    <Image
+                      src={eventsGallery[1]}
+                      alt="Live event entertainment"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-4 mt-8">
+                  <div className="relative aspect-square overflow-hidden bg-muted">
+                    <Image
+                      src={eventsGallery[2]}
+                      alt="Live event entertainment"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="relative aspect-[3/4] overflow-hidden bg-muted">
+                    <Image
+                      src={eventsGallery[3]}
+                      alt="Live event entertainment"
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </TabsContent>

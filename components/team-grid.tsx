@@ -8,8 +8,8 @@ import { Button } from "@/components/ui/button"
 const coreTeam = [
   {
     id: "tarik-ali",
-    name: "Tarik Ali (Tar1k)",
-    role: "Founder and CEO",
+    name: "Tarik Ali ",
+    role: "Founder and Creative Director",
     bio: "Tarik leads Blank Space with a focus on world-class creative output across music, audiovisual, and digital projects.",
     image: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg",
     social: {
@@ -21,7 +21,7 @@ const coreTeam = [
   {
     id: "edward-bob-kamara",
     name: "Edward Bob Kamara",
-    role: "Tech Solutions Lead",
+    role: "Systems & Tech",
     bio: "Edward leads our web and digital solutions, helping brands build strong online presence and reliable platforms.",
     image: "/placeholder-user.jpg",
     social: {},
@@ -29,15 +29,15 @@ const coreTeam = [
   {
     id: "reginald-thompson",
     name: "Reginald Thompson",
-    role: "Resident Musician (Saxophonist)",
+    role: "Music & Operations Director",
     bio: "Reginald supports productions and live sessions with performance, arrangement support, and musical direction.",
     image: "/placeholder-user.jpg",
     social: {},
   },
   {
     id: "olor",
-    name: "Olor",
-    role: "Creative",
+    name: "Leonis “Oloh” Martyn",
+    role: "Studio Lead",
     bio: "Olor collaborates across projects, supporting creative development from concept to delivery.",
     image: "/placeholder-user.jpg",
     social: {},
@@ -154,7 +154,7 @@ export function TeamGrid() {
         </div>
 
         {/* Collaborators */}
-        <div className="mb-24">
+        {/* <div className="mb-24">
           <h2 className="font-heading text-xl font-semibold mb-8 uppercase tracking-wider">Collaborators</h2>
           <p className="text-muted-foreground max-w-2xl mb-8">
             We work with an extended network of talented individuals who bring specialized skills to our projects.
@@ -175,7 +175,7 @@ export function TeamGrid() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
 
         {/* Join CTA */}
         <div className="bg-foreground text-background p-8 md:p-12 rounded-3xl">
