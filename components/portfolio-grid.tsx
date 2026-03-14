@@ -10,7 +10,6 @@ const categories = [
   { id: "all", label: "All Work" },
   { id: "music", label: "Music" },
   { id: "video", label: "Video" },
-  { id: "brand", label: "Brand" },
   { id: "recording", label: "Recording" },
 ]
 
@@ -52,18 +51,6 @@ const projects = [
     hasVideo: false,
   },
   {
-    id: "heritage-rebrand",
-    title: "Heritage Bank Rebrand",
-    category: "brand",
-    type: "Brand Identity",
-    client: "Heritage Bank SL",
-    year: "2023",
-    description: "Complete brand overhaul including visual identity, digital presence, and marketing collateral.",
-    image: "/4f64c688bd941de218f6647a1cc0ad04.jpg",
-    featured: false,
-    hasVideo: false,
-  },
-  {
     id: "freetown-nights",
     title: "Freetown Nights",
     category: "music",
@@ -86,18 +73,6 @@ const projects = [
     image: "/30ebf51e02c4894bf0d4162e506b333e.jpg",
     featured: false,
     hasVideo: true,
-  },
-  {
-    id: "tourism-brand",
-    title: "Visit Sierra Leone",
-    category: "brand",
-    type: "Brand Campaign",
-    client: "National Tourist Board",
-    year: "2023",
-    description: "Tourism brand identity and promotional materials showcasing Sierra Leone's natural beauty.",
-    image: "/d21421eb008f0db473c6036b75be58d6.jpg",
-    featured: false,
-    hasVideo: false,
   },
   {
     id: "rising-stars-ep",
@@ -130,7 +105,7 @@ export function PortfolioGrid() {
             Select Works
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-            A showcase of our creative projects spanning music, video, brand, and recording work.
+            A showcase of our creative endeavours spanning music, video, web development and other solo and collaborative creative work.
           </p>
         </div>
 

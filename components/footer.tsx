@@ -10,7 +10,7 @@ const footerLinks = {
   services: [
     { label: "Recording & Studio Rental", href: "/services#recording" },
     { label: "Audiovisual Productions", href: "/services#audiovisual" },
-    { label: "Web Development", href: "/services#web-development" },
+    { label: "Web Solutions", href: "/services#web-development" },
     { label: "Events & Entertainment", href: "/services#events-entertainment" },
   ],
   company: [

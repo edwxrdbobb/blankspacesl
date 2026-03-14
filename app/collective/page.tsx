@@ -16,7 +16,7 @@ export default function CollectivePage() {
       <Navigation />
       <div className="pt-16">
         <TeamGrid />
-        <PartnersSlider title="Brands and organizations we've worked with" compact />
+        {/* <PartnersSlider title="Brands we've worked with" compact /> */}
       </div>
       <Footer />
       <FloatingBookButton />

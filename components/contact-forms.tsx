@@ -18,10 +18,26 @@ export function ContactForms() {
   const searchParams = useSearchParams()
   const serviceParam = searchParams.get("service")
   const typeParam = searchParams.get("type")
+
+  const corporateProjectDefault =
+    serviceParam === "recording"
+      ? "audio-content"
+      : serviceParam === "audiovisual"
+        ? "visual-content"
+        : serviceParam === "web-development"
+          ? "web-development"
+          : serviceParam === "events-entertainment"
+            ? "events-entertainment"
+            : undefined
+
+  const artistSessionDefault = serviceParam === "recording" ? "recording-session" : undefined
   
   const [formType, setFormType] = useState<FormType>(typeParam === "corporate" ? "corporate" : "artist")
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [artistSessionType, setArtistSessionType] = useState<string | undefined>(artistSessionDefault)
+
+  const artistNeedsDate = artistSessionType === "space-rental" || artistSessionType === "recording-session"
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -92,18 +108,31 @@ export function ContactForms() {
 
             {/* Contact Info */}
             <div className="space-y-4 mb-8">
-              <a href="mailto:hello@blankspace.sl" className="flex items-center gap-3 text-sm hover:text-accent transition-colors">
+              <a
+                href="mailto:info@blankspacesl.com"
+                className="flex items-center gap-3 text-sm hover:text-accent transition-colors"
+              >
                 <Mail className="h-4 w-4 text-muted-foreground" />
-                hello@blankspace.sl
+                info@blankspacesl.com
               </a>
-              <a href="tel:+23276123456" className="flex items-center gap-3 text-sm hover:text-accent transition-colors">
+              <a
+                href="mailto:blankspacesalone@gmail.com"
+                className="flex items-center gap-3 text-sm hover:text-accent transition-colors"
+              >
+                <Mail className="h-4 w-4 text-muted-foreground" />
+                blankspacesalone@gmail.com
+              </a>
+              <a
+                href="tel:+23274464034"
+                className="flex items-center gap-3 text-sm hover:text-accent transition-colors"
+              >
                 <Phone className="h-4 w-4 text-muted-foreground" />
-                +232 76 123 456
+                +232 74 464 034
               </a>
               <div className="flex items-start gap-3 text-sm">
                 <MapPin className="h-4 w-4 text-muted-foreground mt-0.5" />
                 <span>
-                  15 Wilkinson Road<br />
+                  58 Campbell St<br />
                   Freetown, Sierra Leone
                 </span>
               </div>
@@ -165,7 +194,7 @@ export function ContactForms() {
                         : "border-border hover:border-foreground/50"
                     }`}
                   >
-                    Corporate / Agency
+                    Brand / Corporate Entity
                   </Label>
                 </div>
               </RadioGroup>
@@ -192,15 +221,14 @@ export function ContactForms() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="session-type">Session Type *</Label>
-                    <Select defaultValue={serviceParam || undefined}>
+                    <Select value={artistSessionType} onValueChange={setArtistSessionType}>
                       <SelectTrigger id="session-type">
                         <SelectValue placeholder="Select type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="rehearsal">Rehearsal</SelectItem>
-                        <SelectItem value="recording">Recording Session</SelectItem>
-                        <SelectItem value="mixing">Mixing / Mastering</SelectItem>
-                        <SelectItem value="full-day">Full Day Booking</SelectItem>
+                        <SelectItem value="space-rental">Space Rental</SelectItem>
+                        <SelectItem value="recording-session">Recording Session</SelectItem>
+                        <SelectItem value="other-service">Other Service</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -208,9 +236,9 @@ export function ContactForms() {
 
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="preferred-date">Preferred Date *</Label>
+                    <Label htmlFor="preferred-date">Preferred Date{artistNeedsDate ? " *" : ""}</Label>
                     <div className="relative">
-                      <Input id="preferred-date" type="date" required />
+                      <Input id="preferred-date" type="date" required={artistNeedsDate} />
                       <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
                     </div>
                   </div>
@@ -262,7 +290,7 @@ export function ContactForms() {
                     <Input id="corp-name" required placeholder="Your name" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="corp-company">Company / Agency *</Label>
+                    <Label htmlFor="corp-company">Brand / Corporate Entity *</Label>
                     <Input id="corp-company" required placeholder="Organization name" />
                   </div>
                 </div>
@@ -281,17 +309,16 @@ export function ContactForms() {
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="project-type">Project Type *</Label>
-                    <Select defaultValue={serviceParam || undefined}>
+                    <Select defaultValue={corporateProjectDefault}>
                       <SelectTrigger id="project-type">
                         <SelectValue placeholder="Select type" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="video">Video Production</SelectItem>
-                        <SelectItem value="commercial">Commercial / Advertising</SelectItem>
-                        <SelectItem value="brand">Brand Identity</SelectItem>
-                        <SelectItem value="web">Web Design</SelectItem>
-                        <SelectItem value="campaign">Full Campaign</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
+                        <SelectItem value="audio-content">Audio Content Development</SelectItem>
+                        <SelectItem value="visual-content">Visual Content Development</SelectItem>
+                        <SelectItem value="brand-corporate">Brand/Corporate Entity</SelectItem>
+                        <SelectItem value="web-development">Web Development</SelectItem>
+                        <SelectItem value="events-entertainment">Events &amp; Entertainment</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>

@@ -29,12 +29,12 @@ const recordingFeatures = [
 ]
 
 const avFeatures = [
+  "Voice Acting Services",
+  "Voice Over Direction and Production",
+  "Explainer Videos",
   "Radio and TV commercial production",
-  "Professional video direction and capture",
   "Sound design for visual projects",
-  "Lighting and set support",
   "Editing and post-production",
-  "Commercial and branded content delivery",
 ]
 
 const webDevelopmentFeatures = [
@@ -64,28 +64,37 @@ const videoShowcase = [
 const usdToSleRate = 22.58
 
 const studioRates = [
-  { label: "Rehearsal", usd: 25, period: "/hr", note: "Basic room access" },
-  { label: "Recording Session", usd: 50, period: "/hr", note: "Full studio access + engineer", featured: true },
-  { label: "Full Day", usd: 350, period: "/day", note: "8 hours, all inclusive" },
+  { label: "Space Rental", sle: 300, period: "/hr", note: "Basic room access" },
+  {
+    label: "Recording Session",
+    sle: 450,
+    period: "/hr",
+    note: "Full studio access + engineer",
+    featured: true,
+    secondary: { sle: 600, label: "for 2 hours" },
+  },
+  { label: "Full Day", sle: 7903, period: "/day", note: "8 hours, all inclusive" },
 ]
 
 export function ServicesContent() {
-  const [activeVideo, setActiveVideo] = useState("ads")
+  const [activeVideo, setActiveVideo] = useState(videoShowcase[0]?.id ?? "ads")
   const [currency, setCurrency] = useState<"SLE" | "USD">("SLE")
 
-  const formatPrice = (usdAmount: number) => {
+  const formatPrice = (sleAmount: number) => {
     if (currency === "USD") {
       return {
         symbol: "$",
-        amount: usdAmount.toLocaleString("en-US"),
+        amount: (sleAmount / usdToSleRate).toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }),
       }
     }
 
     return {
       symbol: "Le ",
-      amount: (usdAmount * usdToSleRate).toLocaleString("en-SL", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
+      amount: sleAmount.toLocaleString("en-SL", {
+        maximumFractionDigits: 0,
       }),
     }
   }
@@ -130,7 +139,7 @@ export function ServicesContent() {
               id="web-development"
             >
               <Globe className="h-4 w-4 mr-2" />
-              Web Development
+              Web Solutions
             </TabsTrigger>
             <TabsTrigger
               value="events-entertainment"
@@ -231,7 +240,8 @@ export function ServicesContent() {
               </div>
               <div className="grid sm:grid-cols-3 gap-6">
                 {studioRates.map((rate) => {
-                  const price = formatPrice(rate.usd)
+                  const price = formatPrice(rate.sle)
+                  const secondaryPrice = rate.secondary ? formatPrice(rate.secondary.sle) : null
 
                   return (
                     <div
@@ -245,12 +255,18 @@ export function ServicesContent() {
                         <span className="text-lg font-normal text-muted-foreground">{rate.period}</span>
                       </p>
                       <p className="text-muted-foreground text-sm mt-2">{rate.note}</p>
+                      {rate.secondary && secondaryPrice ? (
+                        <p className="text-muted-foreground text-sm">
+                          {secondaryPrice.symbol}
+                          {secondaryPrice.amount} {rate.secondary.label}
+                        </p>
+                      ) : null}
                     </div>
                   )
                 })}
               </div>
               <p className="text-muted-foreground text-sm mt-6">
-                * 50% deposit required to confirm booking. Leone pricing uses an approximate conversion of 1 USD = Le 22.58.
+                * 50% deposit required to confirm booking. Dollar pricing uses an approximate conversion of 1 USD = Le 22.58.
               </p>
             </div>
           </TabsContent>
@@ -265,13 +281,13 @@ export function ServicesContent() {
                   </div>
                   <div>
                     <h2 className="font-heading text-2xl md:text-3xl font-bold">Audiovisual Productions</h2>
-                    <p className="text-muted-foreground">Cinema-quality video content</p>
+                    <p className="text-muted-foreground">High quality audio and visual content</p>
                   </div>
                 </div>
 
                 <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                  From radio and TV commercials to visual projects with key sonic elements, we&apos;ll
-                  bring your vision to life.
+                  From brand songs to radio and TV commercials, to visual projects with key sonic
+                  elements, we&apos;ll bring your vision to life.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-3 mb-8">
@@ -295,8 +311,8 @@ export function ServicesContent() {
               <div className="space-y-4">
                 <div className="relative aspect-video overflow-hidden bg-muted">
                   <Image
-                    src={videoShowcase.find(v => v.id === activeVideo)?.thumbnail || videoShowcase[0].thumbnail}
-                    alt="Video showcase"
+                    src={videoShowcase.find((video) => video.id === activeVideo)?.thumbnail || videoShowcase[0].thumbnail}
+                    alt="Audiovisual showcase"
                     fill
                     className="object-cover"
                   />
@@ -310,16 +326,16 @@ export function ServicesContent() {
                   {videoShowcase.map((video) => (
                     <button
                       key={video.id}
+                      type="button"
                       onClick={() => setActiveVideo(video.id)}
-                      className={`flex-1 relative aspect-video overflow-hidden border-2 transition-all ${activeVideo === video.id ? "border-foreground" : "border-transparent opacity-60 hover:opacity-100"
-                        }`}
+                      className={`flex-1 relative aspect-video overflow-hidden border-2 transition-all ${
+                        activeVideo === video.id
+                          ? "border-foreground"
+                          : "border-transparent opacity-60 hover:opacity-100"
+                      }`}
+                      aria-label={`Show ${video.label}`}
                     >
-                      <Image
-                        src={video.thumbnail || "/placeholder.svg"}
-                        alt={video.label}
-                        fill
-                        className="object-cover"
-                      />
+                      <Image src={video.thumbnail} alt={video.label} fill className="object-cover" />
                       <span className="absolute bottom-0 left-0 right-0 bg-foreground/80 text-background text-xs py-1 px-2">
                         {video.label}
                       </span>
@@ -330,7 +346,7 @@ export function ServicesContent() {
             </div>
           </TabsContent>
 
-          {/* Web Development Tab */}
+          {/* Web Solutions Tab */}
           <TabsContent value="web-development" className="mt-12">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -339,7 +355,7 @@ export function ServicesContent() {
                     <Globe className="h-6 w-6 text-background" />
                   </div>
                   <div>
-                    <h2 className="font-heading text-2xl md:text-3xl font-bold">Web Development</h2>
+                    <h2 className="font-heading text-2xl md:text-3xl font-bold">Web Solutions</h2>
                     <p className="text-muted-foreground">Professional websites for your digital presence</p>
                   </div>
                 </div>

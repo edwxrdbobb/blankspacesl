@@ -2,15 +2,17 @@
 
 import Image from "next/image"
 
-const partners = [
-  { name: "One Mobile", src: "/Partners/one-mobile.jpg" },
-  { name: "UNFPA", src: "/Partners/unfpa-vector-logo.png" },
-  { name: "Purposeful", src: "/Partners/Purposeful-logo-400px-v3.svg" },
-  { name: "SLMDA", src: "/Partners/SLMDA-logo.png" },
-  { name: "Foodbly", src: "/Partners/foodbly.jpeg" },
-  { name: "Vult", src: "/Partners/vult.png" },
-  { name: "Ecobank", src: "/Partners/Ecobank_logo.png" },
-  { name: "BCC", src: "/Partners/bcc-logo.jpg" },
+type Partner = {
+  name: string
+  src?: string
+}
+
+const partners: Partner[] = [
+  { name: "Smove Vehicles" },
+  { name: "Leone Gadgets" },
+  { name: "AWATS" },
+  { name: "KIZURI INTERNATIONAL" },
+  { name: "Centurion Engineering" },
 ]
 
 type PartnersSliderProps = {
@@ -38,15 +40,19 @@ export function PartnersSlider({
               key={`${partner.name}-${index}`}
               className="mx-4 md:mx-6 flex h-20 w-40 shrink-0 items-center justify-center rounded-2xl border border-border/60 bg-background px-6 shadow-sm"
             >
-              <div className="relative h-12 w-full">
-                <Image
-                  src={partner.src}
-                  alt={`${partner.name} logo`}
-                  fill
-                  className="object-contain"
-                  sizes="160px"
-                />
-              </div>
+              {partner.src ? (
+                <div className="relative h-12 w-full">
+                  <Image
+                    src={partner.src}
+                    alt={`${partner.name} logo`}
+                    fill
+                    className="object-contain"
+                    sizes="160px"
+                  />
+                </div>
+              ) : (
+                <p className="text-center text-sm font-medium leading-tight">{partner.name}</p>
+              )}
             </div>
           ))}
         </div>

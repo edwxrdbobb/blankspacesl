@@ -7,31 +7,10 @@ import { Button } from "@/components/ui/button"
 
 const coreTeam = [
   {
-    id: "amara",
-    name: "Amara Koroma",
-    role: "Founder & Creative Director",
-    bio: "Amara founded Blank Space in 2019 with a vision to create a world-class creative hub in Freetown. With over 15 years in the music and advertising industry, she brings a unique blend of artistic vision and business acumen to every project.",
-    image: "/0eb14988cda007dd63b35be6d5020dc6.jpg",
-    social: {
-      instagram: "https://instagram.com/amarakoroma",
-      twitter: "https://twitter.com/amarakoroma",
-    },
-  },
-  {
-    id: "ibrahim",
-    name: "Ibrahim Sesay",
-    role: "Studio Manager & Lead Engineer",
-    bio: "Ibrahim oversees all studio operations and brings 10 years of audio engineering experience. He's worked with some of Sierra Leone's biggest artists and ensures every session meets international standards.",
-    image: "/f14281875b7b16d18596fab170cd9b29.jpg",
-    social: {
-      instagram: "https://instagram.com/ibrahimsesay",
-    },
-  },
-  {
-    id: "tarik",
-    name: "tar1k",
-    role: "Artist-in-Residence & Creative Lead",
-    bio: "tar1k is an award-winning artist and one of Sierra Leone's most recognized voices. As our artist-in-residence, he mentors emerging talent and leads creative direction on flagship projects.",
+    id: "tarik-ali",
+    name: "Tarik Ali (Tar1k)",
+    role: "Founder and CEO",
+    bio: "Tarik leads Blank Space with a focus on world-class creative output across music, audiovisual, and digital projects.",
     image: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg",
     social: {
       instagram: "https://instagram.com/tar1k",
@@ -40,14 +19,28 @@ const coreTeam = [
     },
   },
   {
-    id: "fatou",
-    name: "Fatou Bangura",
-    role: "Head of Brand & Design",
-    bio: "Fatou leads our design team, bringing a fresh perspective to brand identity and visual communications. Her work has been recognized at the African Design Awards.",
-    image: "/b6929bd059977a8238dcbc74008f31f4.jpg",
-    social: {
-      instagram: "https://instagram.com/fatoubangura",
-    },
+    id: "edward-bob-kamara",
+    name: "Edward Bob Kamara",
+    role: "Tech Solutions Lead",
+    bio: "Edward leads our web and digital solutions, helping brands build strong online presence and reliable platforms.",
+    image: "/placeholder-user.jpg",
+    social: {},
+  },
+  {
+    id: "reginald-thompson",
+    name: "Reginald Thompson",
+    role: "Resident Musician (Saxophonist)",
+    bio: "Reginald supports productions and live sessions with performance, arrangement support, and musical direction.",
+    image: "/placeholder-user.jpg",
+    social: {},
+  },
+  {
+    id: "olor",
+    name: "Olor",
+    role: "Creative",
+    bio: "Olor collaborates across projects, supporting creative development from concept to delivery.",
+    image: "/placeholder-user.jpg",
+    social: {},
   },
 ]
 
@@ -95,8 +88,7 @@ export function TeamGrid() {
             The minds behind the magic.
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-            We&apos;re a collective of artists, producers, designers, and dreamers united by a passion
-            for creative excellence and a commitment to putting Sierra Leone on the global creative map.
+            The Blank Space represents a collective of creatives and dreamers united by a passion for creative excellence.
           </p>
         </div>
 
@@ -118,9 +110,7 @@ export function TeamGrid() {
                   <div className="flex flex-col">
                     <h3 className="font-heading text-xl font-bold mb-1">{member.name}</h3>
                     <p className="text-accent text-sm font-medium mb-4">{member.role}</p>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow">
-                      {member.bio}
-                    </p>
+                    <div className="flex-grow" />
                     <div className="flex items-center gap-3">
                       {member.social.instagram && (
                         <a

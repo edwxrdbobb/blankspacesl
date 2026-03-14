@@ -5,7 +5,8 @@ import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { BlurFade } from "@/components/effects/blur-fade"
 import { SpotlightCard } from "@/components/effects/spotlight-card"
-import { DotScreenShader } from "@/components/ui/dot-shader-background";
+import { DotScreenShader } from "@/components/ui/dot-shader-background"
+import { cn } from "@/lib/utils"
 
 const services = [
   {
@@ -18,14 +19,15 @@ const services = [
   {
     id: "audiovisual",
     title: "Audiovisual Productions",
-    description: "From radio and TV commercials to visual projects with key sonic elements, we'll bring your vision to life.",
+    description:
+      "From brand songs to radio and TV commercials, to visual projects with key sonic elements, we'll bring your vision to life.",
     image: "/1190c1d6176009d625f7d93b0d973f5b.jpg",
     href: "/services#audiovisual",
   },
   {
     id: "web-development",
-    title: "Web Development",
-    description: "Get your digital footprint started right with a professional website worth of your dream.",
+    title: "Web Solutions",
+    description: "Get your digital footprint started right with a professional website worthy of your dream.",
     image: "/videoframe_16889.png",
     href: "/services#web-development",
   },
@@ -51,21 +53,25 @@ export function ServicesPreview() {
               Everything you need to create, produce, and grow.
             </h2>
             <p className="text-muted-foreground text-lg">
-              From studio sessions to digital launches and live experiences, we provide end-to-end creative solutions.
+              From studio sessions to digital launches and live experiences, we provide individual and end-to-end creative solutions.
             </p>
           </div>
         </BlurFade>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
           {services.map((service, index) => (
-            <BlurFade key={service.id} delay={0.1 * (index + 1)}>
+            <BlurFade
+              key={service.id}
+              delay={0.1 * (index + 1)}
+              className={cn(index === 0 || index === 3 ? "xl:col-span-2" : "xl:col-span-1")}
+            >
               <Link href={service.href} className="block h-full">
                 <SpotlightCard 
-                  className="group h-full bg-card border border-border rounded-2xl overflow-hidden hover:border-foreground/20 transition-all duration-300"
+                  className="group h-full xl:h-[420px] flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:border-foreground/20 transition-all duration-300"
                   spotlightColor="rgba(255, 255, 255, 0.08)"
                 >
-                  <div className="aspect-[4/3] relative overflow-hidden">
+                  <div className="relative overflow-hidden h-52 sm:h-60 xl:h-64 shrink-0">
                     <Image
                       src={service.image || "/placeholder.svg"}
                       alt={service.title}
@@ -74,13 +80,13 @@ export function ServicesPreview() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <div className="p-6">
+                  <div className="p-6 flex-1">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <h3 className="font-heading text-xl font-semibold mb-2 group-hover:text-accent transition-colors">
+                        <h3 className="font-heading text-xl font-semibold mb-2 group-hover:text-accent transition-colors line-clamp-2">
                           {service.title}
                         </h3>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
+                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
                           {service.description}
                         </p>
                       </div>

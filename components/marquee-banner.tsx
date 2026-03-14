@@ -3,7 +3,7 @@
 const services = [
   "Recording & Studio Rental",
   "Audiovisual Productions",
-  "Web Development",
+  "Web Solutions",
   "Events & Entertainment",
 ]
 
