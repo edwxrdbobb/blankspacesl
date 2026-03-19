@@ -6,6 +6,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { cloudinaryVideoPosterUrl, mediaUrl } from "@/lib/media"
 import {
   ArrowRight,
   ArrowUpRight,
@@ -127,6 +128,12 @@ export function ServicesContent() {
   const [activeVideo, setActiveVideo] = useState(videoShowcase[0]?.id ?? "showcase-1")
   const [currency, setCurrency] = useState<"SLE" | "USD">("SLE")
 
+  const videoPoster = (videoId: string) => {
+    const v = videoShowcase.find((item) => item.id === videoId) ?? videoShowcase[0]
+    const resolvedVideoSrc = mediaUrl(v.src)
+    return cloudinaryVideoPosterUrl(resolvedVideoSrc, 1) ?? mediaUrl(v.thumbnail)
+  }
+
   const formatPrice = (sleAmount: number) => {
     if (currency === "USD") {
       return {
@@ -247,7 +254,7 @@ export function ServicesContent() {
 
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
-                  src="/d21421eb008f0db473c6036b75be58d6.jpg"
+                  src={mediaUrl("/d21421eb008f0db473c6036b75be58d6.jpg")}
                   alt="Recording studio interior"
                   fill
                   className="object-cover"
@@ -364,10 +371,7 @@ export function ServicesContent() {
                       aria-label="Play showcase video"
                     >
                       <Image
-                        src={
-                          videoShowcase.find((video) => video.id === activeVideo)?.thumbnail ??
-                          videoShowcase[0].thumbnail
-                        }
+                        src={videoPoster(activeVideo)}
                         alt="Audiovisual showcase"
                         fill
                         className="object-cover"
@@ -383,7 +387,7 @@ export function ServicesContent() {
                     <div className="relative aspect-video w-full">
                       <video
                         key={activeVideo}
-                        src={videoShowcase.find((video) => video.id === activeVideo)?.src ?? videoShowcase[0].src}
+                        src={mediaUrl(videoShowcase.find((video) => video.id === activeVideo)?.src ?? videoShowcase[0].src)}
                         className="h-full w-full"
                         controls
                         autoPlay
@@ -406,7 +410,7 @@ export function ServicesContent() {
                       }`}
                       aria-label={`Show ${video.label}`}
                     >
-                      <Image src={video.thumbnail} alt={video.label} fill className="object-cover" />
+                      <Image src={videoPoster(video.id)} alt={video.label} fill className="object-cover" />
                       <span className="absolute bottom-0 left-0 right-0 bg-foreground/80 text-background text-xs py-1 px-2">
                         {video.label}
                       </span>
@@ -422,7 +426,7 @@ export function ServicesContent() {
                     {audioAds.map((sample) => (
                       <div key={sample.src} className="border border-border bg-background p-3">
                         <p className="text-sm font-medium mb-2">{sample.title}</p>
-                        <audio className="w-full" controls preload="none" src={sample.src} />
+                        <audio className="w-full" controls preload="none" src={mediaUrl(sample.src)} />
                       </div>
                     ))}
                   </div>
@@ -478,7 +482,7 @@ export function ServicesContent() {
                     aria-label={`Open ${work.title} website`}
                   >
                     <Image
-                      src={work.image}
+                      src={mediaUrl(work.image)}
                       alt={`${work.title} website`}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -539,7 +543,7 @@ export function ServicesContent() {
                 <div className="space-y-4">
                   <div className="relative aspect-[3/4] overflow-hidden bg-muted">
                     <Image
-                      src={eventsGallery[0]}
+                      src={mediaUrl(eventsGallery[0])}
                       alt="Live event entertainment"
                       fill
                       className="object-cover"
@@ -547,7 +551,7 @@ export function ServicesContent() {
                   </div>
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     <Image
-                      src={eventsGallery[1]}
+                      src={mediaUrl(eventsGallery[1])}
                       alt="Live event entertainment"
                       fill
                       className="object-cover"
@@ -557,7 +561,7 @@ export function ServicesContent() {
                 <div className="space-y-4 mt-8">
                   <div className="relative aspect-square overflow-hidden bg-muted">
                     <Image
-                      src={eventsGallery[2]}
+                      src={mediaUrl(eventsGallery[2])}
                       alt="Live event entertainment"
                       fill
                       className="object-cover"
@@ -565,7 +569,7 @@ export function ServicesContent() {
                   </div>
                   <div className="relative aspect-[3/4] overflow-hidden bg-muted">
                     <Image
-                      src={eventsGallery[3]}
+                      src={mediaUrl(eventsGallery[3])}
                       alt="Live event entertainment"
                       fill
                       className="object-cover"

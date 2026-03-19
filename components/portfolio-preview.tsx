@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { mediaUrl } from "@/lib/media"
 
 const projects = [
   {
@@ -76,7 +77,7 @@ export function PortfolioPreview() {
               className="group md:col-span-2 lg:col-span-2 relative aspect-[16/9] overflow-hidden rounded-2xl"
             >
               <Image
-                src={featuredProject.image || "/placeholder.svg"}
+                src={mediaUrl(featuredProject.image || "/placeholder.svg")}
                 alt={featuredProject.title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -112,7 +113,7 @@ export function PortfolioPreview() {
               className="group relative aspect-[4/3] overflow-hidden rounded-2xl"
             >
               <Image
-                src={project.image || "/placeholder.svg"}
+                src={mediaUrl(project.image || "/placeholder.svg")}
                 alt={project.title}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"

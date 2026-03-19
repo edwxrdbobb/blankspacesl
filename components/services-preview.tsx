@@ -7,6 +7,7 @@ import { BlurFade } from "@/components/effects/blur-fade"
 import { SpotlightCard } from "@/components/effects/spotlight-card"
 import { DotScreenShader } from "@/components/ui/dot-shader-background"
 import { cn } from "@/lib/utils"
+import { mediaUrl } from "@/lib/media"
 
 const services = [
   {
@@ -73,7 +74,7 @@ export function ServicesPreview() {
                 >
                   <div className="relative overflow-hidden h-52 sm:h-60 xl:h-64 shrink-0">
                     <Image
-                      src={service.image || "/placeholder.svg"}
+                      src={mediaUrl(service.image || "/placeholder.svg")}
                       alt={service.title}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"

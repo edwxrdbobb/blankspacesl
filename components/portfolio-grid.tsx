@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Play, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { mediaUrl } from "@/lib/media"
 
 const categories = [
   { id: "all", label: "All Work" },
@@ -146,7 +147,7 @@ export function PortfolioGrid() {
                 }`}
             >
               <Image
-                src={project.image || "/placeholder.svg"}
+                src={mediaUrl(project.image || "/placeholder.svg")}
                 alt={project.title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

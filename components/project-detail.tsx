@@ -5,6 +5,7 @@ import Image from "next/image"
 import { ArrowLeft, Play } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { mediaUrl } from "@/lib/media"
 
 interface ProjectDetailProps {
   project: {
@@ -61,7 +62,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               <DialogContent className="sm:max-w-5xl p-0 overflow-hidden bg-black">
                 <div className="relative aspect-video w-full">
                   <video
-                    src={project.videoSrc}
+                    src={mediaUrl(project.videoSrc)}
                     className="h-full w-full"
                     controls
                     autoPlay
@@ -102,7 +103,7 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
                   {audioSamples.map((sample) => (
                     <div key={sample.src} className="border border-border bg-muted p-4">
                       <p className="font-medium mb-2">{sample.title}</p>
-                      <audio className="w-full" controls preload="none" src={sample.src} />
+                      <audio className="w-full" controls preload="none" src={mediaUrl(sample.src)} />
                     </div>
                   ))}
                 </div>
