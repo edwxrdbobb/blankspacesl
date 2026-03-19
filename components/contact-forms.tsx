@@ -35,19 +35,60 @@ export function ContactForms() {
   const [formType, setFormType] = useState<FormType>(typeParam === "corporate" ? "corporate" : "artist")
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [artistSessionType, setArtistSessionType] = useState<string | undefined>(artistSessionDefault)
+  const [preferredTime, setPreferredTime] = useState<string>("")
+  const [corpProjectType, setCorpProjectType] = useState<string>(corporateProjectDefault ?? "")
+  const [corpBudget, setCorpBudget] = useState<string>("")
+  const [corpTimeline, setCorpTimeline] = useState<string>("")
+  const [corpDecisionMaker, setCorpDecisionMaker] = useState<string>("")
 
   const artistNeedsDate = artistSessionType === "space-rental" || artistSessionType === "recording-session"
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+    setError(null)
+
+    const data = new FormData(e.currentTarget)
+
+    const body = formType === "artist"
+      ? {
+          formType: "artist",
+          name: data.get("artist-name"),
+          email: data.get("artist-email"),
+          phone: data.get("artist-phone"),
+          sessionType: artistSessionType,
+          preferredDate: data.get("preferred-date"),
+          preferredTime,
+          message: data.get("artist-message"),
+        }
+      : {
+          formType: "corporate",
+          contactName: data.get("corp-name"),
+          company: data.get("corp-company"),
+          email: data.get("corp-email"),
+          phone: data.get("corp-phone"),
+          projectType: corpProjectType,
+          budget: corpBudget,
+          timeline: corpTimeline,
+          decisionMaker: corpDecisionMaker,
+          projectScope: data.get("project-scope"),
+        }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      })
+      if (!res.ok) throw new Error()
+      setIsSubmitted(true)
+    } catch {
+      setError("Something went wrong. Please try again or email us directly.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (isSubmitted) {
@@ -244,7 +285,7 @@ export function ContactForms() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="preferred-time">Preferred Time</Label>
-                    <Select>
+                    <Select value={preferredTime} onValueChange={setPreferredTime}>
                       <SelectTrigger id="preferred-time">
                         <SelectValue placeholder="Select time" />
                       </SelectTrigger>
@@ -274,6 +315,7 @@ export function ContactForms() {
                   </p>
                 </div>
 
+                {error && <p className="text-sm text-destructive">{error}</p>}
                 <Button type="submit" size="lg" className="w-full sm:w-auto rounded-full shadow-lg" disabled={isSubmitting}>
                   {isSubmitting ? "Submitting..." : "Submit Booking Request"}
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -309,7 +351,7 @@ export function ContactForms() {
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="project-type">Project Type *</Label>
-                    <Select defaultValue={corporateProjectDefault}>
+                    <Select value={corpProjectType} onValueChange={setCorpProjectType}>
                       <SelectTrigger id="project-type">
                         <SelectValue placeholder="Select type" />
                       </SelectTrigger>
@@ -324,7 +366,7 @@ export function ContactForms() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="budget-range">Budget Range *</Label>
-                    <Select>
+                    <Select value={corpBudget} onValueChange={setCorpBudget}>
                       <SelectTrigger id="budget-range">
                         <SelectValue placeholder="Select range" />
                       </SelectTrigger>
@@ -342,7 +384,7 @@ export function ContactForms() {
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <Label htmlFor="timeline">Project Timeline *</Label>
-                    <Select>
+                    <Select value={corpTimeline} onValueChange={setCorpTimeline}>
                       <SelectTrigger id="timeline">
                         <SelectValue placeholder="Select timeline" />
                       </SelectTrigger>
@@ -357,7 +399,7 @@ export function ContactForms() {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="decision-maker">Are you the decision maker?</Label>
-                    <Select>
+                    <Select value={corpDecisionMaker} onValueChange={setCorpDecisionMaker}>
                       <SelectTrigger id="decision-maker">
                         <SelectValue placeholder="Select" />
                       </SelectTrigger>
@@ -380,6 +422,7 @@ export function ContactForms() {
                   />
                 </div>
 
+                {error && <p className="text-sm text-destructive">{error}</p>}
                 <Button type="submit" size="lg" className="w-full sm:w-auto rounded-full shadow-lg" disabled={isSubmitting}>
                   {isSubmitting ? "Submitting..." : "Submit Brief"}
                   <ArrowRight className="ml-2 h-4 w-4" />

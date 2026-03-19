@@ -1,10 +1,11 @@
 "use client"
 
+import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Instagram, Youtube, Twitter, Mail, MapPin, Phone } from "lucide-react"
+import { Instagram, Youtube, Twitter, Mail, MapPin, Phone, Check } from "lucide-react"
 
 const footerLinks = {
   services: [
@@ -27,6 +28,24 @@ const footerLinks = {
 }
 
 export function Footer() {
+  const [email, setEmail] = useState("")
+  const [subState, setSubState] = useState<"idle" | "loading" | "success" | "error">("idle")
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubState("loading")
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      })
+      setSubState(res.ok ? "success" : "error")
+    } catch {
+      setSubState("error")
+    }
+  }
+
   return (
     <footer className="bg-foreground text-background">
       <div className="container mx-auto px-4 py-16 md:py-20">
@@ -102,17 +121,30 @@ export function Footer() {
             <p className="text-background/70 text-sm mb-4">
               Get updates on new releases, artist spotlights, and creative tips.
             </p>
-            <form className="flex gap-2">
-              <Input
-                type="email"
-                placeholder="Your email"
-                className="bg-background/10 border-background/20 text-background placeholder:text-background/50 rounded-full"
-              />
-              <Button type="submit" variant="secondary" size="icon" className="shrink-0 rounded-full">
-                <Mail className="h-4 w-4" />
-                <span className="sr-only">Subscribe</span>
-              </Button>
-            </form>
+            {subState === "success" ? (
+              <div className="flex items-center gap-2 text-sm text-background/80">
+                <Check className="h-4 w-4 shrink-0" />
+                You&apos;re on the list!
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="flex gap-2">
+                <Input
+                  type="email"
+                  required
+                  placeholder="Your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="bg-background/10 border-background/20 text-background placeholder:text-background/50 rounded-full"
+                />
+                <Button type="submit" variant="secondary" size="icon" className="shrink-0 rounded-full" disabled={subState === "loading"}>
+                  <Mail className="h-4 w-4" />
+                  <span className="sr-only">Subscribe</span>
+                </Button>
+              </form>
+            )}
+            {subState === "error" && (
+              <p className="text-xs text-red-400 mt-2">Something went wrong. Please try again.</p>
+            )}
           </div>
         </div>
 

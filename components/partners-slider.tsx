@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import { mediaUrl } from "@/lib/media"
 
 type Partner = {
   name: string
@@ -8,11 +9,19 @@ type Partner = {
 }
 
 const partners: Partner[] = [
-  { name: "Smove Vehicles" },
-  { name: "Leone Gadgets" },
+  { name: "Centurion Engineering", src: "/Partners/centurion-sl-logo.png" },
+  { name: "Ecobank", src: "/Partners/Ecobank_logo.png" },
+  { name: "Vult", src: "/Partners/vult.png" },
+  { name: "1 Mobile", src: "/Partners/one-mobile.jpg" },
+  { name: "Foodbly", src: "/Partners/foodbly.jpeg" },
+  { name: "UNFPA", src: "/Partners/unfpa-vector-logo.png" },
+  { name: "SLMDA", src: "/Partners/SLMDA-logo.png" },
+  { name: "BCC", src: "/Partners/bcc-logo.jpg" },
+  { name: "Purposeful", src: "/Partners/Purposeful-logo-400px-v3.svg" },
+  { name: "Closer", src: "/Partners/Closer-logo-1-01-2.jpg" },
+  { name: "Leone Gadgets", src: "/Partners/LG-logo-e1667494305555-1024x675.png" },
   { name: "AWATS" },
-  { name: "KIZURI INTERNATIONAL" },
-  { name: "Centurion Engineering" },
+  { name: "KIZURI INTERNATIONAL", src: "/Partners/Closer-logo-1-01-2.jpg" },
 ]
 
 type PartnersSliderProps = {
@@ -38,21 +47,20 @@ export function PartnersSlider({
           {[...partners, ...partners, ...partners].map((partner, index) => (
             <div
               key={`${partner.name}-${index}`}
-              className="mx-4 md:mx-6 flex h-20 w-40 shrink-0 items-center justify-center rounded-2xl border border-border/60 bg-background px-6 shadow-sm"
+              className="mx-4 md:mx-6 flex h-24 w-44 shrink-0 flex-col items-center justify-center gap-2 rounded-2xl border border-border/60 bg-background px-4 py-3 shadow-sm"
             >
-              {partner.src ? (
-                <div className="relative h-12 w-full">
+              {partner.src && (
+                <div className="relative h-10 w-full">
                   <Image
-                    src={partner.src}
+                    src={mediaUrl(partner.src)}
                     alt={`${partner.name} logo`}
                     fill
                     className="object-contain"
-                    sizes="160px"
+                    sizes="176px"
                   />
                 </div>
-              ) : (
-                <p className="text-center text-sm font-medium leading-tight">{partner.name}</p>
               )}
+              <p className="text-center text-xs font-medium leading-tight text-muted-foreground">{partner.name}</p>
             </div>
           ))}
         </div>

@@ -29,7 +29,7 @@ const services = [
     id: "web-development",
     title: "Web Solutions",
     description: "Get your digital footprint started right with a professional website worthy of your dream.",
-    image: "/our-work/website/Smove-Vehicles-03-14-2026_05_18_PM.png",
+    image: "/web dev.png",
     href: "/services#web-development",
   },
   {
