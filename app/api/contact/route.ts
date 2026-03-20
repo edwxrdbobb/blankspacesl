@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 const FROM = "Blank Space Website <no-reply@blankspacesl.com>"
-const TO = ["info@blankspacesl.com", "edwardbobkamara@gmail.com"]
+const TO = (process.env.ADMIN_EMAILS ?? "info@blankspacesl.com").split(",")
 
 export async function POST(req: Request) {
   try {
