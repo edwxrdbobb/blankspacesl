@@ -6,6 +6,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { AudioWaveform } from "@/components/audio-waveform"
 import { cloudinaryVideoPosterUrl, mediaUrl } from "@/lib/media"
 import {
   ArrowRight,
@@ -443,16 +444,13 @@ export function ServicesContent() {
                   ))}
                 </div>
 
-                <div className="pt-4">
-                  <h3 className="font-heading text-sm uppercase tracking-wider text-muted-foreground mb-3">
+                <div className="pt-8">
+                  <h3 className="font-heading text-sm uppercase tracking-wider text-muted-foreground mb-6">
                     Audio Samples
                   </h3>
-                  <div className="space-y-3">
+                  <div className="grid gap-4">
                     {audioAds.map((sample) => (
-                      <div key={sample.src} className="border border-border bg-background p-3">
-                        <p className="text-sm font-medium mb-2">{sample.title}</p>
-                        <audio className="w-full" controls preload="none" src={mediaUrl(sample.src)} />
-                      </div>
+                      <AudioWaveform key={sample.src} src={mediaUrl(sample.src)} title={sample.title} />
                     ))}
                   </div>
                 </div>
