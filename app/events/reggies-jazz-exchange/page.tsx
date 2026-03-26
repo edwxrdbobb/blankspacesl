@@ -4,6 +4,15 @@ import { Footer } from "@/components/footer"
 import { EventRSVPForm } from "@/components/event-rsvp-form"
 import { Calendar, MapPin, Clock, Ticket, Phone, Info } from "lucide-react"
 import type { Metadata } from "next"
+import { Prata, Inter } from "next/font/google"
+
+const prata = Prata({ 
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: "Reggie's Jazz Exchange | Blank Space Events",
@@ -20,59 +29,51 @@ const eventDetails = [
 
 export default function RejgiesJazzExchangePage() {
   return (
-    <main className="bg-background selection:bg-accent/30">
+    <main className={`bg-[#fdfaf3] selection:bg-[#f37335]/30 ${inter.className} min-h-screen`}>
       <Navigation />
       
+      {/* Background Texture Overlay */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.03] z-[100] mix-blend-multiply" 
+           style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/paper-fibers.png")` }} />
+
       {/* Hero Section */}
       <section className="relative pt-32 pb-16 md:pt-48 md:pb-32 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background z-10" />
-          <Image
-            src="/Reggies.jpeg"
-            alt="Reggie playing saxophone"
-            fill
-            className="object-cover opacity-20 scale-110 blur-sm"
-            priority
-          />
-        </div>
-
         <div className="container mx-auto px-4 relative z-20">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left Column - Content */}
             <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase tracking-wider mb-6 animate-fade-in">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#f37335]/10 border border-[#f37335]/20 text-[#f37335] text-xs font-bold uppercase tracking-[0.2em] mb-8">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#f37335] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#f37335]"></span>
                 </span>
                 Upcoming Event
               </div>
               
-              <h1 className="font-heading text-4xl md:text-5xl lg:text-7xl font-bold mb-8 leading-tight tracking-tight text-foreground">
-                Reggie&apos;s <span className="text-accent italic font-serif">Jazz</span> Exchange
+              <h1 className={`${prata.className} text-5xl md:text-6xl lg:text-8xl font-normal mb-8 leading-[1.1] tracking-tight text-[#1a1a1a]`}>
+                Reggie&apos;s <span className="text-[#f37335] italic">Jazz</span> <br />
+                <span className="text-[#00aed9]">Exchange</span>
               </h1>
               
-              <div className="space-y-6 text-lg text-muted-foreground leading-relaxed mb-10">
-                <p className="font-medium text-foreground italic border-l-4 border-accent pl-4">
+              <div className="space-y-8 text-lg text-[#4a4a4a] leading-relaxed mb-12">
+                <p className={`${prata.className} text-2xl text-[#1a1a1a] italic border-l-4 border-[#f37335] pl-6 py-2`}>
                   &quot;Dis wan na for di people dem way sabi fine tin. Reggie’s Jazz Exchange is a cultural moment.&quot;
                 </p>
-                <p>
+                <p className="font-medium opacity-80">
                   On the 30th of April, Freetown joins the global stage for International Jazz Day. 
                   Led by none other than Reginald &ldquo;Bizzup&rdquo; Thompson and his saxophone. 
                   Come experience a concert like no other - our best musicians in their element.
                 </p>
               </div>
 
-              {/* Event Details Grid */}
-              <div className="grid sm:grid-cols-2 gap-6 p-8 bg-muted/30 border border-border/50 rounded-3xl backdrop-blur-sm">
+              {/* Event Details Grid - Retro Style */}
+              <div className="grid sm:grid-cols-2 gap-px bg-[#1a1a1a]/10 border border-[#1a1a1a]/10 rounded-2xl overflow-hidden shadow-sm">
                 {eventDetails.map((detail) => (
-                  <div key={detail.label} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-background border border-border/50 flex items-center justify-center shrink-0 shadow-sm">
-                      <detail.icon className="h-5 w-5 text-accent" />
-                    </div>
+                  <div key={detail.label} className="bg-[#fdfaf3]/50 p-6 flex items-start gap-4">
+                    <detail.icon className="h-5 w-5 text-[#f37335] mt-1 shrink-0" />
                     <div>
-                      <p className="text-[10px] uppercase tracking-widest text-muted-foreground mb-0.5">{detail.label}</p>
-                      <p className="text-sm font-bold text-foreground leading-snug">{detail.value}</p>
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-[#4a4a4a]/60 font-bold mb-1">{detail.label}</p>
+                      <p className={`${prata.className} text-base text-[#1a1a1a] leading-tight`}>{detail.value}</p>
                     </div>
                   </div>
                 ))}
@@ -80,18 +81,22 @@ export default function RejgiesJazzExchangePage() {
             </div>
 
             {/* Right Column - Image & RSVP */}
-            <div className="space-y-12">
-              <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700 group ring-1 ring-border/50">
+            <div className="space-y-12 relative">
+              {/* Decorative Elements */}
+              <div className="absolute -top-12 -right-12 w-64 h-64 bg-[#00aed9]/10 rounded-full blur-3xl -z-10" />
+              <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-[#f37335]/10 rounded-full blur-3xl -z-10" />
+
+              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)] transform -rotate-3 hover:rotate-0 transition-all duration-1000 group">
                 <Image
                   src="/Reggies.jpeg"
                   alt="Reggie's Jazz Exchange Flyer"
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-3xl" />
               </div>
 
-              <div id="rsvp">
+              <div id="rsvp" className="relative z-20 pt-4">
                 <EventRSVPForm 
                   eventId="reggies-jazz-exchange-2026" 
                   eventName="Reggie's Jazz Exchange" 
@@ -102,14 +107,16 @@ export default function RejgiesJazzExchangePage() {
         </div>
       </section>
 
-      {/* Info Banner */}
-      <section className="py-12 bg-accent/5 border-y border-accent/10">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8 text-center md:text-left">
-            <div className="flex items-center gap-3">
-              <Info className="h-6 w-6 text-accent" />
-              <p className="text-lg font-medium">Limited spots available for this exclusive session.</p>
-            </div>
+      {/* Info Banner - Retro Style */}
+      <section className="py-16 bg-[#1a1a1a] text-[#fdfaf3] overflow-hidden relative">
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
+             style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/paper-fibers.png")` }} />
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <div className="max-w-3xl mx-auto">
+            <Info className="h-8 w-8 text-[#00aed9] mx-auto mb-6" />
+            <h2 className={`${prata.className} text-3xl md:text-4xl mb-6`}>Limited spots available for this exclusive session.</h2>
+            <div className="h-px w-24 bg-[#f37335] mx-auto mb-6" />
+            <p className="text-[#fdfaf3]/60 uppercase tracking-[0.3em] text-xs font-bold">Secure your place now</p>
           </div>
         </div>
       </section>
