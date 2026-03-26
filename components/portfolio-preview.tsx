@@ -56,16 +56,6 @@ const projects = [
     isCarousel: true,
     href: "/services#web-development",
   },
-  {
-    id: "audiovisual-showcase",
-    title: "Creative Showcase",
-    category: "Audiovisual",
-    client: "Blank Space",
-    image: "/videoframe_2764.png",
-    featured: false,
-    hasVideo: true,
-    href: "/services#audiovisual",
-  },
 ]
 
 function WebSolutionsCarousel() {

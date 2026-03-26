@@ -65,18 +65,6 @@ const projects = [
     hasVideo: false,
   },
   {
-    id: "audiovisual-showcase",
-    title: "Creative Showcase",
-    category: "video",
-    type: "Audiovisual",
-    client: "Blank Space",
-    year: "2024",
-    description: "A collection of our best audiovisual productions and brand storytelling.",
-    image: "/videoframe_2764.png",
-    featured: false,
-    hasVideo: true,
-  },
-  {
     id: "audio-ads",
     title: "Audio Ads Collection",
     category: "recording",
