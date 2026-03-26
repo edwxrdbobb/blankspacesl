@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -66,7 +66,7 @@ const eventsGallery = [
 ]
 
 const audioAds = [
-  { title: "1 Mobile", src: "/our-work/audio-ads/1%20Mobile.mp3" },
+  { title: "One Mobile", src: "/our-work/audio-ads/1%20Mobile.mp3" },
   { title: "AWATS Ad", src: "/our-work/audio-ads/AWATS%20ad.mp3" },
   { title: "Vult App (English)", src: "/our-work/audio-ads/Vult%20App%20English.mp3" },
 ]
@@ -125,8 +125,33 @@ const studioRates = [
 ]
 
 export function ServicesContent() {
+  const [activeTab, setActiveTab] = useState("recording")
   const [activeVideo, setActiveVideo] = useState(videoShowcase[0]?.id ?? "showcase-1")
   const [currency, setCurrency] = useState<"SLE" | "USD">("SLE")
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "")
+      const validTabs = ["recording", "audiovisual", "web-development", "events-entertainment"]
+      
+      if (hash && validTabs.includes(hash)) {
+        setActiveTab(hash)
+        // Small delay to ensure the tab content is rendered before scrolling
+        setTimeout(() => {
+          const element = document.getElementById(hash)
+          if (element) {
+            const yOffset = -100 // Account for fixed header
+            const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+            window.scrollTo({ top: y, behavior: "smooth" })
+          }
+        }, 100)
+      }
+    }
+
+    handleHashChange()
+    window.addEventListener("hashchange", handleHashChange)
+    return () => window.removeEventListener("hashchange", handleHashChange)
+  }, [])
 
   const videoPoster = (videoId: string) => {
     const v = videoShowcase.find((item) => item.id === videoId) ?? videoShowcase[0]
@@ -169,7 +194,7 @@ export function ServicesContent() {
         </div>
 
         {/* Services Tabs */}
-        <Tabs defaultValue="recording" className="space-y-12">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-12">
           <TabsList className="h-auto p-0 bg-transparent border-b border-border rounded-none w-full justify-start flex-wrap gap-0">
             <TabsTrigger
               value="recording"
@@ -254,7 +279,7 @@ export function ServicesContent() {
 
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
-                  src={mediaUrl("/d21421eb008f0db473c6036b75be58d6.jpg")}
+                  src={mediaUrl("/bs-studio-room.jpeg")}
                   alt="Recording studio interior"
                   fill
                   className="object-cover"

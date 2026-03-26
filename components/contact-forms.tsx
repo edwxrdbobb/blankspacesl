@@ -157,14 +157,7 @@ export function ContactForms() {
                 info@blankspacesl.com
               </a>
               <a
-                href="mailto:blankspacesalone@gmail.com"
-                className="flex items-center gap-3 text-sm hover:text-accent transition-colors"
-              >
-                <Mail className="h-4 w-4 text-muted-foreground" />
-                blankspacesalone@gmail.com
-              </a>
-              <a
-                href="tel:+23274464034"
+                href="tel:23274464034"
                 className="flex items-center gap-3 text-sm hover:text-accent transition-colors"
               >
                 <Phone className="h-4 w-4 text-muted-foreground" />
@@ -173,7 +166,7 @@ export function ContactForms() {
               <div className="flex items-start gap-3 text-sm">
                 <MapPin className="h-4 w-4 text-muted-foreground mt-0.5" />
                 <span>
-                  58 Campbell St<br />
+                  58A Campbell St<br />
                   Freetown, Sierra Leone
                 </span>
               </div>

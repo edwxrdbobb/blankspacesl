@@ -12,16 +12,16 @@ const partners: Partner[] = [
   { name: "Centurion Engineering", src: "/Partners/centurion-sl-logo.png" },
   { name: "Ecobank", src: "/Partners/Ecobank_logo.png" },
   { name: "Vult", src: "/Partners/vult.png" },
-  { name: "1 Mobile", src: "/Partners/one-mobile.jpg" },
+  { name: "One Mobile", src: "/Partners/one-mobile.jpg" },
   { name: "Foodbly", src: "/Partners/foodbly.jpeg" },
   { name: "UNFPA", src: "/Partners/unfpa-vector-logo.png" },
   { name: "SLMDA", src: "/Partners/SLMDA-logo.png" },
   { name: "BCC", src: "/Partners/bcc-logo.jpg" },
   { name: "Purposeful", src: "/Partners/Purposeful-logo-400px-v3.svg" },
-  { name: "Closer", src: "/Partners/Closer-logo-1-01-2.jpg" },
   { name: "Leone Gadgets", src: "/Partners/LG-logo-e1667494305555-1024x675.png" },
-  { name: "AWATS" },
+  { name: "AWATS", src: "/Partners/AWATS.webp" },
   { name: "KIZURI INTERNATIONAL", src: "/Partners/Closer-logo-1-01-2.jpg" },
+  { name: "BCCSL", src: "/Partners/bccsl.jpeg" },
 ]
 
 type PartnersSliderProps = {

@@ -7,7 +7,6 @@ import { PortfolioPreview } from "@/components/portfolio-preview"
 import { CTASection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { FloatingBookButton } from "@/components/floating-book-button"
-
 export default function HomePage() {
   return (
     <main>

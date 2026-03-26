@@ -152,17 +152,17 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-background/10">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
-              <a href="mailto:hello@blankspace.sl" className="flex items-center gap-2 text-background/70 hover:text-background text-sm transition-colors">
+              <a href="mailto:info@blankspacesl.com" className="flex items-center gap-2 text-background/70 hover:text-background text-sm transition-colors">
                 <Mail className="h-4 w-4" />
-                hello@blankspace.sl
+                info@blankspacesl.com
               </a>
-              <a href="tel:+23276123456" className="flex items-center gap-2 text-background/70 hover:text-background text-sm transition-colors">
+              <a href="tel:+23274464034" className="flex items-center gap-2 text-background/70 hover:text-background text-sm transition-colors">
                 <Phone className="h-4 w-4" />
-                +232 76 123 456
+                +232 74 464 034
               </a>
               <span className="flex items-center gap-2 text-background/70 text-sm">
                 <MapPin className="h-4 w-4" />
-                Freetown, Sierra Leone
+                58A Campbell St, Freetown Sierra Leone
               </span>
             </div>
           </div>

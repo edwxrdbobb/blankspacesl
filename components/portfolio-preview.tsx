@@ -1,49 +1,117 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, Play } from "lucide-react"
+import { ArrowRight, Play, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { mediaUrl } from "@/lib/media"
 
-const projects = [
+const webWorks = [
   {
-    id: "before-you-wake",
-    title: "Before You Wake",
-    category: "Music Video",
-    client: "tar1k",
-    image: "/ad79ed2ac71a0fecb65425f4acccc4ae.jpg",
-    featured: true,
-    hasVideo: true,
+    title: "Smove Vehicles",
+    image: "/our-work/website/Smove-Vehicles-03-14-2026_05_18_PM.png",
   },
   {
-    id: "eco-initiative",
-    title: "Sustainability Forward",
-    category: "Brand Campaign",
-    client: "EcoSL Initiative",
-    image: "/9e484b919d09faaa3f7f698b4889713c.jpg",
-    featured: false,
-    hasVideo: true,
+    title: "Leone Gadgets",
+    image: "/our-work/website/HOME-Leone-Gadgets-03-14-2026_05_20_PM.png",
   },
   {
-    id: "afrobeats-sessions",
-    title: "Afrobeats Sessions Vol. 1",
-    category: "Album Recording",
-    client: "Various Artists",
-    image: "/b3a086476f7cafa9ad54ad9d0e133f3f.jpg",
-    featured: false,
-    hasVideo: false,
+    title: "Kizuri International",
+    image: "/our-work/website/Kizuri-International-%E2%80%93-HR-Solutions-Across-Borders-03-14-2026_05_22_PM.png",
   },
   {
-    id: "audio-ads",
-    title: "Audio Ads Collection",
-    category: "Audio Ads",
-    client: "Various Brands",
-    image: "/audio1.png",
-    featured: false,
-    hasVideo: false,
+    title: "Centurion Engineering",
+    image: "/our-work/website/Centurion-Engineering-%E2%80%93-Building-a-concrete-future-03-14-2026_05_23_PM.png",
   },
 ]
+
+const projects = [
+  {
+    id: "nassit-animation",
+    title: "",
+    category: "Creative Production",
+    client: "",
+    image: "https://res.cloudinary.com/dhixhto9s/video/upload/so_1,f_jpg/v1773913989/blankspace/our-work/video-2026-03-02-12-19-48.jpg", // This is the animation cover shown in the screenshot
+    featured: true,
+    hasVideo: true,
+    href: "/services#recording",
+  },
+  {
+    id: "events-entertainment",
+    title: "Events & Entertainment",
+    category: "Events & Entertainment",
+    client: "Blank Space",
+    image: "https://res.cloudinary.com/dhixhto9s/image/upload/v1773513655/blankspace/events/whatsapp-image-2026-03-14-at-10.58.55.jpg",
+    featured: false,
+    hasVideo: false,
+    href: "/services#events-entertainment",
+  },
+  {
+    id: "web-solutions",
+    title: "Web Solutions",
+    category: "Web Solution",
+    client: "Various Clients",
+    featured: false,
+    isCarousel: true,
+    href: "/services#web-development",
+  },
+  {
+    id: "audiovisual-showcase",
+    title: "Creative Showcase",
+    category: "Audiovisual",
+    client: "Blank Space",
+    image: "/videoframe_2764.png",
+    featured: false,
+    hasVideo: true,
+    href: "/services#audiovisual",
+  },
+]
+
+function WebSolutionsCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % webWorks.length)
+    }, 4000)
+    return () => clearInterval(timer)
+  }, [])
+
+  return (
+    <div className="relative w-full h-full group/carousel">
+      {webWorks.map((work, index) => (
+        <div
+          key={work.title}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentIndex ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <Image
+            src={mediaUrl(work.image)}
+            alt={work.title}
+            fill
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-foreground/40 group-hover:bg-foreground/30 transition-colors" />
+          <div className="absolute top-4 right-4 bg-background/80 backdrop-blur-sm text-foreground text-[10px] uppercase tracking-wider px-2 py-1 rounded">
+            {work.title}
+          </div>
+        </div>
+      ))}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+        {webWorks.map((_, index) => (
+          <div
+            key={index}
+            className={`w-1.5 h-1.5 rounded-full transition-colors ${
+              index === currentIndex ? "bg-background" : "bg-background/30"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export function PortfolioPreview() {
   const featuredProject = projects.find((p) => p.featured)
@@ -73,8 +141,8 @@ export function PortfolioPreview() {
           {/* Featured Project */}
           {featuredProject && (
             <Link
-              href={`/portfolio/${featuredProject.id}`}
-              className="group md:col-span-2 lg:col-span-2 relative aspect-[16/9] overflow-hidden rounded-2xl"
+              href={featuredProject.href || `/portfolio/${featuredProject.id}`}
+              className="group md:col-span-3 lg:col-span-3 relative aspect-[21/9] md:aspect-[21/7] overflow-hidden rounded-2xl"
             >
               <Image
                 src={mediaUrl(featuredProject.image || "/placeholder.svg")}
@@ -91,7 +159,7 @@ export function PortfolioPreview() {
                   <span className="w-1 h-1 rounded-full bg-background/50" />
                   <span className="text-xs text-background/70">{featuredProject.client}</span>
                 </div>
-                <h3 className="font-heading text-2xl md:text-3xl font-bold text-background">
+                <h3 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-background">
                   {featuredProject.title}
                 </h3>
               </div>
@@ -107,19 +175,27 @@ export function PortfolioPreview() {
 
           {/* Other Projects */}
           {otherProjects.map((project) => (
-            <Link
+            <div
               key={project.id}
-              href={`/portfolio/${project.id}`}
-              className="group relative aspect-[4/3] overflow-hidden rounded-2xl"
+              className="group relative aspect-[4/3] overflow-hidden rounded-2xl border border-background/10"
             >
-              <Image
-                src={mediaUrl(project.image || "/placeholder.svg")}
-                alt={project.title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-foreground/40 group-hover:bg-foreground/30 transition-colors" />
-              <div className="absolute bottom-0 left-0 right-0 p-5">
+              <Link href={project.href || `/portfolio/${project.id}`} className="absolute inset-0 z-10 transition-transform duration-500 group-hover:scale-105">
+                {project.isCarousel ? (
+                  <WebSolutionsCarousel />
+                ) : (
+                  <>
+                    <Image
+                      src={mediaUrl(project.image || "/placeholder.svg")}
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-foreground/40 group-hover:bg-foreground/30 transition-colors" />
+                  </>
+                )}
+              </Link>
+              
+              <div className="absolute bottom-0 left-0 right-0 p-5 z-20 pointer-events-none">
                 <span className="text-xs uppercase tracking-wider text-background/70 mb-2 block">
                   {project.category}
                 </span>
@@ -127,7 +203,7 @@ export function PortfolioPreview() {
                   {project.title}
                 </h3>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

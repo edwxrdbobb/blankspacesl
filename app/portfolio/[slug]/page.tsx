@@ -134,7 +134,7 @@ const projects: Record<string, {
     description: "A selection of radio and digital audio ads produced for brands and campaigns.",
     fullDescription: "This collection highlights our approach to audio advertising: clear messaging, tight pacing, and a mix that translates across phones, cars, and broadcast systems. From script support to voice direction and final mastering, we build ads that feel energetic, modern, and on-brand.",
     image: "/audio1.png",
-    gallery: ["/audio.png", "/stud.png"],
+    gallery: ["/audio.png", "/bs-studio-room.jpeg"],
     credits: [
       { role: "Production", name: "Blank Space" },
       { role: "Sound Design", name: "Blank Space" },
@@ -142,7 +142,7 @@ const projects: Record<string, {
     ],
     hasVideo: false,
     audioSamples: [
-      { title: "1 Mobile", src: "/our-work/audio-ads/1%20Mobile.mp3" },
+      { title: "One Mobile", src: "/our-work/audio-ads/1%20Mobile.mp3" },
       { title: "AWATS Ad", src: "/our-work/audio-ads/AWATS%20ad.mp3" },
       { title: "Vult App (English)", src: "/our-work/audio-ads/Vult%20App%20English.mp3" },
     ],

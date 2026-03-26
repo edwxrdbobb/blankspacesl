@@ -77,7 +77,7 @@ const articles: Record<string, {
       
       <p>Of course, when you're ready to take your sound to the next level, our doors are always open. Book a session and experience the difference professional equipment and environment can make.</p>
     `,
-    image: "/d21421eb008f0db473c6036b75be58d6.jpg",
+    image: "/bs-studio-room.jpeg",
     author: "Ibrahim Sesay",
     authorImage: "/f14281875b7b16d18596fab170cd9b29.jpg",
     date: "January 10, 2024",

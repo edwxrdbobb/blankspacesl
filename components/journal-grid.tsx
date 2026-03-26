@@ -32,7 +32,7 @@ const articles = [
     title: "5 Tips for Better Home Recordings",
     category: "tips",
     excerpt: "Professional recording doesn't always require a studio. Here are essential techniques to improve your home setup.",
-    image: "/d21421eb008f0db473c6036b75be58d6.jpg",
+    image: "/bs-studio-room.jpeg",
     author: "Ibrahim Sesay",
     date: "January 10, 2024",
     readTime: "5 min read",

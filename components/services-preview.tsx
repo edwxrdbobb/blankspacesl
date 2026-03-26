@@ -6,6 +6,7 @@ import { ArrowUpRight } from "lucide-react"
 import { BlurFade } from "@/components/effects/blur-fade"
 import { SpotlightCard } from "@/components/effects/spotlight-card"
 import { DotScreenShader } from "@/components/ui/dot-shader-background"
+import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card"
 import { cn } from "@/lib/utils"
 import { mediaUrl } from "@/lib/media"
 
@@ -14,7 +15,7 @@ const services = [
     id: "recording-studio-rental",
     title: "Recording & Studio Rental",
     description: "Professional studio space with industry standard equipment for high level productions, acoustically treated, with uninterrupted power supply.",
-    image: "/stud.png",
+    image: "/bs-studio-room.jpeg",
     href: "/services#recording",
   },
   {
@@ -68,35 +69,48 @@ export function ServicesPreview() {
               className={cn(index === 0 || index === 3 ? "xl:col-span-2" : "xl:col-span-1")}
             >
               <Link href={service.href} className="block h-full">
-                <SpotlightCard 
-                  className="group h-full xl:h-[420px] flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:border-foreground/20 transition-all duration-300"
-                  spotlightColor="rgba(255, 255, 255, 0.08)"
-                >
-                  <div className="relative overflow-hidden h-52 sm:h-60 xl:h-64 shrink-0">
-                    <Image
-                      src={mediaUrl(service.image || "/placeholder.svg")}
-                      alt={service.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-                  <div className="p-6 flex-1">
-                    <div className="flex items-start justify-between gap-4">
-                      <div>
-                        <h3 className="font-heading text-xl font-semibold mb-2 group-hover:text-accent transition-colors line-clamp-2">
-                          {service.title}
-                        </h3>
-                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
-                          {service.description}
-                        </p>
-                      </div>
-                      <div className="w-8 h-8 rounded-full border border-border flex items-center justify-center shrink-0 group-hover:bg-foreground group-hover:border-foreground transition-colors">
-                        <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover:text-background transition-colors" />
+                <CardContainer className="inter-var h-full">
+                  <CardBody className="bg-card relative group/card dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] border-border w-full h-full xl:h-[420px] rounded-2xl p-0 border flex flex-col overflow-hidden transition-all duration-300">
+                    <CardItem
+                      translateZ="100"
+                      className="relative overflow-hidden h-52 sm:h-60 xl:h-64 shrink-0 w-full"
+                    >
+                      <Image
+                        src={mediaUrl(service.image || "/placeholder.svg")}
+                        alt={service.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover/card:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300" />
+                    </CardItem>
+                    <div className="p-6 flex-1">
+                      <div className="flex items-start justify-between gap-4">
+                        <div>
+                          <CardItem
+                            translateZ="50"
+                            as="h3"
+                            className="font-heading text-xl font-semibold mb-2 group-hover/card:text-accent transition-colors line-clamp-2"
+                          >
+                            {service.title}
+                          </CardItem>
+                          <CardItem
+                            as="p"
+                            translateZ="60"
+                            className="text-muted-foreground text-sm leading-relaxed line-clamp-3"
+                          >
+                            {service.description}
+                          </CardItem>
+                        </div>
+                        <CardItem
+                          translateZ="80"
+                          className="w-8 h-8 rounded-full border border-border flex items-center justify-center shrink-0 group-hover/card:bg-foreground group-hover/card:border-foreground transition-colors"
+                        >
+                          <ArrowUpRight className="h-4 w-4 text-muted-foreground group-hover/card:text-background transition-colors" />
+                        </CardItem>
                       </div>
                     </div>
-                  </div>
-                </SpotlightCard>
+                  </CardBody>
+                </CardContainer>
               </Link>
             </BlurFade>
           ))}

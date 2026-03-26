@@ -7,23 +7,13 @@ import { ArrowRight } from "lucide-react"
 import { BlurFade } from "@/components/effects/blur-fade"
 import { TextAnimate } from "@/components/effects/text-animate"
 import { MagneticButton } from "@/components/effects/magnetic-button"
-import EnergyBeam from '../components/ui/energy-beam';
+import EnergyBeam from '@/components/ui/energy-beam';
 
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-foreground">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
-        {/* <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover opacity-60"
-          poster="/images/studio-poster.jpg"
-        >
-          <source src="https://www.youtube.com/watch?v=kr3iXUcNt2g" type="video/mp4" />
-        </video> */}
         <EnergyBeam className="w-full h-full object-cover opacity-60" />
         <div className="absolute inset-0 bg-foreground/40" />
       </div>
@@ -40,30 +30,6 @@ export function Hero() {
               Recording Studio & Creative Agency
             </p>
           </BlurFade>
-
-          {/* <h1 className="font-heading text-4xl md:text-6xl lg:text-7xl font-bold text-background leading-tight mb-6 text-balance">
-            <TextAnimate
-              text="Endless Possibilities."
-              type="staggerWords"
-              delay={0.2}
-              className="justify-center"
-            />
-            <TextAnimate
-              text="Uninterrupted Power."
-              type="staggerWords"
-              delay={0.4}
-              className="justify-center"
-            />
-            <span className="text-accent">
-              <TextAnimate
-                text="Unmatched Quality."
-                type="staggerWords"
-                delay={0.6}
-                className="justify-center"
-              />
-            </span>
-          </h1> */}
-
 
           <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-background leading-tight mb-6 text-balance">
             <span className="text-white">

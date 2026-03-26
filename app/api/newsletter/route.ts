@@ -1,5 +1,6 @@
 import { Resend } from "resend"
 import { NextResponse } from "next/server"
+import { supabaseAdmin } from "@/lib/supabase"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -12,6 +13,18 @@ export async function POST(req: Request) {
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Invalid email address." }, { status: 400 })
+    }
+
+    // Store in Supabase
+    const { error: dbError } = await supabaseAdmin
+      .from('newsletter_subscriptions')
+      .upsert({ email }, { onConflict: 'email' })
+
+    if (dbError) {
+      console.error("[newsletter-db]", dbError)
+      // We continue even if DB fails, as email notification is also important
+      // or we could return error if preferred. Let's return error to ensure data integrity.
+      return NextResponse.json({ error: "Failed to store subscription." }, { status: 500 })
     }
 
     // Notify the team

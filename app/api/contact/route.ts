@@ -1,5 +1,6 @@
 import { Resend } from "resend"
 import { NextResponse } from "next/server"
+import { supabaseAdmin } from "@/lib/supabase"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -44,6 +45,40 @@ export async function POST(req: Request) {
           <tr><td><strong>Project Scope</strong></td><td>${fields.projectScope}</td></tr>
         </table>
       `
+
+    // Store in Supabase
+    const submissionData = isArtist
+      ? {
+          form_type: "artist",
+          artist_name: fields.name,
+          artist_email: fields.email,
+          artist_phone: fields.phone,
+          session_type: fields.sessionType,
+          preferred_date: fields.preferredDate || null,
+          preferred_time: fields.preferredTime,
+          artist_message: fields.message,
+        }
+      : {
+          form_type: "corporate",
+          corp_contact_name: fields.contactName,
+          corp_company: fields.company,
+          corp_email: fields.email,
+          corp_phone: fields.phone,
+          corp_project_type: fields.projectType,
+          corp_budget: fields.budget,
+          corp_timeline: fields.timeline,
+          corp_decision_maker: fields.decisionMaker,
+          corp_project_scope: fields.projectScope,
+        }
+
+    const { error: dbError } = await supabaseAdmin
+      .from('contact_submissions')
+      .insert(submissionData)
+
+    if (dbError) {
+      console.error("[contact-db]", dbError)
+      return NextResponse.json({ error: "Failed to store submission." }, { status: 500 })
+    }
 
     await resend.emails.send({ from: FROM, to: TO, subject, html })
 
