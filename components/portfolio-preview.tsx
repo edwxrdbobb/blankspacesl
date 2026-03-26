@@ -29,13 +29,13 @@ const webWorks = [
 const projects = [
   {
     id: "nassit-animation",
-    title: "",
+    title: "NASSIT Animation",
     category: "Creative Production",
-    client: "",
-    image: "https://res.cloudinary.com/dhixhto9s/video/upload/so_1,f_jpg/v1773913989/blankspace/our-work/video-2026-03-02-12-19-48.jpg", // This is the animation cover shown in the screenshot
+    client: "NASSIT",
+    image: "https://res.cloudinary.com/dhixhto9s/video/upload/so_1,f_jpg/v1773913989/blankspace/our-work/video-2026-03-02-12-19-48.jpg",
     featured: true,
     hasVideo: true,
-    href: "/services#recording",
+    href: "/portfolio/eco-initiative",
   },
   {
     id: "events-entertainment",
@@ -55,6 +55,16 @@ const projects = [
     featured: false,
     isCarousel: true,
     href: "/services#web-development",
+  },
+  {
+    id: "audio-ads",
+    title: "Audio Ads Collection",
+    category: "Audio Ads",
+    client: "Various Brands",
+    image: "/audio1.png",
+    featured: false,
+    hasVideo: false,
+    href: "/portfolio/audio-ads",
   },
 ]
 
