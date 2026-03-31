@@ -7,6 +7,7 @@ import { PortfolioPreview } from "@/components/portfolio-preview"
 import { CTASection } from "@/components/cta-section"
 import { Footer } from "@/components/footer"
 import { FloatingBookButton } from "@/components/floating-book-button"
+import { EventPopup } from "@/components/event-popup"
 export default function HomePage() {
   return (
     <main>
@@ -19,6 +20,7 @@ export default function HomePage() {
       <CTASection />
       <Footer />
       <FloatingBookButton />
+      <EventPopup />
     </main>
   )
 }
