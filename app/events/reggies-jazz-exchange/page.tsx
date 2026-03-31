@@ -114,7 +114,7 @@ export default function RejgiesJazzExchangePage() {
               {/* RSVP Form */}
               <div className="bg-[#1a1a1a] rounded-3xl p-8 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)]">
                 <p className="text-[#f37335] text-xs uppercase tracking-[0.2em] font-bold mb-2">Confirm Your Vibe</p>
-                <h3 className={`${prata.className} text-4xl text-white mb-4`}>RSVP</h3>
+                <h3 className={`${prata.className} text-4xl text-white mb-4`}>Join the Exchange</h3>
                 <p className="text-[#a0a0a0] text-sm mb-6">Please complete the form below to secure your spot in the space.</p>
 
                 <form className="space-y-4">
@@ -152,6 +152,9 @@ export default function RejgiesJazzExchangePage() {
                       className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#f37335]"
                     >
                       <option>The Vibe (Community, friend, general supporter)</option>
+                      <option>The Maker (Fellow artists, designers, musicians)</option>
+                      <option>The Storyteller (Media, journalists, press)</option>
+                      <option>The Enabler (Patrons, investors, executives, sponsors)</option>
                     </select>
                   </div>
                   <div>
@@ -160,7 +163,7 @@ export default function RejgiesJazzExchangePage() {
                       type="text" 
                       id="affiliation" 
                       className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] focus:outline-none focus:ring-2 focus:ring-[#f37335]" 
-                      placeholder="e.g., Collective, Studio, Brand" 
+                      placeholder="Office, Brand, Organisation" 
                     />
                   </div>
                   <div className="flex items-start">
