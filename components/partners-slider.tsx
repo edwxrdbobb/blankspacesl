@@ -16,7 +16,6 @@ const partners: Partner[] = [
   { name: "Foodbly", src: "/Partners/foodbly.jpeg" },
   { name: "UNFPA", src: "/Partners/unfpa-vector-logo.png" },
   { name: "SLMDA", src: "/Partners/SLMDA-logo.png" },
-
   { name: "Purposeful", src: "/Partners/Purposeful-logo-400px-v3.svg" },
   { name: "Leone Gadgets", src: "/Partners/LG-logo-e1667494305555-1024x675.png" },
   { name: "AWATS", src: "/Partners/AWATS.webp" },

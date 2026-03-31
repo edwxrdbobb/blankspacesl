@@ -1,8 +1,7 @@
 import Image from "next/image"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-import { EventRSVPForm } from "@/components/event-rsvp-form"
-import { Calendar, MapPin, Clock, Ticket, Phone, Info } from "lucide-react"
+import { Calendar, MapPin, Clock, Ticket, Info } from "lucide-react"
 import type { Metadata } from "next"
 import { Prata, Inter } from "next/font/google"
 
@@ -20,11 +19,11 @@ export const metadata: Metadata = {
 }
 
 const eventDetails = [
-  { icon: Calendar, label: "Date", value: "30th April, 2026" },
-  { icon: Clock, label: "Time", value: "Doors Open: 7:00 PM" },
-  { icon: MapPin, label: "Venue", value: "Dove's Nest, Grammar School Jct." },
-  { icon: Ticket, label: "Entry", value: "Le. 500 (Standard Entry)" },
-  { icon: Phone, label: "Enquiries", value: "074464034 / 079871267" },
+  { icon: Calendar, label: "Date", value: "Thursday, April 30th, 2026" },
+  { icon: Clock, label: "Time", value: "7:00 PM – 10:30 PM" },
+  { icon: MapPin, label: "Venue", value: "Dove's Nest" },
+  { icon: Ticket, label: "Dress Code", value: "Afro Chic (Comfortable, Simple)" },
+  { icon: Info, label: "What to Expect", value: "An intimate night of jazz and poetry" },
 ]
 
 export default function RejgiesJazzExchangePage() {
@@ -57,17 +56,18 @@ export default function RejgiesJazzExchangePage() {
               
               <div className="space-y-8 text-lg text-[#4a4a4a] leading-relaxed mb-12">
                 <p className={`${prata.className} text-2xl text-[#1a1a1a] italic border-l-4 border-[#f37335] pl-6 py-2`}>
-                  &quot;Dis wan na for di people dem way sabi fine tin. Reggie’s Jazz Exchange is a cultural moment.&quot;
+                  &quot;On International Jazz Day every year, the world speaks one language. And this year, Salone is joining the conversation.&quot;
                 </p>
                 <p className="font-medium opacity-80">
-                  On the 30th of April, Freetown joins the global stage for International Jazz Day. 
-                  Led by none other than Reginald &ldquo;Bizzup&rdquo; Thompson and his saxophone. 
-                  Come experience a concert like no other - our best musicians in their element.
+                  At the heart of this dialogue is Reginald Thompson (affectionately known in the industry as Bizzup) - A virtuoso multi instrumentalist and a cornerstone of the Sierra Leonean Jazz scene.
+                </p>
+                <p className="font-medium opacity-80">
+                  Reggie&apos;s Jazz Exchange is an acknowledgement of the rhythm that has always lived in our coast. A celebration of our musical heritage and mastery, curated for the sophisticated ear.
                 </p>
               </div>
 
               {/* Event Details Grid - Retro Style */}
-              <div className="grid sm:grid-cols-2 gap-px bg-[#1a1a1a]/10 border border-[#1a1a1a]/10 rounded-2xl overflow-hidden shadow-sm">
+              <div className="grid sm:grid-cols-2 gap-px bg-[#1a1a1a]/10 border border-[#1a1a1a]/10 rounded-2xl overflow-hidden shadow-sm mb-8">
                 {eventDetails.map((detail) => (
                   <div key={detail.label} className="bg-[#fdfaf3]/50 p-6 flex items-start gap-4">
                     <detail.icon className="h-5 w-5 text-[#f37335] mt-1 shrink-0" />
@@ -77,6 +77,21 @@ export default function RejgiesJazzExchangePage() {
                     </div>
                   </div>
                 ))}
+              </div>
+
+              {/* Additional Expectations */}
+              <div className="bg-[#00aed9]/5 border border-[#00aed9]/20 rounded-2xl p-6">
+                <h3 className={`${prata.className} text-lg text-[#1a1a1a] mb-4`}>Also Expect:</h3>
+                <ul className="space-y-2 text-sm text-[#4a4a4a]">
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-[#f37335] rounded-full shrink-0" />
+                    <span>Different artists and musicians in their element</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-[#f37335] rounded-full shrink-0" />
+                    <span>Real conversations with real people</span>
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -96,11 +111,75 @@ export default function RejgiesJazzExchangePage() {
                 <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-3xl" />
               </div>
 
-              <div id="rsvp" className="relative z-20 pt-4">
-                <EventRSVPForm 
-                  eventId="reggies-jazz-exchange-2026" 
-                  eventName="Reggie's Jazz Exchange" 
-                />
+              {/* RSVP Form */}
+              <div className="bg-[#1a1a1a] rounded-3xl p-8 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)]">
+                <p className="text-[#f37335] text-xs uppercase tracking-[0.2em] font-bold mb-2">Confirm Your Vibe</p>
+                <h3 className={`${prata.className} text-4xl text-white mb-4`}>RSVP</h3>
+                <p className="text-[#a0a0a0] text-sm mb-6">Please complete the form below to secure your spot in the space.</p>
+
+                <form className="space-y-4">
+                  <div>
+                    <label htmlFor="full-name" className="block text-[#a0a0a0] text-sm font-medium mb-1">Full Name</label>
+                    <input 
+                      type="text" 
+                      id="full-name" 
+                      className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] focus:outline-none focus:ring-2 focus:ring-[#f37335]" 
+                      placeholder="" 
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-[#a0a0a0] text-sm font-medium mb-1">Email</label>
+                    <input 
+                      type="email" 
+                      id="email" 
+                      className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] focus:outline-none focus:ring-2 focus:ring-[#f37335]" 
+                      placeholder="" 
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-[#a0a0a0] text-sm font-medium mb-1">Phone</label>
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] focus:outline-none focus:ring-2 focus:ring-[#f37335]" 
+                      placeholder="" 
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="community" className="block text-[#a0a0a0] text-sm font-medium mb-1">Community</label>
+                    <select 
+                      id="community" 
+                      className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#f37335]"
+                    >
+                      <option>The Vibe (Community, friend, general supporter)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="affiliation" className="block text-[#a0a0a0] text-sm font-medium mb-1">Affiliation</label>
+                    <input 
+                      type="text" 
+                      id="affiliation" 
+                      className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] focus:outline-none focus:ring-2 focus:ring-[#f37335]" 
+                      placeholder="e.g., Collective, Studio, Brand" 
+                    />
+                  </div>
+                  <div className="flex items-start">
+                    <input 
+                      type="checkbox" 
+                      id="accept-terms" 
+                      className="mt-1 h-4 w-4 text-[#f37335] rounded border-[#4a4a4a] focus:ring-[#f37335]" 
+                    />
+                    <label htmlFor="accept-terms" className="ml-2 text-sm text-[#a0a0a0]">
+                      I accept that by honoring this invitation, I confirm my willingness to have a good time on a beautiful Friday night in Freetown.
+                    </label>
+                  </div>
+                  <button 
+                    type="submit" 
+                    className="w-full bg-[#f37335] text-white font-bold py-3 px-6 rounded-md hover:bg-[#e56230] transition-colors duration-200"
+                  >
+                    Submit RSVP
+                  </button>
+                </form>
               </div>
             </div>
           </div>
