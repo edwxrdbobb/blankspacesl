@@ -39,7 +39,7 @@ const ticketTypeConfig = {
   },
   v1: {
     name: "VIP Gold",
-    tableSize: 2,
+    tableSize: 'single',
     bgColor: "bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a]",
     textColor: "text-white",
     accentColor: "bg-gradient-to-r from-[#d4af37] to-[#f4d03f]",
@@ -253,8 +253,10 @@ export default function RejgiesJazzExchangePage() {
                   {/* Display Table Size Based on Ticket Type */}
                   {config.tableSize && (
                     <div className={`${config.labelColor} text-sm p-4 rounded-md border ${config.borderColor} bg-[#2a2a2a]`}>
-                      <p className="font-medium">Table Seating</p>
-                      <p className="text-xs opacity-75 mt-1">Table for {config.tableSize}</p>
+                      <p className="font-medium">Seating</p>
+                      <p className="text-xs opacity-75 mt-1">
+                        {config.tableSize === 'single' ? 'Single Entry' : `Table for ${config.tableSize}`}
+                      </p>
                     </div>
                   )}
 
