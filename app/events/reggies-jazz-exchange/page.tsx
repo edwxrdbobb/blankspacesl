@@ -1,9 +1,12 @@
+'use client'
+
 import Image from "next/image"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { Calendar, MapPin, Clock, Ticket, Info } from "lucide-react"
-import type { Metadata } from "next"
 import { Prata, Inter } from "next/font/google"
+import { useSearchParams, useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
 
 const prata = Prata({ 
   weight: '400',
@@ -13,11 +16,6 @@ const prata = Prata({
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
-  title: "Reggie's Jazz Exchange | Blank Space Events",
-  description: "Join us for International Jazz Day on April 30th with Reginald Thompson and Freetown's finest musicians.",
-}
-
 const eventDetails = [
   { icon: Calendar, label: "Date", value: "Thursday, April 30th, 2026" },
   { icon: Clock, label: "Time", value: "7:00 PM" },
@@ -25,7 +23,89 @@ const eventDetails = [
   { icon: Ticket, label: "Dress Code", value: "Afro Chic (Comfortable, Simple)" },
 ]
 
+const ticketTypeConfig = {
+  stnd: {
+    name: "Standard",
+    tableSize: null,
+    bgColor: "bg-[#1a1a1a]",
+    textColor: "text-white",
+    accentColor: "bg-[#f37335]",
+    accentColorHover: "hover:bg-[#e56230]",
+    labelColor: "text-[#a0a0a0]",
+    inputBg: "bg-[#2a2a2a]",
+    borderColor: "border-[#4a4a4a]",
+    focusRing: "focus:ring-[#f37335]",
+    gradientText: "",
+  },
+  v1: {
+    name: "VIP Gold",
+    tableSize: 2,
+    bgColor: "bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a]",
+    textColor: "text-white",
+    accentColor: "bg-gradient-to-r from-[#d4af37] to-[#f4d03f]",
+    accentColorHover: "hover:from-[#c9a227] hover:to-[#e6c200]",
+    labelColor: "text-[#d4af37]",
+    inputBg: "bg-[#2a2a2a] border-l-2 border-l-[#d4af37]",
+    borderColor: "border-[#d4af37]",
+    focusRing: "focus:ring-[#d4af37]",
+    gradientText: "bg-gradient-to-r from-[#c0c0c0] via-[#d4af37] to-[#e8e8e8] bg-clip-text text-transparent",
+  },
+  v2: {
+    name: "VIP Diamond",
+    tableSize: 4,
+    bgColor: "bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a]",
+    textColor: "text-white",
+    accentColor: "bg-gradient-to-r from-[#e8e8e8] to-[#ffffff]",
+    accentColorHover: "hover:from-[#d0d0d0] hover:to-[#f0f0f0]",
+    labelColor: "text-[#e8e8e8]",
+    inputBg: "bg-[#2a2a2a] border-l-2 border-l-[#e8e8e8]",
+    borderColor: "border-[#e8e8e8]",
+    focusRing: "focus:ring-[#e8e8e8]",
+    gradientText: "bg-gradient-to-r from-[#c0c0c0] via-[#e8e8e8] to-[#d4af37] bg-clip-text text-transparent",
+  },
+  v3: {
+    name: "VIP Platinum",
+    tableSize: 5,
+    bgColor: "bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a]",
+    textColor: "text-white",
+    accentColor: "bg-gradient-to-r from-[#c0c0c0] via-[#d4af37] to-[#e8e8e8]",
+    accentColorHover: "hover:from-[#a0a0a0] hover:via-[#c9a227] hover:to-[#d0d0d0]",
+    labelColor: "text-[#c0c0c0]",
+    inputBg: "bg-[#2a2a2a] border-l-2 border-l-[#c0c0c0]",
+    borderColor: "border-[#c0c0c0]",
+    focusRing: "focus:ring-[#d4af37]",
+    gradientText: "bg-gradient-to-r from-[#d4af37] via-[#e8e8e8] to-[#c0c0c0] bg-clip-text text-transparent",
+  },
+}
+
 export default function RejgiesJazzExchangePage() {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const [ticketType, setTicketType] = useState<'stnd' | 'v1' | 'v2' | 'v3'>('stnd')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    const tt = searchParams.get('tt') as 'stnd' | 'v1' | 'v2' | 'v3' | null
+    if (tt && ['stnd', 'v1', 'v2', 'v3'].includes(tt)) {
+      setTicketType(tt)
+    }
+  }, [searchParams])
+
+  if (!mounted) return null
+
+  const config = ticketTypeConfig[ticketType]
+
+  const getTicketTypeDisplay = () => {
+    const typeNames = {
+      stnd: 'STANDARD',
+      v1: 'VIP GOLD',
+      v2: 'VIP DIAMOND',
+      v3: 'VIP PLATINUM',
+    }
+    return typeNames[ticketType]
+  }
+
   return (
     <main className={`bg-[#fdfaf3] selection:bg-[#f37335]/30 ${inter.className} min-h-screen`}>
       <Navigation />
@@ -111,44 +191,48 @@ export default function RejgiesJazzExchangePage() {
               </div>
 
               {/* RSVP Form */}
-              <div className="bg-[#1a1a1a] rounded-3xl p-8 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)]">
-                <p className="text-[#f37335] text-xs uppercase tracking-[0.2em] font-bold mb-2">Confirm Your Vibe</p>
-                <h3 className={`${prata.className} text-4xl text-white mb-4`}>Join the Exchange</h3>
-                <p className="text-[#a0a0a0] text-sm mb-6">Please complete the form below to secure your spot in the space.</p>
+              <div className={`${config.bgColor} rounded-3xl p-8 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)]`}>
+                <p className={`${config.labelColor} text-xs uppercase tracking-[0.2em] font-bold mb-2`}>
+                  {getTicketTypeDisplay()}
+                </p>
+                <h3 className={`${prata.className} text-4xl ${config.textColor} mb-4`}>
+                  Join the Exchange
+                </h3>
+                <p className={`${config.labelColor} text-sm mb-6 opacity-75`}>Please complete the form below to secure your spot in the space.</p>
 
                 <form className="space-y-4">
                   <div>
-                    <label htmlFor="full-name" className="block text-[#a0a0a0] text-sm font-medium mb-1">Full Name</label>
+                    <label htmlFor="full-name" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Full Name</label>
                     <input 
                       type="text" 
                       id="full-name" 
-                      className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] focus:outline-none focus:ring-2 focus:ring-[#f37335]" 
+                      className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] ${config.focusRing} focus:outline-none focus:ring-2`} 
                       placeholder="" 
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-[#a0a0a0] text-sm font-medium mb-1">Email</label>
+                    <label htmlFor="email" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Email</label>
                     <input 
                       type="email" 
                       id="email" 
-                      className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] focus:outline-none focus:ring-2 focus:ring-[#f37335]" 
+                      className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] ${config.focusRing} focus:outline-none focus:ring-2`} 
                       placeholder="" 
                     />
                   </div>
                   <div>
-                    <label htmlFor="phone" className="block text-[#a0a0a0] text-sm font-medium mb-1">Phone</label>
+                    <label htmlFor="phone" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Phone</label>
                     <input 
                       type="tel" 
                       id="phone" 
-                      className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] focus:outline-none focus:ring-2 focus:ring-[#f37335]" 
+                      className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] ${config.focusRing} focus:outline-none focus:ring-2`} 
                       placeholder="" 
                     />
                   </div>
                   <div>
-                    <label htmlFor="community" className="block text-[#a0a0a0] text-sm font-medium mb-1">Community</label>
+                    <label htmlFor="community" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Community</label>
                     <select 
                       id="community" 
-                      className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-[#f37335]"
+                      className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white ${config.focusRing} focus:outline-none focus:ring-2`}
                     >
                       <option>The Vibe (Community, friend, general supporter)</option>
                       <option>The Maker (Fellow artists, designers, musicians)</option>
@@ -157,27 +241,36 @@ export default function RejgiesJazzExchangePage() {
                     </select>
                   </div>
                   <div>
-                    <label htmlFor="affiliation" className="block text-[#a0a0a0] text-sm font-medium mb-1">Affiliation</label>
+                    <label htmlFor="affiliation" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Affiliation</label>
                     <input 
                       type="text" 
                       id="affiliation" 
-                      className="w-full bg-[#2a2a2a] border border-[#4a4a4a] rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] focus:outline-none focus:ring-2 focus:ring-[#f37335]" 
+                      className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] ${config.focusRing} focus:outline-none focus:ring-2`} 
                       placeholder="Office, Brand, Organisation" 
                     />
                   </div>
+
+                  {/* Display Table Size Based on Ticket Type */}
+                  {config.tableSize && (
+                    <div className={`${config.labelColor} text-sm p-4 rounded-md border ${config.borderColor} bg-[#2a2a2a]`}>
+                      <p className="font-medium">Table Seating</p>
+                      <p className="text-xs opacity-75 mt-1">Table for {config.tableSize}</p>
+                    </div>
+                  )}
+
                   <div className="flex items-start">
                     <input 
                       type="checkbox" 
                       id="accept-terms" 
-                      className="mt-1 h-4 w-4 text-[#f37335] rounded border-[#4a4a4a] focus:ring-[#f37335]" 
+                      className={`mt-1 h-4 w-4 ${config.accentColor} rounded border-[#4a4a4a] ${config.focusRing}`} 
                     />
-                    <label htmlFor="accept-terms" className="ml-2 text-sm text-[#a0a0a0]">
-                      I accept that by honoring this invitation, I confirm my willingness to have a good time on a beautiful Friday night in Freetown.
+                    <label htmlFor="accept-terms" className={`ml-2 text-sm ${config.labelColor}`}>
+                      I accept that by honoring this invitation, I confirm my willingness to have a good time on a beautiful Thursday night in Freetown.
                     </label>
                   </div>
                   <button 
                     type="submit" 
-                    className="w-full bg-[#f37335] text-white font-bold py-3 px-6 rounded-md hover:bg-[#e56230] transition-colors duration-200"
+                    className={`w-full ${config.accentColor} ${config.accentColorHover} text-black font-bold py-3 px-6 rounded-md transition-all duration-200`}
                   >
                     Submit RSVP
                   </button>
