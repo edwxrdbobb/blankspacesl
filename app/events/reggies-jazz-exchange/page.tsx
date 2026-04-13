@@ -20,10 +20,9 @@ export const metadata: Metadata = {
 
 const eventDetails = [
   { icon: Calendar, label: "Date", value: "Thursday, April 30th, 2026" },
-  { icon: Clock, label: "Time", value: "7:00 PM – 10:30 PM" },
+  { icon: Clock, label: "Time", value: "7:00 PM" },
   { icon: MapPin, label: "Venue", value: "Dove's Nest" },
   { icon: Ticket, label: "Dress Code", value: "Afro Chic (Comfortable, Simple)" },
-  { icon: Info, label: "What to Expect", value: "An intimate night of jazz and poetry" },
 ]
 
 export default function RejgiesJazzExchangePage() {
