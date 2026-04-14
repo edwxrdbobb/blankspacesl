@@ -80,7 +80,7 @@ const ticketTypeConfig: Record<'stnd' | 'v1' | 'v2' | 'v3', TicketConfig> = {
     focusRing: "focus:ring-[#d4af37]",
     badge: "VIP",
     script: "Table of 4",
-    mainTitle: "STANDARD ENTRY"
+    mainTitle: "VIP TABLE FOR 4"
   },
   v3: {
     id: 'v3',
@@ -96,7 +96,7 @@ const ticketTypeConfig: Record<'stnd' | 'v1' | 'v2' | 'v3', TicketConfig> = {
     focusRing: "focus:ring-[#d4af37]",
     badge: "VIP",
     script: "Table of 5",
-    mainTitle: "STANDARD ENTRY"
+    mainTitle: "VIP TABLE FOR 5"
   },
 }
 
@@ -141,8 +141,8 @@ export function ReggiesForm() {
     const typeNames = {
       stnd: 'STANDARD',
       v1: 'SINGLE ENTRY',
-      v2: 'VIP TABLE OF 4',
-      v3: 'VIP TABLE OF 5',
+      v2: 'VIP TABLE FOR 4',
+      v3: 'VIP TABLE FOR 5',
     }
     return typeNames[ticketType]
   }
