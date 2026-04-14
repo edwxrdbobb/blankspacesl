@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image"
-import { Prata, Inter } from "next/font/google"
+import { Prata, Inter, Caveat } from "next/font/google"
 import { useSearchParams } from "next/navigation"
 import { useState, useEffect } from "react"
 import { toast } from "sonner"
@@ -14,10 +14,12 @@ const prata = Prata({
 })
 
 const inter = Inter({ subsets: ['latin'] })
+const caveat = Caveat({ subsets: ['latin'] })
 
 const ticketTypeConfig = {
   stnd: {
-    name: "Standard",
+    id: 'stnd',
+    name: "Standard Entry",
     tableSize: null,
     bgColor: "bg-[#1a1a1a]",
     textColor: "text-white",
@@ -27,42 +29,49 @@ const ticketTypeConfig = {
     inputBg: "bg-[#2a2a2a]",
     borderColor: "border-[#4a4a4a]",
     focusRing: "focus:ring-[#f37335]",
+    badge: null,
   },
   v1: {
-    name: "VIP Gold",
-    tableSize: 'single',
-    bgColor: "bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a]",
+    id: 'v1',
+    name: "VIP Single",
+    tableSize: null,
+    bgColor: "bg-[#1a1a1a] border border-[#d4af37]/20",
     textColor: "text-white",
-    accentColor: "bg-gradient-to-r from-[#d4af37] to-[#f4d03f]",
-    accentColorHover: "hover:from-[#c9a227] hover:to-[#e6c200]",
+    accentColor: "bg-[#d4af37]",
+    accentColorHover: "hover:bg-[#b8962e]",
     labelColor: "text-[#d4af37]",
-    inputBg: "bg-[#2a2a2a] border-l-2 border-l-[#d4af37]",
-    borderColor: "border-[#d4af37]",
+    inputBg: "bg-[#1f1f1f]",
+    borderColor: "border-[#3d3419]",
     focusRing: "focus:ring-[#d4af37]",
+    badge: "VIP",
   },
   v2: {
-    name: "VIP Diamond",
-    tableSize: 4,
-    bgColor: "bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a]",
+    id: 'v2',
+    name: "VIP Table for 4",
+    tableSize: 3, // Primary + 3 guests
+    bgColor: "bg-[#1a1a1a] border-2 border-[#d4af37]/30",
     textColor: "text-white",
-    accentColor: "bg-gradient-to-r from-[#e8e8e8] to-[#ffffff]",
-    accentColorHover: "hover:from-[#d0d0d0] hover:to-[#f0f0f0]",
-    labelColor: "text-[#e8e8e8]",
-    inputBg: "bg-[#2a2a2a] border-l-2 border-l-[#e8e8e8]",
-    borderColor: "border-[#e8e8e8]",
-    focusRing: "focus:ring-[#e8e8e8]",
+    accentColor: "bg-[#d4af37]",
+    accentColorHover: "hover:bg-[#b8962e]",
+    labelColor: "text-[#d4af37]",
+    inputBg: "bg-[#1f1f1f]",
+    borderColor: "border-[#3d3419]",
+    focusRing: "focus:ring-[#d4af37]",
+    badge: "VIP",
   },
   v3: {
-    name: "VIP Platinum",
-    tableSize: 5,
-    bgColor: "bg-gradient-to-br from-[#1a1a1a] via-[#2a2a2a] to-[#1a1a1a]",
+    id: 'v3',
+    name: "VIP Table for 5",
+    tableSize: 4, // Primary + 4 guests
+    bgColor: "bg-[#1a1a1a] border-4 border-[#d4af37]/40 shadow-[0_0_50px_-12px_rgba(212,175,55,0.2)]",
     textColor: "text-white",
-    accentColor: "bg-gradient-to-r from-[#c0c0c0] via-[#d4af37] to-[#e8e8e8]",
-    accentColorHover: "hover:from-[#a0a0a0] hover:via-[#c9a227] hover:to-[#d0d0d0]",
-    labelColor: "text-[#c0c0c0]",
-    inputBg: "bg-[#2a2a2a] border-l-2 border-l-[#c0c0c0]",
-    borderColor: "border-[#c0c0c0]",
+    accentColor: "bg-[#d4af37]",
+    accentColorHover: "hover:bg-[#b8962e]",
+    labelColor: "text-[#d4af37]",
+    inputBg: "bg-[#1f1f1f]",
+    borderColor: "border-[#3d3419]",
     focusRing: "focus:ring-[#d4af37]",
+    badge: "VIP",
   },
 }
 
@@ -78,9 +87,11 @@ export function ReggiesForm() {
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [community, setCommunity] = useState("The Vibe (Community, friend, general supporter)")
-  const [affiliation, setAffiliation] = useState("")
+   const [affiliation, setAffiliation] = useState("")
+  const [dietaryRequirements, setDietaryRequirements] = useState("")
   const [guests, setGuests] = useState<{name: string, phone: string}[]>([])
   const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [marketingConsent, setMarketingConsent] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -90,7 +101,7 @@ export function ReggiesForm() {
     }
   }, [searchParams])
 
-  const maxGuests = ticketType === 'v2' ? 4 : ticketType === 'v3' ? 5 : 0
+   const maxGuests = ticketType === 'v2' ? 3 : ticketType === 'v3' ? 4 : 0
 
   useEffect(() => {
     // Sync guest state with maxGuests
@@ -139,9 +150,11 @@ export function ReggiesForm() {
       email,
       phone,
       community,
-      affiliation,
+       affiliation,
       ticketType: ticketTypeConfig[ticketType].name,
-      guests: guests.filter(g => g.name.trim() !== ""), // Only send guests with names
+      guests: guests.filter(g => g.name.trim() !== ""), 
+      dietaryRequirements: dietaryRequirements || null,
+      marketingConsent
     }
 
     try {
@@ -199,18 +212,37 @@ export function ReggiesForm() {
     )
   }
 
-  return (
-    <div className={`${config.bgColor} rounded-3xl p-8 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)]`}>
-      <p className={`${config.labelColor} text-xs uppercase tracking-[0.2em] font-bold mb-2`}>
-        Ticket Type
-      </p>
-      <h2 className={`text-5xl md:text-6xl font-bold ${config.labelColor} mb-6`}>
-        {getTicketTypeDisplay()}
-      </h2>
+   return (
+    <div className={`${config.bgColor} rounded-3xl p-8 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)] transition-all duration-500`}>
+      <div className="flex justify-between items-start mb-2">
+        <p className={`${config.labelColor} text-xs uppercase tracking-[0.2em] font-bold`}>
+          Ticket Type
+        </p>
+        {config.badge && (
+          <div className="bg-[#d4af37] text-black text-[10px] font-black px-2 py-0.5 rounded italic tracking-tighter">
+            {config.badge}
+          </div>
+        )}
+      </div>
+      
+      <div className="relative mb-6">
+        <h2 className={`text-5xl md:text-6xl font-bold ${config.labelColor} leading-none`}>
+          SINGLE ENTRY
+        </h2>
+        <span className={`${caveat.className} absolute -top-4 right-0 block text-3xl md:text-4xl text-[#f37335] rotate-[-12deg] drop-shadow-sm`}>
+          {ticketType === 'stnd' ? 'Standard' : 'VIP'}
+        </span>
+        {ticketTypeConfig[ticketType].tableSize && (
+          <p className={`${config.labelColor} text-sm font-bold mt-2 opacity-80 uppercase tracking-widest`}>
+            {ticketType === 'v2' ? 'Table of 4' : 'Table of 5'}
+          </p>
+        )}
+      </div>
+
       <h3 className={`${prata.className} text-4xl ${config.textColor} mb-4`}>
         Join the Exchange
       </h3>
-      <p className={`${config.labelColor} text-sm mb-6 opacity-75`}>Please complete the form below to secure your spot in the space.</p>
+      <p className={`${config.labelColor} text-sm mb-8 opacity-75 leading-relaxed`}>Please complete the form below to secure your spot in the space.</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -250,21 +282,21 @@ export function ReggiesForm() {
         </div>
         <div>
           <label htmlFor="community" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Community</label>
-          <select 
+           <select 
             id="community" 
             value={community}
             onChange={(e) => setCommunity(e.target.value)}
-            className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white ${config.focusRing} focus:outline-none focus:ring-2 transition-all cursor-pointer`}
+            className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-3 text-white ${config.focusRing} focus:outline-none focus:ring-2 transition-all cursor-pointer`}
           >
-            <option>The Vibe (Community, friend, general supporter)</option>
-            <option>The Maker (Fellow artists, designers, musicians)</option>
-            <option>The Storyteller (Media, journalists, press)</option>
-            <option>The Enabler (Patrons, investors, executives, sponsors)</option>
+            <option>The Vibe (Community, Friend, General)</option>
+            <option>The Maker (Artist, Designer, Musician)</option>
+            <option>The Storyteller (Media, Press)</option>
+            <option>The Enabler (Patron, Investor, Sponsor)</option>
           </select>
         </div>
         <div>
           <label htmlFor="affiliation" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Affiliation</label>
-          <input 
+           <input 
             type="text" 
             id="affiliation" 
             value={affiliation}
@@ -273,6 +305,25 @@ export function ReggiesForm() {
             placeholder="Office, Brand, Organisation" 
           />
         </div>
+
+        {ticketType !== 'stnd' && (
+          <div className="animate-in fade-in slide-in-from-top-2 duration-300">
+            <label htmlFor="dietary" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Dietary Requirements</label>
+            <select 
+              id="dietary" 
+              value={dietaryRequirements}
+              onChange={(e) => setDietaryRequirements(e.target.value)}
+               className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white ${config.focusRing} focus:outline-none focus:ring-2 transition-all cursor-pointer`}
+            >
+              <option value="">None</option>
+              <option value="Vegan">Vegan</option>
+              <option value="Vegetarian">Vegetarian</option>
+              <option value="Nut Free">Nut Free</option>
+              <option value="Gluten Free">Gluten Free</option>
+              <option value="Other">Other (mention in phone/affiliation)</option>
+            </select>
+          </div>
+        )}
 
         {/* Guest Details for Table Tickets */}
         {maxGuests > 0 && (
@@ -312,17 +363,33 @@ export function ReggiesForm() {
           </div>
         )}
 
-        <div className="flex items-start pt-2">
-          <input 
-            type="checkbox" 
-            id="accept-terms" 
-            checked={acceptedTerms}
-            onChange={(e) => setAcceptedTerms(e.target.checked)}
-            className={`mt-1 h-4 w-4 ${config.accentColor} rounded border-[#4a4a4a] ${config.focusRing} cursor-pointer`} 
-          />
-          <label htmlFor="accept-terms" className={`ml-2 text-sm ${config.labelColor} cursor-pointer select-none`}>
-            I accept that by honoring this invitation, I confirm my willingness to have a good time on a beautiful Thursday night in Freetown.
-          </label>
+         <div className="space-y-4 pt-4 border-t border-white/5 mt-4">
+          <div className="flex items-start">
+            <input 
+              type="checkbox" 
+              id="accept-terms" 
+              required
+              checked={acceptedTerms}
+              onChange={(e) => setAcceptedTerms(e.target.checked)}
+              className={`mt-1 h-4 w-4 rounded border-[#4a4a4a] text-[#f37335] focus:ring-[#f37335] cursor-pointer`} 
+            />
+            <label htmlFor="accept-terms" className={`ml-2 text-sm ${config.labelColor} cursor-pointer select-none leading-tight`}>
+              I accept that by honoring this invitation, I confirm my willingness to have a good time on a beautiful Thursday night in Freetown.
+            </label>
+          </div>
+
+          <div className="flex items-start">
+            <input 
+              type="checkbox" 
+              id="marketing-consent" 
+              checked={marketingConsent}
+              onChange={(e) => setMarketingConsent(e.target.checked)}
+              className={`mt-1 h-4 w-4 rounded border-[#4a4a4a] text-[#f37335] focus:ring-[#f37335] cursor-pointer`} 
+            />
+            <label htmlFor="marketing-consent" className={`ml-2 text-sm ${config.labelColor} cursor-pointer select-none leading-tight`}>
+              Keep me updated on future Blank Space activations and creative projects (Optional)
+            </label>
+          </div>
         </div>
         
         <button 
