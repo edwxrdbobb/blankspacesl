@@ -284,28 +284,17 @@ export function ReggiesForm() {
           />
         </div>
         <div>
-          <label htmlFor="email" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Email *</label>
-          <input 
-            type="email" 
-            id="email" 
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+          <label htmlFor="affiliation" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Organization</label>
+           <input 
+            type="text" 
+            id="affiliation" 
+            value={affiliation}
+            onChange={(e) => setAffiliation(e.target.value)}
             className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] ${config.focusRing} focus:outline-none focus:ring-2 transition-all`} 
-            placeholder="your@email.com" 
+            placeholder="Office, Brand, Organisation" 
           />
         </div>
-        <div>
-          <label htmlFor="phone" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Phone</label>
-          <input 
-            type="tel" 
-            id="phone" 
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] ${config.focusRing} focus:outline-none focus:ring-2 transition-all`} 
-            placeholder="+232 XX XXX XXX" 
-          />
-        </div>
+
         <div>
           <label htmlFor="community" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Community</label>
            <select 
@@ -319,17 +308,6 @@ export function ReggiesForm() {
             <option>The Storyteller (Media, Press)</option>
             <option>The Enabler (Patron, Investor, Sponsor)</option>
           </select>
-        </div>
-        <div>
-          <label htmlFor="affiliation" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Affiliation</label>
-           <input 
-            type="text" 
-            id="affiliation" 
-            value={affiliation}
-            onChange={(e) => setAffiliation(e.target.value)}
-            className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] ${config.focusRing} focus:outline-none focus:ring-2 transition-all`} 
-            placeholder="Office, Brand, Organisation" 
-          />
         </div>
 
         {ticketType !== 'stnd' && (
@@ -388,6 +366,31 @@ export function ReggiesForm() {
             </div>
           </div>
         )}
+
+        <div>
+          <label htmlFor="phone" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Phone</label>
+          <input 
+            type="tel" 
+            id="phone" 
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] ${config.focusRing} focus:outline-none focus:ring-2 transition-all`} 
+            placeholder="+232 XX XXX XXX" 
+          />
+        </div>
+
+        <div>
+          <label htmlFor="email" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Email *</label>
+          <input 
+            type="email" 
+            id="email" 
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white placeholder-[#7a7a7a] ${config.focusRing} focus:outline-none focus:ring-2 transition-all`} 
+            placeholder="your@email.com" 
+          />
+        </div>
 
        <div className="pt-4 border-t border-white/5 mt-4">
         <div className="flex items-start">
