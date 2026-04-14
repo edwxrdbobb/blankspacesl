@@ -258,11 +258,6 @@ export function ReggiesForm() {
          <span className={`${caveat.className} absolute -top-4 right-0 block text-3xl md:text-4xl text-[#f37335] rotate-[-12deg] drop-shadow-sm`}>
           {config.script}
         </span>
-        {ticketTypeConfig[ticketType].tableSize && (
-          <p className={`${config.labelColor} text-sm font-bold mt-2 opacity-80 uppercase tracking-widest`}>
-            {ticketType === 'v2' ? 'Table of 4' : 'Table of 5'}
-          </p>
-        )}
       </div>
 
       <h3 className={`${prata.className} text-4xl ${config.textColor} mb-4`}>
@@ -332,7 +327,7 @@ export function ReggiesForm() {
         {/* Guest Details for Table Tickets */}
         {maxGuests > 0 && (
           <div className={`border-t ${config.borderColor} pt-6 mt-6 animate-in fade-in slide-in-from-top-4 duration-500`}>
-            <h4 className={`text-lg font-semibold ${config.labelColor} mb-4`}>Guest Details (Max {maxGuests})</h4>
+            <h4 className={`text-lg font-semibold ${config.labelColor} mb-4`}>Guest Details</h4>
             <div className="space-y-4">
               {guests.map((guest, index) => (
                 <div key={index} className={`p-4 rounded-md border ${config.borderColor} bg-opacity-50 ${config.inputBg} transition-all`}>
