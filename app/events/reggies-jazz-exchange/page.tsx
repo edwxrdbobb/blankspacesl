@@ -3,7 +3,7 @@ import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import { ReggiesForm } from "@/components/reggies-form"
 import { Calendar, MapPin, Clock, Ticket, Info } from "lucide-react"
-import { Prata, Inter } from "next/font/google"
+import { Prata, Inter, Caveat } from "next/font/google"
 import { Suspense } from "react"
 
 const prata = Prata({ 
@@ -13,6 +13,7 @@ const prata = Prata({
 })
 
 const inter = Inter({ subsets: ['latin'] })
+const caveat = Caveat({ subsets: ['latin'] })
 
 const eventDetails = [
   { icon: Calendar, label: "Date", value: "Thursday, April 30th, 2026" },
@@ -125,9 +126,9 @@ export default function RejgiesJazzExchangePage() {
         <div className="container mx-auto px-4 relative z-10 text-center">
           <div className="max-w-3xl mx-auto">
             <Info className="h-8 w-8 text-[#00aed9] mx-auto mb-6" />
-            <h2 className={`${prata.className} text-3xl md:text-4xl mb-6`}>Limited spots available for this exclusive session.</h2>
-            <div className="h-px w-24 bg-[#f37335] mx-auto mb-6" />
-            <p className="text-[#fdfaf3]/60 uppercase tracking-[0.3em] text-xs font-bold">Secure your place now</p>
+            <h2 className={`${caveat.className} text-5xl md:text-6xl text-[#f37335] mb-6 rotate-[-2deg]`}>Welcome to the Exchange</h2>
+            <div className="h-px w-24 bg-[#00aed9]/30 mx-auto mb-6" />
+            <p className="text-[#fdfaf3]/40 uppercase tracking-[0.3em] text-[10px] font-bold">Registration confirmed session</p>
           </div>
         </div>
       </section>
