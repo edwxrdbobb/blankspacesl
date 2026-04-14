@@ -16,7 +16,24 @@ const prata = Prata({
 const inter = Inter({ subsets: ['latin'] })
 const caveat = Caveat({ subsets: ['latin'] })
 
-const ticketTypeConfig = {
+interface TicketConfig {
+  id: string;
+  name: string;
+  tableSize: number | null;
+  bgColor: string;
+  textColor: string;
+  accentColor: string;
+  accentColorHover: string;
+  labelColor: string;
+  inputBg: string;
+  borderColor: string;
+  focusRing: string;
+  badge: string | null;
+  script: string;
+  mainTitle: string;
+}
+
+const ticketTypeConfig: Record<'stnd' | 'v1' | 'v2' | 'v3', TicketConfig> = {
   stnd: {
     id: 'stnd',
     name: "Standard Entry",
@@ -28,8 +45,10 @@ const ticketTypeConfig = {
     labelColor: "text-[#a0a0a0]",
     inputBg: "bg-[#2a2a2a]",
     borderColor: "border-[#4a4a4a]",
-    focusRing: "focus:ring-[#f37335]",
+     focusRing: "focus:ring-[#f37335]",
     badge: null,
+    script: "Standard",
+    mainTitle: "STANDARD ENTRY"
   },
   v1: {
     id: 'v1',
@@ -44,11 +63,13 @@ const ticketTypeConfig = {
     borderColor: "border-[#3d3419]",
     focusRing: "focus:ring-[#d4af37]",
     badge: "VIP",
+    script: "VIP",
+    mainTitle: "SINGLE ENTRY"
   },
   v2: {
     id: 'v2',
-    name: "VIP Table for 4",
-    tableSize: 3, // Primary + 3 guests
+    name: "VIP Table of 4",
+    tableSize: 3, 
     bgColor: "bg-[#1a1a1a] border-2 border-[#d4af37]/30",
     textColor: "text-white",
     accentColor: "bg-[#d4af37]",
@@ -58,11 +79,13 @@ const ticketTypeConfig = {
     borderColor: "border-[#3d3419]",
     focusRing: "focus:ring-[#d4af37]",
     badge: "VIP",
+    script: "Table of 4",
+    mainTitle: "STANDARD ENTRY"
   },
   v3: {
     id: 'v3',
-    name: "VIP Table for 5",
-    tableSize: 4, // Primary + 4 guests
+    name: "VIP Table of 5",
+    tableSize: 4, 
     bgColor: "bg-[#1a1a1a] border-4 border-[#d4af37]/40 shadow-[0_0_50px_-12px_rgba(212,175,55,0.2)]",
     textColor: "text-white",
     accentColor: "bg-[#d4af37]",
@@ -72,6 +95,8 @@ const ticketTypeConfig = {
     borderColor: "border-[#3d3419]",
     focusRing: "focus:ring-[#d4af37]",
     badge: "VIP",
+    script: "Table of 5",
+    mainTitle: "STANDARD ENTRY"
   },
 }
 
@@ -90,7 +115,7 @@ export function ReggiesForm() {
    const [affiliation, setAffiliation] = useState("")
   const [dietaryRequirements, setDietaryRequirements] = useState("")
   const [guests, setGuests] = useState<{name: string, phone: string}[]>([])
-  const [acceptedTerms, setAcceptedTerms] = useState(false)
+  const [acceptedTerms, setAcceptedTerms] = useState(true)
   const [marketingConsent, setMarketingConsent] = useState(false)
 
   useEffect(() => {
@@ -116,8 +141,8 @@ export function ReggiesForm() {
     const typeNames = {
       stnd: 'STANDARD',
       v1: 'SINGLE ENTRY',
-      v2: 'VIP TABLE FOR 4',
-      v3: 'VIP TABLE FOR 5',
+      v2: 'VIP TABLE OF 4',
+      v3: 'VIP TABLE OF 5',
     }
     return typeNames[ticketType]
   }
@@ -213,6 +238,7 @@ export function ReggiesForm() {
   }
 
    return (
+    <div className="w-full">
     <div className={`${config.bgColor} rounded-3xl p-8 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.2)] transition-all duration-500`}>
       <div className="flex justify-between items-start mb-2">
         <p className={`${config.labelColor} text-xs uppercase tracking-[0.2em] font-bold`}>
@@ -227,10 +253,10 @@ export function ReggiesForm() {
       
       <div className="relative mb-6">
         <h2 className={`text-5xl md:text-6xl font-bold ${config.labelColor} leading-none`}>
-          SINGLE ENTRY
+          {config.mainTitle}
         </h2>
-        <span className={`${caveat.className} absolute -top-4 right-0 block text-3xl md:text-4xl text-[#f37335] rotate-[-12deg] drop-shadow-sm`}>
-          {ticketType === 'stnd' ? 'Standard' : 'VIP'}
+         <span className={`${caveat.className} absolute -top-4 right-0 block text-3xl md:text-4xl text-[#f37335] rotate-[-12deg] drop-shadow-sm`}>
+          {config.script}
         </span>
         {ticketTypeConfig[ticketType].tableSize && (
           <p className={`${config.labelColor} text-sm font-bold mt-2 opacity-80 uppercase tracking-widest`}>
@@ -363,34 +389,20 @@ export function ReggiesForm() {
           </div>
         )}
 
-         <div className="space-y-4 pt-4 border-t border-white/5 mt-4">
-          <div className="flex items-start">
-            <input 
-              type="checkbox" 
-              id="accept-terms" 
-              required
-              checked={acceptedTerms}
-              onChange={(e) => setAcceptedTerms(e.target.checked)}
-              className={`mt-1 h-4 w-4 rounded border-[#4a4a4a] text-[#f37335] focus:ring-[#f37335] cursor-pointer`} 
-            />
-            <label htmlFor="accept-terms" className={`ml-2 text-sm ${config.labelColor} cursor-pointer select-none leading-tight`}>
-              I accept that by honoring this invitation, I confirm my willingness to have a good time on a beautiful Thursday night in Freetown.
-            </label>
-          </div>
-
-          <div className="flex items-start">
-            <input 
-              type="checkbox" 
-              id="marketing-consent" 
-              checked={marketingConsent}
-              onChange={(e) => setMarketingConsent(e.target.checked)}
-              className={`mt-1 h-4 w-4 rounded border-[#4a4a4a] text-[#f37335] focus:ring-[#f37335] cursor-pointer`} 
-            />
-            <label htmlFor="marketing-consent" className={`ml-2 text-sm ${config.labelColor} cursor-pointer select-none leading-tight`}>
-              Keep me updated on future Blank Space activations and creative projects (Optional)
-            </label>
-          </div>
+       <div className="pt-4 border-t border-white/5 mt-4">
+        <div className="flex items-start">
+          <input 
+            type="checkbox" 
+            id="marketing-consent" 
+            checked={marketingConsent}
+            onChange={(e) => setMarketingConsent(e.target.checked)}
+            className={`mt-1 h-4 w-4 rounded border-[#4a4a4a] text-[#f37335] focus:ring-[#f37335] cursor-pointer`} 
+          />
+          <label htmlFor="marketing-consent" className={`ml-3 text-sm ${config.labelColor} cursor-pointer select-none leading-tight`}>
+            Keep me updated on future Blank Space activations and creative projects (Optional)
+          </label>
         </div>
+      </div>
         
         <button 
           type="submit" 
@@ -406,7 +418,9 @@ export function ReggiesForm() {
             <>Submit RSVP</>
           )}
         </button>
-      </form>
+       </form>
     </div>
+
+     </div>
   )
 }

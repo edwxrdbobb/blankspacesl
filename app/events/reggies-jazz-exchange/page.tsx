@@ -60,6 +60,13 @@ export default function RejgiesJazzExchangePage() {
                 <p className="font-medium opacity-80">
                   Reggie&apos;s Jazz Exchange is an acknowledgement of the rhythm that has always lived in our coast. A celebration of our musical heritage and mastery, curated for the sophisticated ear.
                 </p>
+               </div>
+              
+              {/* RSVP Form */}
+              <div className="mb-12">
+                <Suspense fallback={<div className="bg-[#1a1a1a] rounded-3xl p-8 h-96" />}>
+                  <ReggiesForm />
+                </Suspense>
               </div>
 
               {/* Event Details Grid - Retro Style */}
@@ -77,7 +84,7 @@ export default function RejgiesJazzExchangePage() {
 
               {/* Additional Expectations */}
               <div className="bg-[#00aed9]/5 border border-[#00aed9]/20 rounded-2xl p-6">
-                <h3 className={`${prata.className} text-lg text-[#1a1a1a] mb-4`}>Also Expect:</h3>
+                <h3 className={`${prata.className} text-lg text-[#1a1a1a] mb-4`}>What to Expect:</h3>
                 <ul className="space-y-2 text-sm text-[#4a4a4a]">
                   <li className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-[#f37335] rounded-full shrink-0" />
@@ -106,11 +113,6 @@ export default function RejgiesJazzExchangePage() {
                 />
                 <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-3xl" />
               </div>
-
-              {/* RSVP Form */}
-              <Suspense fallback={<div className="bg-[#1a1a1a] rounded-3xl p-8 h-96" />}>
-                <ReggiesForm />
-              </Suspense>
             </div>
           </div>
         </div>
