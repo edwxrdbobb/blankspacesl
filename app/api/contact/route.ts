@@ -4,7 +4,7 @@ import { supabaseAdmin } from "@/lib/supabase"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-const FROM = "Blank Space Website <no-reply@blankspacesl.com>"
+const FROM = "Blank Space Website <no-reply@tar1k.com>"
 const TO = (process.env.ADMIN_EMAILS ?? "info@blankspacesl.com").split(",")
 
 export async function POST(req: Request) {
@@ -80,21 +80,29 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Failed to store submission." }, { status: 500 })
     }
 
-    await resend.emails.send({ from: FROM, to: TO, subject, html })
+    try {
+      const { data: adminData, error: adminError } = await resend.emails.send({ from: FROM, to: TO, subject, html })
+      if (adminError) console.error("[contact-admin-email-error]", adminError)
 
-    // Send confirmation to the submitter
-    const replyTo = fields.email
-    const confirmSubject = "We've received your message — Blank Space"
-    const confirmHtml = `
-      <p>Hi ${isArtist ? fields.name : fields.contactName},</p>
-      <p>Thanks for reaching out to Blank Space. We've received your ${isArtist ? "booking request" : "project brief"} and will get back to you within 24–48 hours.</p>
-      <p>— The Blank Space Team</p>
-    `
-    await resend.emails.send({ from: FROM, to: replyTo, subject: confirmSubject, html: confirmHtml })
+      // Send confirmation to the submitter
+      const replyTo = fields.email
+      const confirmSubject = "We've received your message — Blank Space"
+      const confirmHtml = `
+        <p>Hi ${isArtist ? fields.name : fields.contactName},</p>
+        <p>Thanks for reaching out to Blank Space. We've received your ${isArtist ? "booking request" : "project brief"} and will get back to you within 24–48 hours.</p>
+        <p>— The Blank Space Team</p>
+      `
+      const { data: userData, error: userError } = await resend.emails.send({ from: FROM, to: replyTo, subject: confirmSubject, html: confirmHtml })
+      if (userError) console.error("[contact-user-email-error]", userError)
+
+    } catch (emailErr) {
+      console.error("[contact-email-exception]", emailErr)
+      // We log but don't strictly fail the response if DB insertion was successful
+    }
 
     return NextResponse.json({ ok: true })
   } catch (err) {
-    console.error("[contact]", err)
+    console.error("[contact-fatal]", err)
     return NextResponse.json({ error: "Failed to send message." }, { status: 500 })
   }
 }

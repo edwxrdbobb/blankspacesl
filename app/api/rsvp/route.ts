@@ -3,7 +3,7 @@ import { supabaseAdmin } from '@/lib/supabase'
 import { Resend } from "resend"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const FROM = "Blank Space Events <no-reply@blankspacesl.com>"
+const FROM = "Blank Space Events <no-reply@tar1k.com>"
 const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? "info@blankspacesl.com").split(",")
 
 export async function POST(req: Request) {
@@ -115,9 +115,10 @@ export async function POST(req: Request) {
     `
     
     try {
-      await resend.emails.send({ from: FROM, to: ADMIN_EMAILS, subject: adminSubject, html: adminHtml })
+      const { data, error } = await resend.emails.send({ from: FROM, to: ADMIN_EMAILS, subject: adminSubject, html: adminHtml })
+      if (error) console.error('[rsvp-admin-email-error]', error)
     } catch (adminEmailError) {
-      console.error('[rsvp-admin-email]', adminEmailError)
+      console.error('[rsvp-admin-email-exception]', adminEmailError)
       // We don't fail the whole request if only admin email fails
     }
 
@@ -186,11 +187,11 @@ export async function POST(req: Request) {
     `
     
     try {
-      await resend.emails.send({ from: FROM, to: email, subject: confirmSubject, html: confirmHtml })
+      const { data, error } = await resend.emails.send({ from: FROM, to: email, subject: confirmSubject, html: confirmHtml })
+      if (error) console.error('[rsvp-user-email-error]', error)
     } catch (userEmailError) {
-      console.error('[rsvp-user-email]', userEmailError)
-      // Similarly, we log but don't fail if the confirm email has an issue, 
-      // though ideally we'd want to know.
+      console.error('[rsvp-user-email-exception]', userEmailError)
+      // Similarly, we log but don't fail if the confirm email has an issue
     }
 
     return NextResponse.json({ ok: true })

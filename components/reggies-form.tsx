@@ -64,7 +64,7 @@ const ticketTypeConfig: Record<'stnd' | 'v1' | 'v2' | 'v3', TicketConfig> = {
     focusRing: "focus:ring-[#d4af37]",
     badge: "VIP",
     script: "VIP",
-    mainTitle: "SINGLE ENTRY"
+    mainTitle: "VIP SINGLE ENTRY"
   },
   v2: {
     id: 'v2',
@@ -140,7 +140,7 @@ export function ReggiesForm() {
   const getTicketTypeDisplay = () => {
     const typeNames = {
       stnd: 'STANDARD',
-      v1: 'SINGLE ENTRY',
+      v1: 'VIP SINGLE ENTRY',
       v2: 'VIP TABLE FOR 4',
       v3: 'VIP TABLE FOR 5',
     }
