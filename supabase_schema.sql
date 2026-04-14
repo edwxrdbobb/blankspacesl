@@ -38,3 +38,20 @@ CREATE TABLE IF NOT EXISTS contact_submissions (
 -- If using anon key from server, you might need to enable insert for anon.
 ALTER TABLE newsletter_subscriptions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE contact_submissions ENABLE ROW LEVEL SECURITY;
+
+-- Create event_rsvps table
+CREATE TABLE IF NOT EXISTS event_rsvps (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  event_id TEXT NOT NULL,
+  event_name TEXT,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT,
+  community TEXT,
+  affiliation TEXT,
+  ticket_type TEXT,
+  guests JSONB DEFAULT '[]'::jsonb,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+ALTER TABLE event_rsvps ENABLE ROW LEVEL SECURITY;

@@ -13,6 +13,8 @@ const prata = Prata({
   display: 'swap',
 })
 
+import { toast } from "sonner"
+
 interface EventRSVPFormProps {
   eventId: string
   eventName: string
@@ -21,12 +23,10 @@ interface EventRSVPFormProps {
 export function EventRSVPForm({ eventId, eventName }: EventRSVPFormProps) {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setIsSubmitting(true)
-    setError(null)
 
     const formData = new FormData(e.currentTarget)
     const data = {
@@ -44,10 +44,14 @@ export function EventRSVPForm({ eventId, eventName }: EventRSVPFormProps) {
         body: JSON.stringify(data),
       })
 
-      if (!res.ok) throw new Error("Failed to submit RSVP")
+      const result = await res.json()
+
+      if (!res.ok) throw new Error(result.error || "Failed to submit RSVP")
+      
+      toast.success("RSVP Confirmed! See you there.")
       setIsSubmitted(true)
-    } catch (err) {
-      setError("Something went wrong. Please try again later.")
+    } catch (err: any) {
+      toast.error(err.message || "Something went wrong. Please try again later.")
     } finally {
       setIsSubmitting(false)
     }
@@ -112,8 +116,6 @@ export function EventRSVPForm({ eventId, eventName }: EventRSVPFormProps) {
             className="bg-transparent border-0 border-b-2 border-[#1a1a1a]/20 focus:border-[#f37335] rounded-none px-0 shadow-none text-lg placeholder:text-[#1a1a1a]/20" 
           />
         </div>
-        
-        {error && <p className="text-sm text-red-600 font-bold italic">{error}</p>}
         
         <Button 
           type="submit" 
