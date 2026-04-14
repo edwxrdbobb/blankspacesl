@@ -244,20 +244,12 @@ export function ReggiesForm() {
         <p className={`${config.labelColor} text-xs uppercase tracking-[0.2em] font-bold`}>
           Ticket Type
         </p>
-        {config.badge && (
-          <div className="bg-[#d4af37] text-black text-[10px] font-black px-2 py-0.5 rounded italic tracking-tighter">
-            {config.badge}
-          </div>
-        )}
       </div>
       
-      <div className="relative mb-6">
+      <div className="mb-6">
         <h2 className={`text-5xl md:text-6xl font-bold ${config.labelColor} leading-none`}>
           {config.mainTitle}
         </h2>
-         <span className={`${caveat.className} absolute -top-4 right-0 block text-3xl md:text-4xl text-[#f37335] rotate-[-12deg] drop-shadow-sm`}>
-          {config.script}
-        </span>
       </div>
 
       <h3 className={`${prata.className} text-4xl ${config.textColor} mb-4`}>
