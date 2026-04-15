@@ -106,6 +106,7 @@ export function ReggiesForm() {
   const [mounted, setMounted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const [emailDelivered, setEmailDelivered] = useState(true)
   
   // Form State
   const [fullName, setFullName] = useState("")
@@ -191,7 +192,12 @@ export function ReggiesForm() {
       const result = await response.json()
 
       if (response.ok) {
-        toast.success("RSVP Confirmed! Check your email for details.")
+        setEmailDelivered(result.emailDelivered !== false)
+        if (result.emailDelivered === false) {
+          toast.warning("RSVP saved, but the confirmation email could not be sent.")
+        } else {
+          toast.success("RSVP Confirmed! Check your email for details.")
+        }
         setIsSuccess(true)
         window.scrollTo({ top: 0, behavior: 'smooth' })
       } else {
@@ -222,7 +228,11 @@ export function ReggiesForm() {
         
         <p className={`${config.labelColor} text-lg mb-10 max-w-sm relative z-10 font-medium`}>
           Thank you for joining <span className="text-white font-bold">Reggie&apos;s Jazz Exchange</span>. 
-          A confirmation invitation has been sent to <span className="text-white">{email}</span>.
+          {emailDelivered ? (
+            <> A confirmation invitation has been sent to <span className="text-white">{email}</span>.</>
+          ) : (
+            <> Your RSVP is saved, but the confirmation email could not be delivered right now.</>
+          )}
         </p>
 
         <button 

@@ -3,8 +3,11 @@ import { supabaseAdmin } from '@/lib/supabase'
 import { Resend } from "resend"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const FROM = "Blank Space Events <no-reply@tar1k.com>"
-const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? "info@blankspacesl.com").split(",")
+const FROM = "Blank Space Events <no-reply@blankspacesl.com>"
+const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? "info@blankspacesl.com")
+  .split(",")
+  .map((email) => email.trim())
+  .filter(Boolean)
 
 export async function POST(req: Request) {
   try {
@@ -12,6 +15,11 @@ export async function POST(req: Request) {
 
     if (!eventId || !name || !email) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+    }
+
+    if (!process.env.RESEND_API_KEY) {
+      console.error('[rsvp-email-config]', 'Missing RESEND_API_KEY')
+      return NextResponse.json({ error: 'RSVP email is not configured.' }, { status: 500 })
     }
 
     // 1. Store in Supabase
@@ -124,12 +132,17 @@ export async function POST(req: Request) {
       </div>
     `
     
+    const emailFailures: string[] = []
+
     try {
-      const { data, error } = await resend.emails.send({ from: FROM, to: ADMIN_EMAILS, subject: adminSubject, html: adminHtml })
-      if (error) console.error('[rsvp-admin-email-error]', error)
+      const { error } = await resend.emails.send({ from: FROM, to: ADMIN_EMAILS, subject: adminSubject, html: adminHtml })
+      if (error) {
+        console.error('[rsvp-admin-email-error]', error)
+        emailFailures.push('admin')
+      }
     } catch (adminEmailError) {
       console.error('[rsvp-admin-email-exception]', adminEmailError)
-      // We don't fail the whole request if only admin email fails
+      emailFailures.push('admin')
     }
 
     // 3. Send confirmation to the attendee
@@ -190,14 +203,21 @@ export async function POST(req: Request) {
     `
     
     try {
-      const { data, error } = await resend.emails.send({ from: FROM, to: email, subject: confirmSubject, html: confirmHtml })
-      if (error) console.error('[rsvp-user-email-error]', error)
+      const { error } = await resend.emails.send({ from: FROM, to: email, subject: confirmSubject, html: confirmHtml })
+      if (error) {
+        console.error('[rsvp-user-email-error]', error)
+        emailFailures.push('user')
+      }
     } catch (userEmailError) {
       console.error('[rsvp-user-email-exception]', userEmailError)
-      // Similarly, we log but don't fail if the confirm email has an issue
+      emailFailures.push('user')
     }
 
-    return NextResponse.json({ ok: true })
+    return NextResponse.json({
+      ok: true,
+      emailDelivered: emailFailures.length === 0,
+      warning: emailFailures.length > 0 ? "RSVP was saved, but email delivery failed." : null,
+    })
   } catch (err) {
     console.error('[rsvp]', err)
     return NextResponse.json({ error: 'Failed to process RSVP.' }, { status: 500 })

@@ -23,6 +23,7 @@ interface EventRSVPFormProps {
 export function EventRSVPForm({ eventId, eventName }: EventRSVPFormProps) {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [emailDelivered, setEmailDelivered] = useState(true)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -47,8 +48,13 @@ export function EventRSVPForm({ eventId, eventName }: EventRSVPFormProps) {
       const result = await res.json()
 
       if (!res.ok) throw new Error(result.error || "Failed to submit RSVP")
-      
-      toast.success("RSVP Confirmed! See you there.")
+
+      setEmailDelivered(result.emailDelivered !== false)
+      if (result.emailDelivered === false) {
+        toast.warning("RSVP saved, but the confirmation email could not be sent.")
+      } else {
+        toast.success("RSVP Confirmed! See you there.")
+      }
       setIsSubmitted(true)
     } catch (err: any) {
       toast.error(err.message || "Something went wrong. Please try again later.")
@@ -65,7 +71,10 @@ export function EventRSVPForm({ eventId, eventName }: EventRSVPFormProps) {
         </div>
         <h3 className={`${prata.className} text-3xl font-normal mb-4 text-[#1a1a1a]`}>You&apos;re on the list!</h3>
         <p className="text-[#4a4a4a] mb-8 leading-relaxed">
-          Thank you for RSVPing for <span className="font-bold">{eventName}</span>. We&apos;ve sent a confirmation to your email. See you there!
+          Thank you for RSVPing for <span className="font-bold">{eventName}</span>.{" "}
+          {emailDelivered
+            ? "We've sent a confirmation to your email. See you there!"
+            : "Your RSVP is saved, but the confirmation email could not be delivered right now."}
         </p>
         <Button 
           variant="outline" 

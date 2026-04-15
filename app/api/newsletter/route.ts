@@ -4,7 +4,7 @@ import { supabaseAdmin } from "@/lib/supabase"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-const FROM = "Blank Space <no-reply@tar1k.com>"
+const FROM = "Blank Space <no-reply@blankspacesl.com>"
 const NOTIFY_TO = (process.env.ADMIN_EMAILS ?? "info@blankspacesl.com").split(",")
 
 export async function POST(req: Request) {
