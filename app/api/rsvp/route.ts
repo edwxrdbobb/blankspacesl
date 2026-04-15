@@ -8,7 +8,7 @@ const ADMIN_EMAILS = (process.env.ADMIN_EMAILS ?? "info@blankspacesl.com").split
 
 export async function POST(req: Request) {
   try {
-    const { eventId, eventName, name, email, phone, community, affiliation, ticketType, guests, dietaryRequirements, marketingConsent } = await req.json()
+    const { eventId, eventName, name, email, phone, community, affiliation, ticketType, guests, acceptedTerms, marketingConsent } = await req.json()
 
     if (!eventId || !name || !email) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
           affiliation,
            ticket_type: ticketType,
           guests: guests || [],
-          dietary_requirements: dietaryRequirements,
+          accepted_terms: acceptedTerms,
           marketing_consent: marketingConsent
         }
       ])
@@ -79,12 +79,10 @@ export async function POST(req: Request) {
               <td style="padding-bottom: 12px; color: #666;">Affiliation</td>
               <td style="padding-bottom: 12px;">${affiliation || "—"}</td>
             </tr>
-            ${dietaryRequirements ? `
             <tr>
-              <td style="padding-bottom: 12px; color: #666;">Dietary Requirements</td>
-              <td style="padding-bottom: 12px; color: #f37335; font-weight: bold;">${dietaryRequirements}</td>
+              <td style="padding-bottom: 12px; color: #666;">Good Time Consent</td>
+              <td style="padding-bottom: 12px;">${acceptedTerms ? "Yes" : "No"}</td>
             </tr>
-            ` : ''}
             <tr>
               <td style="margin: 0; color: #666;">Marketing Opt-in</td>
               <td style="margin: 0;">${marketingConsent ? "Yes" : "No"}</td>
@@ -145,13 +143,6 @@ export async function POST(req: Request) {
             <p style="margin: 0; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #f37335; margin-bottom: 10px;">Ticket Confirmed</p>
             <h2 style="margin: 0; font-size: 24px; color: #1a1a1a; font-weight: bold;">${ticketType || 'General Admission'}</h2>
             
-             ${dietaryRequirements ? `
-              <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
-                <p style="margin: 0; font-size: 12px; color: #666; margin-bottom: 8px;">Dietary Requirements:</p>
-                <div style="font-size: 14px; font-weight: 500; color: #f37335;">${dietaryRequirements}</div>
-              </div>
-            ` : ''}
-
             ${guests && guests.length > 0 ? `
               <div style="margin-top: 20px; border-top: 1px solid #eee; padding-top: 15px;">
                 <p style="margin: 0; font-size: 12px; color: #666; margin-bottom: 8px;">Plus Guest(s):</p>

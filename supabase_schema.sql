@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS event_rsvps (
   ticket_type TEXT,
   guests JSONB DEFAULT '[]'::jsonb,
   dietary_requirements TEXT,
+  accepted_terms BOOLEAN DEFAULT FALSE,
   marketing_consent BOOLEAN DEFAULT FALSE,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

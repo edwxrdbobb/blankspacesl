@@ -113,9 +113,8 @@ export function ReggiesForm() {
   const [phone, setPhone] = useState("")
   const [community, setCommunity] = useState("The Vibe (Community, friend, general supporter)")
    const [affiliation, setAffiliation] = useState("")
-  const [dietaryRequirements, setDietaryRequirements] = useState("")
   const [guests, setGuests] = useState<{name: string, phone: string}[]>([])
-  const [acceptedTerms, setAcceptedTerms] = useState(true)
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
   const [marketingConsent, setMarketingConsent] = useState(false)
 
   useEffect(() => {
@@ -178,7 +177,7 @@ export function ReggiesForm() {
        affiliation,
       ticketType: ticketTypeConfig[ticketType].name,
       guests: guests.filter(g => g.name.trim() !== ""), 
-      dietaryRequirements: dietaryRequirements || null,
+      acceptedTerms,
       marketingConsent
     }
 
@@ -297,25 +296,6 @@ export function ReggiesForm() {
           </select>
         </div>
 
-        {ticketType !== 'stnd' && (
-          <div className="animate-in fade-in slide-in-from-top-2 duration-300">
-            <label htmlFor="dietary" className={`block ${config.labelColor} text-sm font-medium mb-1`}>Dietary Requirements</label>
-            <select 
-              id="dietary" 
-              value={dietaryRequirements}
-              onChange={(e) => setDietaryRequirements(e.target.value)}
-               className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-4 py-2 text-white ${config.focusRing} focus:outline-none focus:ring-2 transition-all cursor-pointer`}
-            >
-              <option value="">None</option>
-              <option value="Vegan">Vegan</option>
-              <option value="Vegetarian">Vegetarian</option>
-              <option value="Nut Free">Nut Free</option>
-              <option value="Gluten Free">Gluten Free</option>
-              <option value="Other">Other (mention in phone/affiliation)</option>
-            </select>
-          </div>
-        )}
-
         {/* Guest Details for Table Tickets */}
         {maxGuests > 0 && (
           <div className={`border-t ${config.borderColor} pt-6 mt-6 animate-in fade-in slide-in-from-top-4 duration-500`}>
@@ -380,17 +360,32 @@ export function ReggiesForm() {
         </div>
 
        <div className="pt-4 border-t border-white/5 mt-4">
-        <div className="flex items-start">
-          <input 
-            type="checkbox" 
-            id="marketing-consent" 
-            checked={marketingConsent}
-            onChange={(e) => setMarketingConsent(e.target.checked)}
-            className={`mt-1 h-4 w-4 rounded border-[#4a4a4a] text-[#f37335] focus:ring-[#f37335] cursor-pointer`} 
-          />
-          <label htmlFor="marketing-consent" className={`ml-3 text-sm ${config.labelColor} cursor-pointer select-none leading-tight`}>
-            Keep me updated on future Blank Space activations and creative projects (Optional)
-          </label>
+        <div className="">
+          <div className="flex items-start mb-4">
+            <input
+              type="checkbox"
+              id="accepted-terms"
+              checked={acceptedTerms}
+              onChange={(e) => setAcceptedTerms(e.target.checked)}
+              className={`mt-1 h-4 w-4 rounded border-[#4a4a4a] text-[#f37335] focus:ring-[#f37335] cursor-pointer`}
+            />
+            <label htmlFor="accepted-terms" className={`ml-3 text-sm ${config.labelColor} cursor-pointer select-none leading-tight`}>
+              I accept that by honoring this invitation, I confirm my willingness to have a good time on a beautiful Friday night in Freetown.
+            </label>
+          </div>
+
+          <div className="flex items-start mt-2">
+            <input 
+              type="checkbox" 
+              id="marketing-consent" 
+              checked={marketingConsent}
+              onChange={(e) => setMarketingConsent(e.target.checked)}
+              className={`mt-1 h-4 w-4 rounded border-[#4a4a4a] text-[#f37335] focus:ring-[#f37335] cursor-pointer`} 
+            />
+            <label htmlFor="marketing-consent" className={`ml-3 text-sm ${config.labelColor} cursor-pointer select-none leading-tight`}>
+              Keep me updated on future Blank Space activations and creative projects (Optional)
+            </label>
+          </div>
         </div>
       </div>
         
