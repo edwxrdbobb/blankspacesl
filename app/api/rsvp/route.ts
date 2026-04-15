@@ -15,23 +15,36 @@ export async function POST(req: Request) {
     }
 
     // 1. Store in Supabase
-    const { error: dbError } = await supabaseAdmin
+    const baseRsvpRecord = {
+      event_id: eventId,
+      event_name: eventName,
+      name,
+      email,
+      phone,
+      community,
+      affiliation,
+      ticket_type: ticketType,
+      guests: guests || [],
+      marketing_consent: marketingConsent,
+    }
+
+    let { error: dbError } = await supabaseAdmin
       .from('event_rsvps')
       .insert([
-        { 
-          event_id: eventId, 
-          event_name: eventName,
-          name, 
-          email, 
-          phone,
-          community,
-          affiliation,
-           ticket_type: ticketType,
-          guests: guests || [],
+        {
+          ...baseRsvpRecord,
           accepted_terms: acceptedTerms,
-          marketing_consent: marketingConsent
         }
       ])
+
+    // Allow deploy-before-migration without breaking RSVP submissions.
+    if (dbError?.code === 'PGRST204') {
+      const fallbackResult = await supabaseAdmin
+        .from('event_rsvps')
+        .insert([baseRsvpRecord])
+
+      dbError = fallbackResult.error
+    }
 
     if (dbError) {
       console.error('[rsvp-db]', dbError)
