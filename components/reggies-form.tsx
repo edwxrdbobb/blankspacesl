@@ -303,7 +303,6 @@ export function ReggiesForm() {
             <div className="space-y-4">
               {guests.map((guest, index) => (
                 <div key={index} className={`p-4 rounded-md border ${config.borderColor} bg-opacity-50 ${config.inputBg} transition-all`}>
-                  <p className={`text-xs font-medium ${config.labelColor} mb-2 opacity-75`}>Guest {index + 1}</p>
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label htmlFor={`guest-name-${index}`} className={`block ${config.labelColor} text-xs font-medium mb-1`}>Name</label>
