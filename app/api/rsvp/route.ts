@@ -108,10 +108,9 @@ export async function POST(req: Request) {
             <h3 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 15px;">Guest List (${guests.length})</h3>
             <div style="background: #fff; border: 1px solid #eee; border-radius: 8px; padding: 15px;">
               <ul style="margin: 0; padding: 0; list-style: none;">
-                ${guests.map((g: { name?: string; phone?: string }, index: number) => `
+                ${guests.map((g: { name?: string }, index: number) => `
                   <li style="padding: 10px 0; border-bottom: ${index === guests.length - 1 ? 'none' : '1px solid #f9f9f9'};">
                     <div style="font-weight: bold; font-size: 14px;">${g.name || 'Anonymous Guest'}</div>
-                    ${g.phone ? `<div style="font-size: 12px; color: #999;">${g.phone}</div>` : ''}
                   </li>
                 `).join('')}
               </ul>

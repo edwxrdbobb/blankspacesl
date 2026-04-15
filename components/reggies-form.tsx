@@ -113,7 +113,7 @@ export function ReggiesForm() {
   const [phone, setPhone] = useState("")
   const [community, setCommunity] = useState("The Vibe (Community, friend, general supporter)")
    const [affiliation, setAffiliation] = useState("")
-  const [guests, setGuests] = useState<{name: string, phone: string}[]>([])
+  const [guests, setGuests] = useState<{name: string}[]>([])
   const [acceptedTerms, setAcceptedTerms] = useState(false)
   const [marketingConsent, setMarketingConsent] = useState(false)
 
@@ -129,7 +129,7 @@ export function ReggiesForm() {
 
   useEffect(() => {
     // Sync guest state with maxGuests
-    setGuests(Array.from({ length: maxGuests }).map(() => ({ name: "", phone: "" })))
+    setGuests(Array.from({ length: maxGuests }).map(() => ({ name: "" })))
   }, [maxGuests])
 
   if (!mounted) return null
@@ -146,9 +146,9 @@ export function ReggiesForm() {
     return typeNames[ticketType]
   }
 
-  const handleGuestChange = (index: number, field: 'name' | 'phone', value: string) => {
+  const handleGuestChange = (index: number, value: string) => {
     const newGuests = [...guests]
-    newGuests[index] = { ...newGuests[index], [field]: value }
+    newGuests[index] = { ...newGuests[index], name: value }
     setGuests(newGuests)
   }
 
@@ -303,27 +303,16 @@ export function ReggiesForm() {
             <div className="space-y-4">
               {guests.map((guest, index) => (
                 <div key={index} className={`p-4 rounded-md border ${config.borderColor} bg-opacity-50 ${config.inputBg} transition-all`}>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div>
                     <div>
                       <label htmlFor={`guest-name-${index}`} className={`block ${config.labelColor} text-xs font-medium mb-1`}>Name</label>
                       <input 
                         type="text" 
                         id={`guest-name-${index}`}
                         value={guest.name}
-                        onChange={(e) => handleGuestChange(index, 'name', e.target.value)}
+                        onChange={(e) => handleGuestChange(index, e.target.value)}
                         className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-3 py-2 text-white placeholder-[#7a7a7a] text-sm ${config.focusRing} focus:outline-none focus:ring-2 transition-all`} 
                         placeholder="Guest name" 
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor={`guest-phone-${index}`} className={`block ${config.labelColor} text-xs font-medium mb-1`}>Phone</label>
-                      <input 
-                        type="tel" 
-                        id={`guest-phone-${index}`}
-                        value={guest.phone}
-                        onChange={(e) => handleGuestChange(index, 'phone', e.target.value)}
-                        className={`w-full ${config.inputBg} border ${config.borderColor} rounded-md px-3 py-2 text-white placeholder-[#7a7a7a] text-sm ${config.focusRing} focus:outline-none focus:ring-2 transition-all`} 
-                        placeholder="Guest phone" 
                       />
                     </div>
                   </div>
