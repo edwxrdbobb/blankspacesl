@@ -18,6 +18,14 @@ export default function ReggiesGalleryPage() {
   const [showEmailPopup, setShowEmailPopup] = useState(false)
 
   useEffect(() => {
+    // Check if user has already submitted or dismissed the popup
+    const hasSubmitted = localStorage.getItem('emailPopupSubmitted') === 'true'
+    const hasDismissed = localStorage.getItem('emailPopupDismissed') === 'true'
+    
+    if (hasSubmitted || hasDismissed) {
+      return // Don't show popup if user has already interacted with it
+    }
+
     // Show popup after 10 seconds or when user scrolls 50% down the page
     const timer = setTimeout(() => {
       setShowEmailPopup(true)
@@ -76,7 +84,10 @@ export default function ReggiesGalleryPage() {
       {/* Email Popup */}
       <EmailPopup 
         isOpen={showEmailPopup} 
-        onClose={() => setShowEmailPopup(false)} 
+        onClose={() => {
+          setShowEmailPopup(false)
+          localStorage.setItem('emailPopupDismissed', 'true')
+        }} 
       />
     </main>
   )

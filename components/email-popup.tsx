@@ -46,6 +46,9 @@ export function EmailPopup({ isOpen, onClose }: EmailPopupProps) {
       // Simulate API call - replace with actual endpoint
       await new Promise(resolve => setTimeout(resolve, 1500))
       
+      // Mark as submitted in localStorage to prevent future popups
+      localStorage.setItem('emailPopupSubmitted', 'true')
+      
       setIsSubmitted(true)
       setTimeout(() => {
         onClose()
@@ -94,7 +97,8 @@ export function EmailPopup({ isOpen, onClose }: EmailPopupProps) {
           </h3>
           
           <p className="text-[#fdfaf3]/60 text-sm leading-relaxed">
-            Get updates on future events and Blank Space projects delivered to your inbox.
+            Join the inner circle, Reggie's Jazz Exchange was just the beginning, we're building the future of creativity in Sierra Leone and we want you in the room for what's next.<br/><br/>
+            Drop your email below to get first notice on upcoming events, exclusive project drops, and everything happening within the Blank Space ecosystem.
           </p>
         </div>
 
