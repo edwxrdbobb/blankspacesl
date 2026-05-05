@@ -26,7 +26,6 @@ import {
 const recordingFeatures = [
   "Industry standard recording equipment",
   "Acoustically treated studio rooms",
-  "24/7 uninterrupted power supply",
   "Professional mixing & mastering",
   "Studio rental for high-level productions",
   "Comfortable rehearsal and recording environment",
@@ -247,7 +246,7 @@ export function ServicesContent() {
 
                 <p className="text-muted-foreground text-lg leading-relaxed mb-8">
                   Professional studio space with industry standard equipment for high level productions,
-                  acoustically treated, with uninterrupted power supply.
+                  acoustically treated.
                 </p>
 
                 <div className="grid sm:grid-cols-2 gap-3 mb-8">

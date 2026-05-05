@@ -16,36 +16,48 @@ interface Partner {
 const partners: Partner[] = [
   {
     name: "Dove's Nest",
-    logo: "https://res.cloudinary.com/dhixhto9s/image/upload/v1777919060/blankspace/partners/doves-nest-logo.png",
-    url: "https://dovesnestsl.com",
+    logo: "/reggies-event-partners/dove's nest.jpg",
     description: "Venue Partner"
   },
   {
-    name: "Reggie's Jazz Exchange",
-    logo: "/Reggies.jpeg",
-    description: "Music Partner",
-    useCustomLogo: true
+    name: "iLiquid",
+    logo: "/reggies-event-partners/iLiquid.jpg",
+    description: "Technology Partner"
   },
   {
-    name: "Blank Space",
-    logo: "https://res.cloudinary.com/dhixhto9s/image/upload/v1777919062/blankspace/partners/blank-space-logo.png",
-    url: "https://blankspace.sl",
-    description: "Creative Partner"
+    name: "Manikene",
+    logo: "/reggies-event-partners/manikene.JPG",
+    description: "Fashion Partner"
   },
   {
-    name: "Freetown Collective",
-    logo: "https://res.cloudinary.com/dhixhto9s/image/upload/v1777919063/blankspace/partners/freetown-collective-logo.png",
-    description: "Community Partner"
+    name: "Ministry of Tourism & Cultural Affairs",
+    logo: "/reggies-event-partners/min.tourishm.jpg",
+    description: "Government Partner"
   },
   {
-    name: "Sierra Leone Tourism",
-    logo: "https://res.cloudinary.com/dhixhto9s/image/upload/v1777919064/blankspace/partners/tourism-logo.png",
-    description: "Tourism Partner"
+    name: "Shocks Inc.",
+    logo: "/reggies-event-partners/shock-inc.jpg",
+    description: "Audio Partner"
   },
   {
-    name: "Salone Music",
-    logo: "https://res.cloudinary.com/dhixhto9s/image/upload/v1777919065/blankspace/partners/salone-music-logo.png",
-    description: "Music Industry Partner"
+    name: "Studio Muyu",
+    logo: "/reggies-event-partners/studio-muyu.jpg",
+    description: "Production Partner"
+  },
+  {
+    name: "Studio Z",
+    logo: "/reggies-event-partners/studio-z.jpg",
+    description: "Recording Partner"
+  },
+  {
+    name: "Swit Salone News",
+    logo: "/reggies-event-partners/Swit-salone-news.png",
+    description: "Media Partner"
+  },
+  {
+    name: "Yvonne Nics Events",
+    logo: "/reggies-event-partners/yvonne.png",
+    description: "Event Styling Partner"
   }
 ]
 
@@ -123,18 +135,18 @@ export function PartnerReel() {
             {partners.map((partner, index) => (
               <div
                 key={partner.name}
-                className="flex-shrink-0 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl p-6 hover:border-[#f37335]/50 transition-all group"
+                className="flex-shrink-0 w-48 bg-[#1a1a1a] border border-white/10 rounded-xl p-4 hover:border-[#f37335]/50 transition-all group"
               >
                 {/* Partner Logo */}
-                <div className="w-20 h-20 mx-auto mb-4 bg-white/5 rounded-lg flex items-center justify-center group-hover:bg-[#f37335]/10 transition-colors">
+                <div className="w-16 h-16 mx-auto mb-3 bg-white/5 rounded-lg flex items-center justify-center group-hover:bg-[#f37335]/10 transition-colors">
                   {partner.useCustomLogo ? (
                     <ReggiesLogo size="sm" className="scale-75" />
                   ) : (
                     <Image
                       src={partner.logo}
                       alt={partner.name}
-                      width={60}
-                      height={60}
+                      width={48}
+                      height={48}
                       className="object-contain filter brightness-0 invert group-hover:brightness-100 transition-all"
                     />
                   )}
@@ -142,12 +154,9 @@ export function PartnerReel() {
 
                 {/* Partner Info */}
                 <div className="text-center">
-                  <h3 className="text-[#fdfaf3] font-medium mb-1">
+                  <h3 className="text-[#fdfaf3] font-medium">
                     {partner.name}
                   </h3>
-                  <p className="text-[#f37335] text-xs font-medium mb-3">
-                    {partner.description}
-                  </p>
                   
                   {partner.url && (
                     <a

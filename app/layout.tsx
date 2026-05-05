@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Blank Space | Recording Studio & Creative Agency',
-    description: 'Endless Possibilities. Uninterrupted Power. Unmatched Quality.',
+    description: 'Endless Possibilities. Unmatched Quality.',
     type: 'website',
   },
   icons: {

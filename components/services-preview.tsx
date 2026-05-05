@@ -14,7 +14,7 @@ const services = [
   {
     id: "recording-studio-rental",
     title: "Recording & Studio Rental",
-    description: "Professional studio space with industry standard equipment for high level productions, acoustically treated, with uninterrupted power supply.",
+    description: "Professional studio space with industry standard equipment for high level productions, acoustically treated.",
     image: "/bs-studio-room.jpeg",
     href: "/services#recording",
   },

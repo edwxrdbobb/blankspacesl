@@ -10,7 +10,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetClose } from "@/com
 const navLinks = [
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Select Works" },
-  { href: "/events/reggies-jazz-exchange", label: "Upcoming Event" },
+  { href: "/events/reggies-jazz-exchange", label: "Reggie's Jazz Exchange" },
   { href: "/collective", label: "The Collective" },
   { href: "/contact", label: "Contact" },
 ]
