@@ -147,7 +147,16 @@ export function PartnerReel() {
                       alt={partner.name}
                       width={48}
                       height={48}
-                      className="object-contain filter brightness-0 invert group-hover:brightness-100 transition-all"
+                      className="object-contain transition-all"
+                      onError={(e) => {
+                        console.error(`Failed to load logo: ${partner.logo}`);
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
+                        if (parent) {
+                          parent.innerHTML = `<span class="text-white/40 text-xs">${partner.name}</span>`;
+                        }
+                      }}
                     />
                   )}
                 </div>
