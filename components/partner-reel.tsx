@@ -15,6 +15,16 @@ interface Partner {
 
 const partners: Partner[] = [
   {
+    name: "Ministry of Tourism & Cultural Affairs",
+    logo: "/reggies-event-partners/min.tourishm.jpg",
+    description: "Government Partner"
+  },
+  {
+    name: "Foodbly",
+    logo: "/reggies-event-partners/foodbly-logo.jpeg",
+    description: "Food & Beverage Partner"
+  },
+  {
     name: "Dove's Nest",
     logo: "/reggies-event-partners/dove's nest.jpg",
     description: "Venue Partner"
@@ -28,11 +38,6 @@ const partners: Partner[] = [
     name: "Manikene",
     logo: "/reggies-event-partners/manikene.JPG",
     description: "Fashion Partner"
-  },
-  {
-    name: "Ministry of Tourism & Cultural Affairs",
-    logo: "/reggies-event-partners/min.tourishm.jpg",
-    description: "Government Partner"
   },
   {
     name: "Shocks Inc.",
