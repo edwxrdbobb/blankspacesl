@@ -149,6 +149,7 @@ async function main() {
     path.join(process.cwd(), "public", "events"),
     path.join(process.cwd(), "public", "our-work"),
     path.join(process.cwd(), "public", "Partners"),
+    path.join(process.cwd(), "public", "reggie-events-images"),
   ]
 
   const files = []
