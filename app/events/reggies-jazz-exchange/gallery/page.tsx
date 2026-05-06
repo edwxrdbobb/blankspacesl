@@ -8,17 +8,35 @@ import { Prata, Inter } from "next/font/google"
 import { GalleryClient } from "@/components/reggies-gallery-client"
 import { EmailPopup } from "@/components/email-popup"
 import { PartnerReel } from "@/components/partner-reel"
-import galleryUrlsJson from "@/scripts/reggie-gallery-urls.json"
 
 const prata = Prata({ weight: "400", subsets: ["latin"], display: "swap" })
 const inter = Inter({ subsets: ["latin"] })
 
-const galleryImages: string[] = Object.values(galleryUrlsJson)
-
 export default function ReggiesGalleryPage() {
   const [showEmailPopup, setShowEmailPopup] = useState(false)
+  const [galleryImages, setGalleryImages] = useState<string[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    // Fetch images from Cloudinary
+    async function fetchImages() {
+      try {
+        const response = await fetch('/api/cloudinary/folder?folder=blankspace/reggies-gallery')
+        if (!response.ok) {
+          throw new Error('Failed to fetch images')
+        }
+        const data = await response.json()
+        const imageUrls = data.images.map((img: any) => img.secure_url)
+        setGalleryImages(imageUrls)
+      } catch (error) {
+        console.error('Error fetching images:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchImages()
+
     // Check if user has already submitted or dismissed the popup
     const hasSubmitted = localStorage.getItem('emailPopupSubmitted') === 'true'
     const hasDismissed = localStorage.getItem('emailPopupDismissed') === 'true'
@@ -83,7 +101,13 @@ export default function ReggiesGalleryPage() {
       {/* Gallery */}
       <section className="pb-20 md:pb-28 px-2 md:px-4">
         <div className="container mx-auto max-w-7xl">
-          <GalleryClient images={galleryImages} />
+          {loading ? (
+            <div className="text-center py-12">
+              <p className="text-white/60 text-sm">Loading gallery...</p>
+            </div>
+          ) : (
+            <GalleryClient images={galleryImages} />
+          )}
         </div>
       </section>
 
